@@ -100,7 +100,6 @@ public class BYG {
         BYGHoeables.hoeablesBYG();
         BYGFlammables.flammablesBYG();
         BYGStrippables.strippableLogsBYG();
-//        BYGBoatDispenseRegister.dispenseBoatBehavior();
         DimensionOverride.dimensionOverrideServerCommon();
         LOGGER.info("BYG: \"Load Complete\" Event Complete!");
     }
