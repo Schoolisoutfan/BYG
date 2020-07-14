@@ -405,6 +405,8 @@ public class BYGFeatures {
         biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.NETHER_BRISTLE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(UnderGroundPlacement.UGPLACER.configure(new AtSurfaceWithExtraConfig(2, 0.4F, 1))));
         biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.WEEPING_ROOTS.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.LIGHT_GEM_CHANCE.configure(new FrequencyConfig(150))));
         biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.WEEPING_ROOTS_PLANT.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.LIGHT_GEM_CHANCE.configure(new FrequencyConfig(200))));
+        biome.addFeature(GenerationStage.Decoration.RAW_GENERATION, BYGFeatureList.CHAIN.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.LIGHT_GEM_CHANCE.configure(new FrequencyConfig(120))));
+
     }
 
     public static void addEmburBogVegetation(Biome biome) {
