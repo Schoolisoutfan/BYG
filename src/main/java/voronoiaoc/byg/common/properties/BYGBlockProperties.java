@@ -791,6 +791,46 @@ public class BYGBlockProperties {
         }
     }
 
+    public static class BYGThatch extends HayBlock {
+        public BYGThatch (String registryName) {
+            super(Block.Properties.create(Material.ORGANIC)
+                    .sound(SoundType.PLANT)
+                    .hardnessAndResistance(0.5f)
+            );
+            setRegistryName(registryName);
+        }
+    }
+
+    public static class ThatchCarpet extends CarpetBlock {
+        public ThatchCarpet (String registryName) {
+            super(DyeColor.BROWN, Block.Properties.create(Material.ORGANIC)
+                    .sound(SoundType.PLANT)
+                    .hardnessAndResistance(0.5f)
+            );
+            setRegistryName(registryName);
+        }
+    }
+
+    public static class ThatchStairs extends StairsBlock {
+        public ThatchStairs (String registryName) {
+            super(BYGBlockList.REED_THATCH.getDefaultState(), Block.Properties.from(BYGBlockList.REED_THATCH)
+                    .sound(SoundType.PLANT)
+                    .hardnessAndResistance(0.5f)
+            );
+            setRegistryName(registryName);
+        }
+    }
+
+    public static class ThatchSlab extends SlabBlock {
+        public ThatchSlab(String registryName) {
+            super(Block.Properties.create(Material.ORGANIC)
+                    .sound(SoundType.PLANT)
+                    .hardnessAndResistance(0.5f)
+            );
+            setRegistryName(registryName);
+        }
+    }
+
     public static class BYGPoisonIvy extends PoisonIvyBlock {
         public BYGPoisonIvy(String registryName) {
             super(Block.Properties.create(Material.LEAVES)

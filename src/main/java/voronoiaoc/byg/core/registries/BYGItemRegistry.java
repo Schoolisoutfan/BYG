@@ -32,6 +32,7 @@ public class BYGItemRegistry {
                 BYGItemList.MEADOW_DIRT = new BlockItem(BYGBlockList.MEADOW_DIRT, new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName(BYGBlockList.MEADOW_DIRT.getRegistryName()),
                 BYGItemList.MUD_BLOCK = new BlockItem(BYGBlockList.MUD_BLOCK, new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName(BYGBlockList.MUD_BLOCK.getRegistryName()),
                 BYGItemList.MUD_BRICKS = new BlockItem(BYGBlockList.MUD_BRICKS, new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName(BYGBlockList.MUD_BRICKS.getRegistryName()),
+                BYGItemList.MUD = new Item(new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName("mud_ball"),
 
                 BYGItemList.CHAIN_PLATING = new Item(new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName("chain_plating"),
 
@@ -775,6 +776,12 @@ public class BYGItemRegistry {
                 BYGItemList.PRICKLY_PEAR_CACTUS = new BlockItem(BYGBlockList.PRICKLY_PEAR_CACTUS, new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName(BYGBlockList.PRICKLY_PEAR_CACTUS.getRegistryName()),
                 BYGItemList.PRAIRIE_GRASS = new BlockItem(BYGBlockList.PRAIRIE_GRASS, new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName(BYGBlockList.PRAIRIE_GRASS.getRegistryName()),
                 BYGItemList.REEDS = new BlockItem(BYGBlockList.REEDS, new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName(BYGBlockList.REEDS.getRegistryName()),
+                BYGItemList.REED_THATCH = new BlockItem(BYGBlockList.REED_THATCH, new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName(BYGBlockList.REED_THATCH.getRegistryName()),
+                BYGItemList.REED_THATCH_STAIRS = new BlockItem(BYGBlockList.REED_THATCH_STAIRS, new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName(BYGBlockList.REED_THATCH_STAIRS.getRegistryName()),
+                BYGItemList.REED_THATCH_CARPET = new BlockItem(BYGBlockList.REED_THATCH_CARPET, new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName(BYGBlockList.REED_THATCH_CARPET.getRegistryName()),
+                BYGItemList.REED_THATCH_SLAB = new BlockItem(BYGBlockList.REED_THATCH_SLAB, new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName(BYGBlockList.REED_THATCH_SLAB.getRegistryName()),
+
+
                 BYGItemList.SHORT_GRASS = new BlockItem(BYGBlockList.SHORT_GRASS, new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName(BYGBlockList.SHORT_GRASS.getRegistryName()),
                 BYGItemList.TALL_PRAIRIE_GRASS = new BlockItem(BYGBlockList.TALL_PRAIRIE_GRASS, new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName(BYGBlockList.TALL_PRAIRIE_GRASS.getRegistryName()),
                 BYGItemList.TINY_LILYPADS = (new BYGLilyItem(BYGBlockList.TINY_LILYPADS, (new Item.Properties()).group(BYGCreativeTab.creativeTab)).setRegistryName(BYGBlockList.TINY_LILYPADS.getRegistryName())),

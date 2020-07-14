@@ -1,5 +1,6 @@
 package voronoiaoc.byg.core.byglists;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 public class BYGItemList {
@@ -271,6 +272,7 @@ public class BYGItemList {
     public static Item MEADOW_DIRT;
     public static Item MUD_BLOCK;
     public static Item MUD_BRICKS;
+    public static Item MUD;
 
     //Sand Items
     public static Item BLUE_SAND;
@@ -521,6 +523,11 @@ public class BYGItemList {
     //PlantItems
     public static Item CATTAIL;
     public static Item REEDS;
+    public static Item REED_THATCH;
+    public static Item REED_THATCH_STAIRS;
+    public static Item REED_THATCH_CARPET;
+    public static Item REED_THATCH_SLAB;
+
     public static Item HORSEWEED;
     public static Item MINI_CACTUS;
     public static Item PRICKLY_PEAR_CACTUS;

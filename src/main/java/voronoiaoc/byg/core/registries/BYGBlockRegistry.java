@@ -388,6 +388,12 @@ public class BYGBlockRegistry {
 
                 BYGBlockList.CATTAIL = new BYGBlockProperties.BlockCattail("cattail"),
                 BYGBlockList.REEDS = new BYGBlockProperties.BlockCattail("reeds"),
+                BYGBlockList.REED_THATCH = new BYGBlockProperties.BYGThatch("reed_thatch"),
+                BYGBlockList.REED_THATCH_CARPET = new BYGBlockProperties.ThatchCarpet("reed_thatch_carpet"),
+                BYGBlockList.REED_THATCH_STAIRS = new BYGBlockProperties.ThatchStairs("reed_thatch_stairs"),
+                BYGBlockList.REED_THATCH_SLAB = new BYGBlockProperties.ThatchSlab("reed_thatch_slab"),
+
+
                 BYGBlockList.HORSEWEED = new BYGBlockProperties.BYGFlower("horseweed"),
                 BYGBlockList.MINI_CACTUS = new BYGBlockProperties.BYGDesertPlant("mini_cactus"),
                 BYGBlockList.PRICKLY_PEAR_CACTUS = new BYGBlockProperties.BYGDesertPlant("prickly_pear_cactus"),
@@ -619,10 +625,10 @@ public class BYGBlockRegistry {
                 BYGBlockList.MOSSY_STONE_WALL = new BYGBlockProperties.BYGStoneWall("mossy_stone_wall"),
 
                 BYGBlockList.PODZOL_DACITE = new BYGBlockProperties.BlockOvergrownDaciteBlock("podzol_dacite"),
-                BYGBlockList.DACITE_FARMLAND = new BYGBlockProperties.BYGDaciteFarmland("dacite_farmland"),
+//                BYGBlockList.DACITE_FARMLAND = new BYGBlockProperties.BYGDaciteFarmland("dacite_farmland"),
                 BYGBlockList.OVERGROWN_DACITE = new BYGBlockProperties.BlockOvergrownDaciteBlock("overgrown_dacite"),
                 BYGBlockList.OVERGROWN_STONE = new BYGBlockProperties.BlockOvergrownStoneBlock("overgrown_stone"),
-                BYGBlockList.STONE_FARMLAND = new BYGBlockProperties.BYGStoneFarmland("stone_farmland"),
+//                BYGBlockList.STONE_FARMLAND = new BYGBlockProperties.BYGStoneFarmland("stone_farmland"),
                 BYGBlockList.ROCKY_STONE = new BYGBlockProperties.BYGStone("rocky_stone"),
                 BYGBlockList.ROCKY_SLAB = new BYGBlockProperties.BYGStoneSlab("rocky_stone_slab"),
                 BYGBlockList.ROCKY_STAIRS = new BYGBlockProperties.BYGStoneStairs("rocky_stone_stairs"),

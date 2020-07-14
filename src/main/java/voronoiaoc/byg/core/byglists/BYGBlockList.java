@@ -467,6 +467,11 @@ public class BYGBlockList {
     //PlantBlocks
     public static Block CATTAIL;
     public static Block REEDS;
+    public static Block REED_THATCH;
+    public static Block REED_THATCH_STAIRS;
+    public static Block REED_THATCH_CARPET;
+    public static Block REED_THATCH_SLAB;
+
     public static Block HORSEWEED;
     public static Block MINI_CACTUS;
     public static Block PRICKLY_PEAR_CACTUS;

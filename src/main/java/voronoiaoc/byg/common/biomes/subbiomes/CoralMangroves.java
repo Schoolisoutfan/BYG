@@ -27,8 +27,8 @@ public class CoralMangroves extends Biome {
     static final double SCALE = 0.01F;
     static final float TEMPERATURE = 0.8F;
     static final float DOWNFALL = 0.8F;
-    static final int WATER_COLOR = 4159204;
-    static final int WATER_FOG_COLOR = 329011;
+    static final int WATER_COLOR = 4566514;
+    static final int WATER_FOG_COLOR = 267827;
     static final String PARENT = null;
 
     public CoralMangroves() {
