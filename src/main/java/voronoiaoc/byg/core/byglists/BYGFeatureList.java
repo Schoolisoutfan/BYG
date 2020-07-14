@@ -9,6 +9,7 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 import voronoiaoc.byg.common.world.carver.VolcanicCarver;
 import voronoiaoc.byg.common.world.feature.features.end.obsidianspires.ObsidianSpike;
+import voronoiaoc.byg.common.world.feature.features.nether.LargeChain;
 import voronoiaoc.byg.common.world.feature.features.nether.emburbog.*;
 import voronoiaoc.byg.common.world.feature.features.nether.glowstonegardens.*;
 import voronoiaoc.byg.common.world.feature.features.nether.sythiantorrids.SythianRoots;
@@ -178,7 +179,6 @@ public class BYGFeatureList {
     public static final BYGAbstractTreeFeature<NoFeatureConfig> GIANT_ROSE_FLOWER = new RoseGiant(NoFeatureConfig::deserialize);
 
 
-
     /*********************************************************************Large Mushroom Features*********************************************************/
     public static final Feature<NoFeatureConfig> GREEN_MUSHROOM_HUGE = new GreenMushroomHuge(NoFeatureConfig::deserialize);
     public static final Feature<NoFeatureConfig> WOOD_BLEWIT_HUGE = new WoodBlewitHuge(NoFeatureConfig::deserialize);
@@ -192,6 +192,8 @@ public class BYGFeatureList {
     /********************************************************************Nether Features********************************************************************/
 
     public static final Feature<NoFeatureConfig> BLACK_PUFF = new BlackPuffMushroom(NoFeatureConfig::deserialize);
+
+    public static final Feature<NoFeatureConfig> CHAIN = new LargeChain(NoFeatureConfig::deserialize);
 
     public static final Feature<NoFeatureConfig> GREEN_MUSHROOM = new GreenMushroom(NoFeatureConfig::deserialize);
 
