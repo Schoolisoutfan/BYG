@@ -22,37 +22,40 @@ import voronoiaoc.byg.core.byglists.BYGSBList;
 public class StoneForest extends Biome {
     static final ConfiguredSurfaceBuilder<?> SURFACE_BUILDER = new ConfiguredSurfaceBuilder<>(BYGSBList.STONE_FOREST_SB, new SurfaceBuilderConfig(BYGBlockList.OVERGROWN_STONE.getDefaultState(), Blocks.STONE.getDefaultState(), Blocks.STONE.getDefaultState()));
     static final RainType PRECIPATATION = RainType.RAIN;
-    static final Category CATEGORY = Category.TAIGA;
-    static final double DEPTH = 1.9F;
+    static final Category CATEGORY = Category.JUNGLE;
+    static final double DEPTH = 1.0F;
     static final double SCALE = 0.15F;
-    static final float TEMPERATURE = 0.25F;
-    static final float DOWNFALL = 0.8F;
-    static final int WATER_COLOR = 4159204;
-    static final int WATER_FOG_COLOR = 329011;
+    static final float TEMPERATURE = 0.85F;
+    static final float DOWNFALL = 0.9F;
+    static final int WATER_COLOR = 8170451;
+    static final int WATER_FOG_COLOR = 6200521;
     static final String PARENT = null;
+
 
     public StoneForest() {
         super(new Builder().surfaceBuilder(SURFACE_BUILDER).precipitation(PRECIPATATION).category(CATEGORY).depth((float) DEPTH).waterColor(WATER_COLOR).scale((float) SCALE).temperature(TEMPERATURE).downfall(DOWNFALL).waterFogColor(WATER_FOG_COLOR).parent(PARENT));
-        this.addStructure(Feature.VILLAGE.withConfiguration(new VillageConfig("village/plains/town_centers", 6)));
-        this.addStructure(Feature.PILLAGER_OUTPOST.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
+        this.addStructure(Feature.JUNGLE_TEMPLE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
         this.addStructure(Feature.MINESHAFT.withConfiguration(new MineshaftConfig(0.004D, MineshaftStructure.Type.NORMAL)));
         this.addStructure(Feature.STRONGHOLD.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
         DefaultBiomeFeatures.addCarvers(this);
         DefaultBiomeFeatures.addStructures(this);
         DefaultBiomeFeatures.addMonsterRooms(this);
-        DefaultBiomeFeatures.addDoubleFlowers(this);
         DefaultBiomeFeatures.addStoneVariants(this);
         DefaultBiomeFeatures.addOres(this);
         DefaultBiomeFeatures.addSedimentDisks(this);
-        DefaultBiomeFeatures.addDefaultFlowers(this);
+        DefaultBiomeFeatures.addExtraDefaultFlowers(this);
         DefaultBiomeFeatures.addMushrooms(this);
         DefaultBiomeFeatures.addReedsAndPumpkins(this);
-        BYGTreeFeatures.addDeciduousTrees(this);
-        BYGFeatures.addLeafPile(this);
-        BYGFeatures.addHorseweed(this);
-        BYGFeatures.addBYGMushrooms(this);
+        DefaultBiomeFeatures.addJunglePlants(this);
+        DefaultBiomeFeatures.addFreezeTopLayer(this);
+        BYGTreeFeatures.addTropJungleTrees(this);
         BYGFeatures.addGrass(this);
-        BYGFeatures.addAzalea(this);
+        BYGFeatures.addWeedGrass(this);
+        BYGFeatures.addBYGTropicFlowers(this);
+        BYGFeatures.addBYGMushrooms(this);
+        BYGFeatures.addRockyStoneBoulder(this);
+        BYGFeatures.addMossyStoneBoulder(this);
+        DefaultBiomeFeatures.addTaigaRocks(this);
 
         this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.SHEEP, 12, 4, 4));
         this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.PIG, 10, 4, 4));
@@ -70,15 +73,16 @@ public class StoneForest extends Biome {
         this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.WITCH, 5, 1, 1));
     }
 
+    @Override
     @OnlyIn(Dist.CLIENT)
-    public int getGrassColor(double x, double z) {
-        double noise = INFO_NOISE.noiseAt(x * 0.0225D, z * 0.0225D, false);
-        return noise < -0.1D ? 7185745 : 8627537;
+    public int getGrassColor(double posX, double posZ) {
+        return 10145074;
+
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public int getFoliageColor() {
-        return 6589494;
+        return 10145074;
     }
 }
