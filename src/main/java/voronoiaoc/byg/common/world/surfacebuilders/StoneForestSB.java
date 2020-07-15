@@ -22,21 +22,16 @@ public class StoneForestSB extends SurfaceBuilder<SurfaceBuilderConfig> {
         super(config);
     }
 
+    public static FastNoise noiseGen = null;
+
     public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {
+        setSeed(seed);
         BlockPos.Mutable block = new BlockPos.Mutable();
-        FastNoise noiseGen = new FastNoise();
-        noiseGen.SetSeed((int) seed);
-        noiseGen.SetFractalType(FastNoise.FractalType.RigidMulti);
-        noiseGen.SetNoiseType(FastNoise.NoiseType.SimplexFractal);
-        noiseGen.SetGradientPerturbAmp(1);
-        noiseGen.SetFractalOctaves(1);
-        noiseGen.SetFractalGain(0.3f);
-        noiseGen.SetFrequency(0.02f);
         int xPos = x & 15;
         int zPos = z & 15;
         float sampleNoise = noiseGen.GetNoise(x, z);
         if(sampleNoise < 0.45) {
-            for (int yPos = startHeight + 55; yPos >= seaLevel; --yPos) {
+            for (int yPos = startHeight + 55; yPos >= startHeight; --yPos) {
                 block.setPos(xPos, yPos, zPos);
                 if (yPos == startHeight + 55)
                     chunkIn.setBlockState(block, BYGBlockList.OVERGROWN_STONE.getDefaultState(), false);
@@ -44,8 +39,8 @@ public class StoneForestSB extends SurfaceBuilder<SurfaceBuilderConfig> {
                     chunkIn.setBlockState(block, STONE, false);
             }
         }
-        else if (sampleNoise < 0.5) {
-            for (int yPos = startHeight + 44; yPos >= seaLevel; --yPos) {
+        else if (sampleNoise < 0.55) {
+            for (int yPos = startHeight + 44; yPos >= startHeight; --yPos) {
                 block.setPos(xPos, yPos, zPos);
                 if (yPos == startHeight + 44)
                     chunkIn.setBlockState(block, BYGBlockList.OVERGROWN_STONE.getDefaultState(), false);
@@ -55,5 +50,18 @@ public class StoneForestSB extends SurfaceBuilder<SurfaceBuilderConfig> {
         }
         else
             SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, BYGSBList.BYGSBConfigList.GRASSSTONEMOUNTAIN_CF);
+    }
+
+    @Override
+    public void setSeed(long seed) {
+        if (noiseGen == null) {
+            noiseGen = new FastNoise((int) seed);
+            noiseGen.SetFractalType(FastNoise.FractalType.RigidMulti);
+            noiseGen.SetNoiseType(FastNoise.NoiseType.SimplexFractal);
+            noiseGen.SetGradientPerturbAmp(1);
+            noiseGen.SetFractalOctaves(1);
+            noiseGen.SetFractalGain(0.3f);
+            noiseGen.SetFrequency(0.02f);
+        }
     }
 }
