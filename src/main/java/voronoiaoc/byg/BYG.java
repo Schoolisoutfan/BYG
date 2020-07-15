@@ -63,6 +63,8 @@ public class BYG {
         MinecraftForge.EVENT_BUS.register(new SubscribeEvents());
     }
 
+
+
     private void bygCommonSetup(FMLCommonSetupEvent event) {
         ConfigWeightManager.buildConfig();
         ConfigWeightManager.loadConfig(ConfigWeightManager.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(BYG.MOD_ID + "-weights-common.toml"));
@@ -76,6 +78,7 @@ public class BYG {
         tempList.add(BYGFeatureList.BYGVILLAGE);
         Feature.ILLAGER_STRUCTURES = ImmutableList.copyOf(tempList);
         Collections.sort(BYGBiomeRegistry.biomeList);
+
 //        BYGBiomeRegistry.biomeList.forEach(e -> {
 //            idx++;
 //            System.out.println(idx + ". " + e);
