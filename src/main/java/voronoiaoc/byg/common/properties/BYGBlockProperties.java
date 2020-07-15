@@ -946,6 +946,19 @@ public class BYGBlockProperties {
         }
     }
 
+    public static class AnthraciteOre extends BYGOreBlock {
+        public AnthraciteOre(String registryName) {
+            super(Block.Properties.create(Material.ROCK)
+                    .sound(SoundType.STONE)
+                    .hardnessAndResistance(0.4F, 0.4F)
+                    .harvestLevel(3)
+                    .harvestTool(ToolType.PICKAXE)
+
+            );
+            setRegistryName(registryName);
+        }
+    }
+
     public static class BYGREDGlowCane extends BYGGlowcane {
         public BYGREDGlowCane(String registryName) {
             super(Block.Properties.create(BYGMaterials.RED_GLOWCANE)

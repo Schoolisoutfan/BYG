@@ -1,6 +1,7 @@
 package voronoiaoc.byg.core.byglists;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 
 public class BYGBlockList {
 
@@ -400,13 +401,13 @@ public class BYGBlockList {
     //GemBlocks
     public static Block PENDORITE_BLOCK;
     public static Block AMETRINE_BLOCK;
-
+    public static Block ANTHRACITE_BLOCK;
 
     //OreBlocks
     public static Block PENDORITE_ORE;
     public static Block AMETRINE_ORE;
     public static Block PERVADED_NETHERRACK;
-
+    public static Block ANTHRACITE_ORE;
 
     //BookshelvesBlocks
     public static Block ASPEN_BOOKSHELF;
@@ -508,6 +509,15 @@ public class BYGBlockList {
     public static Block OVERGROWN_NETHERRACK;
     public static Block NETHER_BRISTLE;
 
+    public static Block BRIMSTONE;
+    public static Block YELLOW_NETHER_BRICKS;
+    public static Block BORIC_FIRE;
+    public static Block HANGING_BONE;
+    public static Block WHALING_VINES;
+    public static Block WHALING_GRASS;
+    public static Block MAGMATIC_STONE;
+    public static Block SCORCHED_BUSH;
+    public static Block SCORCHED_GRASS;
 
     public static Block WARPED_CACTUS;
     public static Block WARPED_BUSH;

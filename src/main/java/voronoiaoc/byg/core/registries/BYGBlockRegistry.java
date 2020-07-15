@@ -426,6 +426,8 @@ public class BYGBlockRegistry {
                 BYGBlockList.OVERGROWN_NETHERRACK = new BYGBlockProperties.BYGOvergrownNetherrack("overgrown_netherrack"),
                 BYGBlockList.NETHER_BRISTLE = new BYGBlockProperties.BYGDoubleDamagePlant("nether_bristle"),
 
+                BYGBlockList.ANTHRACITE_BLOCK = new BYGBlockProperties.AnthraciteOre("anthracite_block"),
+                BYGBlockList.ANTHRACITE_ORE = new BYGBlockProperties.AnthraciteOre("anthracite_ore"),
 
                 BYGBlockList.WARPED_CACTUS = new BYGBlockProperties.BYGWarpedCacti("warped_cactus"),
                 BYGBlockList.WARPED_BUSH = new BYGBlockProperties.BYGWarpedBush("warped_bush"),

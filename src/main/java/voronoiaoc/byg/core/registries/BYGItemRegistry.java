@@ -714,6 +714,10 @@ public class BYGItemRegistry {
                 BYGItemList.NYLIUM_SOUL_SAND = new BlockItem(BYGBlockList.NYLIUM_SOUL_SAND, new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName(BYGBlockList.NYLIUM_SOUL_SAND.getRegistryName()),
                 BYGItemList.NYLIUM_SOUL_SOIL = new BlockItem(BYGBlockList.NYLIUM_SOUL_SOIL, new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName(BYGBlockList.NYLIUM_SOUL_SOIL.getRegistryName()),
 
+                BYGItemList.ANTHRACITE = new AnthraciteItem(new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName("anthracite"),
+                BYGItemList.ANTHRACITE_ORE = new BlockItem(BYGBlockList.ANTHRACITE_ORE, new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName(BYGBlockList.ANTHRACITE_ORE.getRegistryName()),
+                BYGItemList.ANTHRACITE_BLOCK = new AnthraciteBlockItem(BYGBlockList.ANTHRACITE_BLOCK, new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName(BYGBlockList.ANTHRACITE_BLOCK.getRegistryName()),
+
                 BYGItemList.WEEPING_ROOTS_PLANT = new BlockItem(BYGBlockList.WEEPING_ROOTS_PLANT, new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName(BYGBlockList.WEEPING_ROOTS_PLANT.getRegistryName()),
                 BYGItemList.NETHER_BRISTLE = new BlockItem(BYGBlockList.NETHER_BRISTLE, new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName(BYGBlockList.NETHER_BRISTLE.getRegistryName()),
                 BYGItemList.OVERGROWN_NETHERRACK = new BlockItem(BYGBlockList.OVERGROWN_NETHERRACK, new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName(BYGBlockList.OVERGROWN_NETHERRACK.getRegistryName()),

@@ -48,9 +48,8 @@ public class StoneForest extends Biome {
         DefaultBiomeFeatures.addReedsAndPumpkins(this);
         DefaultBiomeFeatures.addJunglePlants(this);
         DefaultBiomeFeatures.addFreezeTopLayer(this);
-        BYGTreeFeatures.addTropJungleTrees(this);
+        BYGTreeFeatures.addStoneForestTrees(this);
         BYGFeatures.addGrass(this);
-        BYGFeatures.addWeedGrass(this);
         BYGFeatures.addBYGTropicFlowers(this);
         BYGFeatures.addBYGMushrooms(this);
         BYGFeatures.addRockyStoneBoulder(this);
