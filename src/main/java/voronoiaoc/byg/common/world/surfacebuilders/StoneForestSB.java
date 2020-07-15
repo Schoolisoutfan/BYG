@@ -6,6 +6,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
+import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 import voronoiaoc.byg.common.world.worldtype.noise.fastnoise.FastNoise;
@@ -30,8 +31,10 @@ public class StoneForestSB extends SurfaceBuilder<SurfaceBuilderConfig> {
         int xPos = x & 15;
         int zPos = z & 15;
         float sampleNoise = noiseGen.GetNoise(x, z);
-        if(sampleNoise < 0.45) {
-            for (int yPos = startHeight + 55; yPos >= startHeight; --yPos) {
+        int groundLevel = chunkIn.getTopBlockY(Heightmap.Type.OCEAN_FLOOR_WG, x, z);
+
+        if(sampleNoise < 0.43) {
+            for (int yPos = startHeight + 55; yPos >= groundLevel; --yPos) {
                 block.setPos(xPos, yPos, zPos);
                 if (yPos == startHeight + 55)
                     chunkIn.setBlockState(block, BYGBlockList.OVERGROWN_STONE.getDefaultState(), false);
@@ -39,8 +42,8 @@ public class StoneForestSB extends SurfaceBuilder<SurfaceBuilderConfig> {
                     chunkIn.setBlockState(block, STONE, false);
             }
         }
-        else if (sampleNoise < 0.55) {
-            for (int yPos = startHeight + 44; yPos >= startHeight; --yPos) {
+        else if (sampleNoise < 0.48) {
+            for (int yPos = startHeight + 44; yPos >= groundLevel; --yPos) {
                 block.setPos(xPos, yPos, zPos);
                 if (yPos == startHeight + 44)
                     chunkIn.setBlockState(block, BYGBlockList.OVERGROWN_STONE.getDefaultState(), false);
