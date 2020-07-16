@@ -511,9 +511,9 @@ public class BYGBlockList {
 
     public static Block BRIMSTONE;
     public static Block YELLOW_NETHER_BRICKS;
-    public static Block BORIC_FIRE;
-    public static Block HANGING_BONE;
-    public static Block WHALING_VINES;
+    public static Block BORIC_CAMPFIRE;
+    public static Block HANGING_BONES;
+    public static Block WHALING_VINE;
     public static Block WHALING_GRASS;
     public static Block MAGMATIC_STONE;
     public static Block SCORCHED_BUSH;

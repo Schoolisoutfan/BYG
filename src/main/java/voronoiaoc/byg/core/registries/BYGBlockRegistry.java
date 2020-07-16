@@ -429,6 +429,17 @@ public class BYGBlockRegistry {
                 BYGBlockList.ANTHRACITE_BLOCK = new BYGBlockProperties.AnthraciteOre("anthracite_block"),
                 BYGBlockList.ANTHRACITE_ORE = new BYGBlockProperties.AnthraciteOre("anthracite_ore"),
 
+                BYGBlockList.BRIMSTONE = new BYGBlockProperties.BYGNetherrack("brimstone"),
+                BYGBlockList.YELLOW_NETHER_BRICKS = new BYGBlockProperties.BYGNetherrack("yellow_nether_bricks"),
+                BYGBlockList.BORIC_CAMPFIRE = new BYGBlockProperties.BoricCampfire("boric_campfire"),
+
+                BYGBlockList.HANGING_BONES = new BYGBlockProperties.HangingBones("hanging_bones"),
+                BYGBlockList.WHALING_VINE = new BYGBlockProperties.WhalingVines("whaling_vine"),
+                BYGBlockList.WHALING_GRASS = new BYGBlockProperties.WhalingGrass("whaling_grass"),
+                BYGBlockList.MAGMATIC_STONE = new BYGBlockProperties.BYGNetherrack("magmatic_stone"),
+                BYGBlockList.SCORCHED_BUSH = new BYGBlockProperties.ScorchedPlant("scorched_bush"),
+                BYGBlockList.SCORCHED_GRASS = new BYGBlockProperties.ScorchedPlant("scorched_grass"),
+
                 BYGBlockList.WARPED_CACTUS = new BYGBlockProperties.BYGWarpedCacti("warped_cactus"),
                 BYGBlockList.WARPED_BUSH = new BYGBlockProperties.BYGWarpedBush("warped_bush"),
                 BYGBlockList.WARPED_CORAL_BLOCK = new BYGBlockProperties.BYGWarpedCoralBlock("warped_coral_block"),

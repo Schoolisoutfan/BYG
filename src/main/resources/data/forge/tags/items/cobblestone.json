@@ -3,8 +3,9 @@
   "values": [
     "byg:dacite_cobblestone",
     "byg:scoria_cobblestone",
-    "byg:red_rock"
-
-
+    "byg:red_rock",
+    "byg:blue_netherrack",
+    "byg:brimstone",
+    "byg:magmatic_stone"
   ]
 }

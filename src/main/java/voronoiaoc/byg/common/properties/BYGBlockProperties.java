@@ -15,10 +15,13 @@ import voronoiaoc.byg.common.properties.blocks.embur.EmburPlantBlock;
 import voronoiaoc.byg.common.properties.blocks.embur.EmburVinesPlantBlock;
 import voronoiaoc.byg.common.properties.blocks.flowers.*;
 import voronoiaoc.byg.common.properties.blocks.grassblocks.*;
+import voronoiaoc.byg.common.properties.blocks.scorched.ScorchedPlantBlock;
 import voronoiaoc.byg.common.properties.blocks.sythian.BYGSythianPlantBlock;
 import voronoiaoc.byg.common.properties.blocks.sythian.SythianSaplingBlock;
 import voronoiaoc.byg.common.properties.blocks.sythian.SythianStalkBlock;
 import voronoiaoc.byg.common.properties.blocks.warped.*;
+import voronoiaoc.byg.common.properties.blocks.whaling.HangingBonesBlock;
+import voronoiaoc.byg.common.properties.blocks.whaling.WhalingGrassBlock;
 import voronoiaoc.byg.core.byglists.BYGBlockList;
 
 public class BYGBlockProperties {
@@ -552,6 +555,53 @@ public class BYGBlockProperties {
 
     }
 
+    public static class HangingBones extends HangingBonesBlock {
+        public HangingBones(String registryName) {
+            super(Block.Properties.create(Material.ROCK)
+                    .sound(SoundType.STONE)
+                    .hardnessAndResistance(0.0F)
+                    .doesNotBlockMovement()
+            );
+            setRegistryName(registryName);
+        }
+    }
+
+    public static class WhalingVines extends VineBlock {
+        public WhalingVines(String registryName) {
+            super(Block.Properties.create(Material.PLANTS)
+                    .sound(SoundType.PLANT)
+                    .hardnessAndResistance(0.0F)
+                    .tickRandomly()
+                    .doesNotBlockMovement()
+            );
+            setRegistryName(registryName);
+        }
+    }
+
+    public static class WhalingGrass extends WhalingGrassBlock {
+        public WhalingGrass(String registryName) {
+            super(Block.Properties.create(Material.PLANTS)
+                    .sound(SoundType.PLANT)
+                    .hardnessAndResistance(0.0F)
+                    .doesNotBlockMovement()
+                    .notSolid()
+            );
+            setRegistryName(registryName);
+        }
+    }
+
+    public static class ScorchedPlant extends ScorchedPlantBlock {
+        public ScorchedPlant(String registryName) {
+            super(Block.Properties.create(Material.PLANTS)
+                    .sound(SoundType.PLANT)
+                    .hardnessAndResistance(0.0F)
+                    .doesNotBlockMovement()
+                    .notSolid()
+            );
+            setRegistryName(registryName);
+        }
+    }
+
     public static class BYGWarpedCacti extends WarpedCactiBlock {
         public BYGWarpedCacti(String registryName) {
             super(Block.Properties.create(Material.CACTUS)
@@ -874,6 +924,19 @@ public class BYGBlockProperties {
                     .hardnessAndResistance(0.0F)
                     .tickRandomly()
                     .doesNotBlockMovement()
+            );
+            setRegistryName(registryName);
+        }
+    }
+
+    public static class BoricCampfire extends CampfireBlock {
+        public BoricCampfire(String registryName) {
+            super(Block.Properties.create(Material.WOOD, MaterialColor.OBSIDIAN)
+                            .hardnessAndResistance(2.0F)
+                            .sound(SoundType.WOOD)
+                            .lightValue(14)
+                            .tickRandomly()
+                            .notSolid()
             );
             setRegistryName(registryName);
         }

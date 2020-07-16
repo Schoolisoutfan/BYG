@@ -562,7 +562,7 @@ public class BYGItemList {
     public static Item BRIM_POWDER;
     public static Item YELLOW_NETHER_BRICKS;
     public static Item YELLOW_NETHER_BRICK;
-    public static Item BORIC_FIRE;
+    public static Item BORIC_CAMPFIRE;
     public static Item HANGING_BONE;
     public static Item WHALING_VINES;
     public static Item WHALING_GRASS;

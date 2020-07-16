@@ -22,14 +22,21 @@ public class BYGCutoutRenders {
         RenderTypeLookup.setRenderLayer(BYGBlockList.WHITE_CHERRY_FOLIAGE.getBlock(), RenderType.getCutoutMipped());
         RenderTypeLookup.setRenderLayer(BYGBlockList.TALL_PINK_ALLIUM.getBlock(), RenderType.getCutoutMipped());
         RenderTypeLookup.setRenderLayer(BYGBlockList.TALL_ALLIUM.getBlock(), RenderType.getCutoutMipped());
+
+        //Nether
         RenderTypeLookup.setRenderLayer(BYGBlockList.EMBUR_ROOTS.getBlock(), RenderType.getCutoutMipped());
         RenderTypeLookup.setRenderLayer(BYGBlockList.TALL_EMBUR_ROOTS.getBlock(), RenderType.getCutoutMipped());
         RenderTypeLookup.setRenderLayer(BYGBlockList.EMBUR_WART.getBlock(), RenderType.getCutoutMipped());
         RenderTypeLookup.setRenderLayer(BYGBlockList.EMBUR_GEL_BLOCK.getBlock(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(BYGBlockList.EMBUR_GEL_VINES.getBlock(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(BYGBlockList.EMBUR_LILY.getBlock(), RenderType.getCutoutMipped());
+        RenderTypeLookup.setRenderLayer(BYGBlockList.HANGING_BONES.getBlock(), RenderType.getCutoutMipped());
+        RenderTypeLookup.setRenderLayer(BYGBlockList.WHALING_GRASS.getBlock(), RenderType.getCutoutMipped());
+        RenderTypeLookup.setRenderLayer(BYGBlockList.WHALING_VINE.getBlock(), RenderType.getCutoutMipped());
+        RenderTypeLookup.setRenderLayer(BYGBlockList.SCORCHED_BUSH.getBlock(), RenderType.getCutoutMipped());
+        RenderTypeLookup.setRenderLayer(BYGBlockList.SCORCHED_GRASS.getBlock(), RenderType.getCutoutMipped());
+        RenderTypeLookup.setRenderLayer(BYGBlockList.BORIC_CAMPFIRE.getBlock(), RenderType.getCutoutMipped());
 
-        //Nether
         RenderTypeLookup.setRenderLayer(BYGBlockList.OVERGROWN_NETHERRACK.getBlock(), RenderType.getCutoutMipped());
 
         RenderTypeLookup.setRenderLayer(BYGBlockList.WARPED_BUSH.getBlock(), RenderType.getCutoutMipped());
