@@ -410,15 +410,11 @@ public class BYGFeatures {
 
     public static void addWhalingGarthVegetation(Biome biome) {
         biome.addFeature(GenerationStage.Decoration.RAW_GENERATION, BYGFeatureList.CHAIN.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.LIGHT_GEM_CHANCE.configure(new FrequencyConfig(200))));
-        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.WHALING_VINES.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.LIGHT_GEM_CHANCE.configure(new FrequencyConfig(400))));
-        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.WHALING_GRASS.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(800, 0, 0, 256))));
-        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.WHALING_GRASS.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(800, 0, 0, 256))));
-        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.WEEPING_ROOTS_PLANT.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.LIGHT_GEM_CHANCE.configure(new FrequencyConfig(400))));
-        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.WHALING_GRASS.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(800, 0, 0, 256))));
-        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.WHALING_GRASS.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(800, 0, 0, 256))));
-        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.WHALING_GRASS.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(800, 0, 0, 256))));
-        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.SCORCHED_BUSH.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(UnderGroundPlacement.UGPLACER.configure(new AtSurfaceWithExtraConfig(10, 0.5F, 8))));
-        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.SCORCHED_GRASS.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(UnderGroundPlacement.UGPLACER.configure(new AtSurfaceWithExtraConfig(10, 0.5F, 8))));
+        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.WHALING_VINES.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.LIGHT_GEM_CHANCE.configure(new FrequencyConfig(600))));
+        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.WHALING_GRASS.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(UnderGroundPlacement.UGPLACER.configure(new AtSurfaceWithExtraConfig(20, 0.5F, 12))));
+        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.WEEPING_ROOTS_PLANT.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.LIGHT_GEM_CHANCE.configure(new FrequencyConfig(600))));
+        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.SCORCHED_BUSH.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(UnderGroundPlacement.UGPLACER.configure(new AtSurfaceWithExtraConfig(20, 0.5F, 12))));
+        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.SCORCHED_GRASS.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(UnderGroundPlacement.UGPLACER.configure(new AtSurfaceWithExtraConfig(20, 0.5F, 12))));
 
     }
 

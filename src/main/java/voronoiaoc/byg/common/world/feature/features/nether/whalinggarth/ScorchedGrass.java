@@ -19,11 +19,12 @@ public class ScorchedGrass extends Feature<NoFeatureConfig> {
     }
 
     public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
-        if (!worldIn.isAirBlock(pos) || worldIn.getBlockState(pos.down()).getBlock() != BYGBlockList.OVERGROWN_NETHERRACK || worldIn.getBlockState(pos.down()).getBlock() != BYGBlockList.MAGMATIC_STONE || worldIn.getBlockState(pos.down()).getBlock() != Blocks.SOUL_SAND || worldIn.getBlockState(pos.down()).getBlock() != Blocks.NETHERRACK) {
+        if (!worldIn.isAirBlock(pos)) {
             return false;
-        } else {
-            worldIn.setBlockState(pos, BYGBlockList.SCORCHED_GRASS.getDefaultState(), 10);
+        } else if ((worldIn.getBlockState(pos.down()).getBlock() == BYGBlockList.OVERGROWN_NETHERRACK) || (worldIn.getBlockState(pos.down()).getBlock() == Blocks.SOUL_SAND)) {
+            worldIn.setBlockState(pos, BYGBlockList.SCORCHED_GRASS.getDefaultState(), 2);
             return true;
         }
+        return true;
     }
 }
