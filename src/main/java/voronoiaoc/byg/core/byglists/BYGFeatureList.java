@@ -15,10 +15,11 @@ import voronoiaoc.byg.common.world.feature.features.nether.glowstonegardens.*;
 import voronoiaoc.byg.common.world.feature.features.nether.sythiantorrids.SythianRoots;
 import voronoiaoc.byg.common.world.feature.features.nether.sythiantorrids.SythianSprout;
 import voronoiaoc.byg.common.world.feature.features.nether.sythiantorrids.SythianStalk;
-import voronoiaoc.byg.common.world.feature.features.nether.warpeddesert.WarpedBush;
-import voronoiaoc.byg.common.world.feature.features.nether.warpeddesert.WarpedCoral;
-import voronoiaoc.byg.common.world.feature.features.nether.warpeddesert.WarpedCoralFan;
-import voronoiaoc.byg.common.world.feature.features.nether.warpeddesert.WarpedCoralFeature;
+import voronoiaoc.byg.common.world.feature.features.nether.warpeddesert.*;
+import voronoiaoc.byg.common.world.feature.features.nether.whalinggarth.ScorchedBush;
+import voronoiaoc.byg.common.world.feature.features.nether.whalinggarth.ScorchedGrass;
+import voronoiaoc.byg.common.world.feature.features.nether.whalinggarth.WhalingGrass;
+import voronoiaoc.byg.common.world.feature.features.nether.whalinggarth.WhalingVine;
 import voronoiaoc.byg.common.world.feature.features.overworld.*;
 import voronoiaoc.byg.common.world.feature.features.overworld.deadsea.DeadSeaSpikes;
 import voronoiaoc.byg.common.world.feature.features.overworld.deadsea.TallDeadSeaSpikes;
@@ -210,11 +211,15 @@ public class BYGFeatureList {
     public static final Feature<NoFeatureConfig> WARPED_CORALPLANT = new WarpedCoralFeature(NoFeatureConfig::deserialize);
     public static final Feature<NoFeatureConfig> WARPED_CORALFAN = new WarpedCoralFan(NoFeatureConfig::deserialize);
 
+    //Whaling
+    public static final Feature<NoFeatureConfig> WHALING_VINES = new WhalingVine(NoFeatureConfig::deserialize);
+    public static final Feature<NoFeatureConfig> WHALING_GRASS = new WhalingGrass(NoFeatureConfig::deserialize);
+    public static final Feature<NoFeatureConfig> SCORCHED_GRASS = new ScorchedGrass(NoFeatureConfig::deserialize);
+    public static final Feature<NoFeatureConfig> SCORCHED_BUSH = new ScorchedBush(NoFeatureConfig::deserialize);
 
+    //Misc.
     public static final Feature<NoFeatureConfig> WOOD_BLEWIT = new WoodBlewitMushroom(NoFeatureConfig::deserialize);
-
     public static final Feature<NoFeatureConfig> WEED_GRASS = new WeedGrass(NoFeatureConfig::deserialize);
-
     public static final Feature<NoFeatureConfig> WEEPING_MILKCAP = new WeepingMilkCapMushroom(NoFeatureConfig::deserialize);
 
     //Weeping Roots

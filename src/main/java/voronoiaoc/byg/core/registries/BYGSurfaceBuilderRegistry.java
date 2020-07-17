@@ -35,16 +35,8 @@ public class BYGSurfaceBuilderRegistry {
                 BYGSBList.LUSH_TUNDRA_SB.setRegistryName("lush_tundra_sb"),
                 BYGSBList.EBONY_SB.setRegistryName("ebony_woods_sb"),
                 BYGSBList.FUNGAL_RAINFOREST_SB.setRegistryName("fungal_rainforest_sb"),
-                BYGSBList.GLOWING_ANCIENT_FOREST_SB.setRegistryName("glowing_ancient_forest_sb")
-
-
-
-
-
-
-
-
-
+                BYGSBList.GLOWING_ANCIENT_FOREST_SB.setRegistryName("glowing_ancient_forest_sb"),
+                BYGSBList.WHALING_GARTH_SB.setRegistryName("whaling_garth_sb")
         );
         BYG.LOGGER.info("BYG: Surface Builders Registered!");
     }

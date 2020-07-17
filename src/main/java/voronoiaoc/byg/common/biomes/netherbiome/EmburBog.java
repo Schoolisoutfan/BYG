@@ -26,7 +26,7 @@ import voronoiaoc.byg.core.byglists.BYGSBList;
 
 public class EmburBog extends Biome implements BiomeFog {
     static final ConfiguredSurfaceBuilder<?> SURFACE_BUILDER = new ConfiguredSurfaceBuilder<>(BYGSBList.EMBURBOG, BYGSBList.BYGSBConfigList.EMBURNYLIUM);
-    static final RainType PRECIPATATION = RainType.RAIN;
+    static final RainType PRECIPATATION = RainType.NONE;
     static final Category CATEGORY = Category.NETHER;
     static final double DEPTH = 0.125F;
     static final double SCALE = 0.05F;

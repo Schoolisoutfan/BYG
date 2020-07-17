@@ -182,6 +182,7 @@ public class BYGBiomeRegistry {
         registerNetherBiome(registry, BYGBiomeList.SYTHIANTORRIDS, "sythiantorrids",  BiomeDictionary.Type.NETHER);
         registerNetherBiome(registry, BYGBiomeList.GLOWSTONEGARDENS, "glowstonegardens",  BiomeDictionary.Type.NETHER);
         registerNetherBiome(registry, BYGBiomeList.EMBURBOG, "embur_bog", BiomeDictionary.Type.NETHER);
+        registerNetherBiome(registry, BYGBiomeList.WHALING_GARTH, "whaling_garth", BiomeDictionary.Type.NETHER);
 
         //End
         registerBYGEndBiome(registry, BYGBiomeList.IVISFIELDS, "ivis_fields",  BiomeDictionary.Type.END);

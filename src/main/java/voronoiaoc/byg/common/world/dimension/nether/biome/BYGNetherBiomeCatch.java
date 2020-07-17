@@ -25,6 +25,7 @@ public class BYGNetherBiomeCatch {
     public static final int SYTHIANTORRIDS = BiomeRegistry.getID(BYGBiomeList.SYTHIANTORRIDS);
     public static final int GLOWSTONEGARDENS = BiomeRegistry.getID(BYGBiomeList.GLOWSTONEGARDENS);
     public static final int EMBURBOG = BiomeRegistry.getID(BYGBiomeList.EMBURBOG);
+    public static final int WHALING_GARTH = BiomeRegistry.getID(BYGBiomeList.WHALING_GARTH);
     public static final int ASHENINFERNO = BiomeRegistry.getID(new ResourceLocation("biomesoplenty:ashen_inferno"));
     public static final int UNDERGARDEN = BiomeRegistry.getID(new ResourceLocation("biomesoplenty:undergarden"));
     public static final int VISCERALHEAP = BiomeRegistry.getID(new ResourceLocation("biomesoplenty:visceral_heap"));
@@ -66,6 +67,7 @@ public class BYGNetherBiomeCatch {
         netherBiomeIDS.add(SYTHIANTORRIDS);
         netherBiomeIDS.add(GLOWSTONEGARDENS);
         netherBiomeIDS.add(EMBURBOG);
+        netherBiomeIDS.add(WHALING_GARTH);
 
         if (ModList.get().isLoaded("biomesoplenty")) {
             netherBiomeIDS.add(ASHENINFERNO);

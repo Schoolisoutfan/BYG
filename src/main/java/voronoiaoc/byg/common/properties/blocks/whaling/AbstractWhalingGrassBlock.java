@@ -57,7 +57,7 @@ public class AbstractWhalingGrassBlock extends Block implements IWaterLoggable {
     }
 
     protected boolean isValidGround(BlockState state) {
-        return state.getBlock() == Blocks.SOUL_SAND || isIn(Tags.Blocks.NETHERRACK) || state.getBlock() == BYGBlockList.MAGMATIC_STONE;
+        return state.getBlock() == Blocks.SOUL_SAND || isIn(Tags.Blocks.NETHERRACK) || state.getBlock() == BYGBlockList.MAGMATIC_STONE || state.getBlock() == BYGBlockList.OVERGROWN_NETHERRACK;
     }
 
     @Override

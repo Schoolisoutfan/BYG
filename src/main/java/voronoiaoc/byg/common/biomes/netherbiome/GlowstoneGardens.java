@@ -27,7 +27,7 @@ import voronoiaoc.byg.core.byglists.BYGSBList;
 
 public class GlowstoneGardens extends Biome implements BiomeFog {
     static final ConfiguredSurfaceBuilder SURFACE_BUILDER = new ConfiguredSurfaceBuilder<>(SurfaceBuilder.DEFAULT, BYGSBList.BYGSBConfigList.GLOWSTONEGARDENS);
-    static final RainType PRECIPATATION = RainType.RAIN;
+    static final RainType PRECIPATATION = RainType.NONE;
     static final Category CATEGORY = Category.NETHER;
     static final double DEPTH = 0.125F;
     static final double SCALE = 0.05F;
