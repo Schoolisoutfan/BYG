@@ -30,8 +30,7 @@ public class SmallPineTree extends Feature<NoFeatureConfig> {
 
     public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 
-
-        if (pos.getX() == -8 && pos.getZ() == -4) {
+        if (pos.getX() == -2 && pos.getZ() == -1) {
             for (int checkX = pos.getX() + -16; checkX <= pos.getX() + 16; checkX++) {
                 for (int checkY = pos.getY(); checkY <= 25; checkY++) {
                     for (int checkZ = pos.getZ() + -16; checkZ <= pos.getZ() + 16; checkZ++) {
@@ -44,7 +43,7 @@ public class SmallPineTree extends Feature<NoFeatureConfig> {
             TemplateManager templatemanager = ((ServerWorld) world.getWorld()).getSaveHandler().getStructureTemplateManager();
 
             if (template == null)
-                template = templatemanager.getTemplate(new ResourceLocation(BYG.MOD_ID + ":features/trees/ancient_tree2"));
+                template = templatemanager.getTemplate(new ResourceLocation(BYG.MOD_ID + ":features/trees/mini_wood_blewit"));
 
             if (template == null) {
                 BYG.LOGGER.warn("NBT does not exist!");

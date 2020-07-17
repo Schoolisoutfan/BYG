@@ -404,17 +404,29 @@ public class BYGFeatures {
         biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.GREEN_MUSHROOM.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(UnderGroundPlacement.UGPLACER.configure(new AtSurfaceWithExtraConfig(10, 0.5F, 8))));
         biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.NETHER_BRISTLE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(UnderGroundPlacement.UGPLACER.configure(new AtSurfaceWithExtraConfig(2, 0.4F, 1))));
         biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.WEEPING_ROOTS.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.LIGHT_GEM_CHANCE.configure(new FrequencyConfig(150))));
-        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.WEEPING_ROOTS_PLANT.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.LIGHT_GEM_CHANCE.configure(new FrequencyConfig(400))));
+        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.WEEPING_ROOTS_PLANT.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.LIGHT_GEM_CHANCE.configure(new FrequencyConfig(500))));
 
     }
 
     public static void addWhalingGarthVegetation(Biome biome) {
         biome.addFeature(GenerationStage.Decoration.RAW_GENERATION, BYGFeatureList.CHAIN.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.LIGHT_GEM_CHANCE.configure(new FrequencyConfig(200))));
         biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.WHALING_VINES.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.LIGHT_GEM_CHANCE.configure(new FrequencyConfig(600))));
-        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.WHALING_GRASS.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(UnderGroundPlacement.UGPLACER.configure(new AtSurfaceWithExtraConfig(20, 0.5F, 12))));
+        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.WHALING_GRASS.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(UnderGroundPlacement.UGPLACER.configure(new AtSurfaceWithExtraConfig(50, 0.5F, 25))));
         biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.WEEPING_ROOTS_PLANT.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.LIGHT_GEM_CHANCE.configure(new FrequencyConfig(600))));
         biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.SCORCHED_BUSH.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(UnderGroundPlacement.UGPLACER.configure(new AtSurfaceWithExtraConfig(20, 0.5F, 12))));
         biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, BYGFeatureList.SCORCHED_GRASS.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(UnderGroundPlacement.UGPLACER.configure(new AtSurfaceWithExtraConfig(20, 0.5F, 12))));
+
+    }
+
+    public static void addMiniNetherMushrooms(Biome biome) {
+        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(
+                BYGFeatureList.MINI_BLACK_PUFF.withConfiguration(DecoratedFeatureConfig.NO_FEATURE_CONFIG).withChance(0.15F),
+                BYGFeatureList.MINI_BROWN_MUSHROOM.withConfiguration(DecoratedFeatureConfig.NO_FEATURE_CONFIG).withChance(0.2F),
+                BYGFeatureList.MINI_GREEN_MUSHROOM.withConfiguration(DecoratedFeatureConfig.NO_FEATURE_CONFIG).withChance(0.25F),
+                BYGFeatureList.MINI_RED_MUSHROOM.withConfiguration(DecoratedFeatureConfig.NO_FEATURE_CONFIG).withChance(0.2F),
+                BYGFeatureList.MINI_WEEPING_MILKCAP.withConfiguration(DecoratedFeatureConfig.NO_FEATURE_CONFIG).withChance(0.25F)),
+                BYGFeatureList.MINI_WOOD_BLEWIT.withConfiguration(DecoratedFeatureConfig.NO_FEATURE_CONFIG))).withPlacement(UnderGroundPlacement.UGPLACER.configure(
+                new AtSurfaceWithExtraConfig(7, 0.5F, 3))));
 
     }
 

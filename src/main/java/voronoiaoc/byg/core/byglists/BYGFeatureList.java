@@ -160,6 +160,7 @@ public class BYGFeatureList {
     public static final Feature<BlockStateFeatureConfig> LAKE_FROST = new FrostMagmaLakeFeature(BlockStateFeatureConfig::deserialize);
     public static final Feature<NoFeatureConfig> LAKE_WIDE_SHALLOW = new LakeWideShallow(NoFeatureConfig::deserialize);
     public static final Feature<NoFeatureConfig> LAKE_LAVA_WIDE_SHALLOW = new LavaLakeWideShallow(NoFeatureConfig::deserialize);
+
     //Vines
     public static final Feature<NoFeatureConfig> VINES = new VinePlacer(NoFeatureConfig::deserialize);
 
@@ -171,14 +172,11 @@ public class BYGFeatureList {
     /********************************************************************Carvers**************************************************************************/
     public static final WorldCarver<ProbabilityConfig> VOLCANIC_CARVER = new VolcanicCarver(ProbabilityConfig::deserialize, 256);
 
-
-
     /*********************************************************************Large Flower Features***********************************************************/
     public static final BYGAbstractTreeFeature<NoFeatureConfig> GIANT_ANGELICA_FLOWER = new AngelicaGiant(NoFeatureConfig::deserialize);
     public static final BYGAbstractTreeFeature<NoFeatureConfig> GIANT_DANDELION_FLOWER = new DandelionGiant(NoFeatureConfig::deserialize);
     public static final BYGAbstractTreeFeature<NoFeatureConfig> GIANT_IRIS_FLOWER = new IrisGiant(NoFeatureConfig::deserialize);
     public static final BYGAbstractTreeFeature<NoFeatureConfig> GIANT_ROSE_FLOWER = new RoseGiant(NoFeatureConfig::deserialize);
-
 
     /*********************************************************************Large Mushroom Features*********************************************************/
     public static final Feature<NoFeatureConfig> GREEN_MUSHROOM_HUGE = new GreenMushroomHuge(NoFeatureConfig::deserialize);
@@ -188,7 +186,13 @@ public class BYGFeatureList {
     public static final Feature<NoFeatureConfig> BLUE_GLOWSHROOM_HUGE = new BlueGlowshroomHuge(NoFeatureConfig::deserialize);
     public static final Feature<NoFeatureConfig> PURPLE_GLOWSHROOM_HUGE = new PurpleGlowshroomHuge(NoFeatureConfig::deserialize);
 
-
+    /*********************************************************************Mini Mushroom Features*********************************************************/
+    public static final Feature<NoFeatureConfig> MINI_GREEN_MUSHROOM = new MiniGreenMushroom(NoFeatureConfig::deserialize);
+    public static final Feature<NoFeatureConfig> MINI_RED_MUSHROOM = new MiniRedMushroom(NoFeatureConfig::deserialize);
+    public static final Feature<NoFeatureConfig> MINI_BROWN_MUSHROOM = new MiniBrownMushroom(NoFeatureConfig::deserialize);
+    public static final Feature<NoFeatureConfig> MINI_WEEPING_MILKCAP = new MiniWeepingMilkcap(NoFeatureConfig::deserialize);
+    public static final Feature<NoFeatureConfig> MINI_BLACK_PUFF = new MiniBlackPuff(NoFeatureConfig::deserialize);
+    public static final Feature<NoFeatureConfig> MINI_WOOD_BLEWIT = new MiniWoodBlewit(NoFeatureConfig::deserialize);
 
     /********************************************************************Nether Features********************************************************************/
 

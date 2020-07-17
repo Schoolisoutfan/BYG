@@ -48,6 +48,7 @@ public class WhalingGarth extends Biome implements BiomeFog {
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.SPRING_FEATURE.withConfiguration(DefaultBiomeFeatures.ENCLOSED_NETHER_SPRING_CONFIG).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(16, 10, 20, 128))));
         BYGFeatures.addNetherFortress(this);
         BYGFeatures.addWhalingGarthVegetation(this);
+        BYGFeatures.addMiniNetherMushrooms(this);
 
         this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.GHAST, 80, 4, 4));
         this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.ZOMBIE_PIGMAN, 100, 4, 4));
