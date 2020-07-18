@@ -29,7 +29,7 @@ public class LargeChain extends Feature<NoFeatureConfig> {
         mainMutable1.move(Direction.UP, 2);
         mainMutable2.move(Direction.UP, 2);
 
-        if (!worldIn.isAirBlock(pos)) {
+        if (worldIn.getBlockState(pos).getBlock() == Blocks.BEDROCK) {
             return false;
         } else if (!worldIn.getBlockState(pos.up()).isIn(Tags.Blocks.NETHERRACK)) {
             return false;

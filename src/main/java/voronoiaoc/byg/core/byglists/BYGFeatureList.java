@@ -246,8 +246,6 @@ public class BYGFeatureList {
     public static final Structure<NoFeatureConfig> SKYRISFORTRESS = new SkyrisFortressStructure(NoFeatureConfig::deserialize);
     public static final Feature<NoFeatureConfig> DOVERQUARRY = new DoverQuarry1(NoFeatureConfig::deserialize);
 
-
-
     /********************************************************************Tree Features********************************************************************/
     //Acacia
     public static final BYGAbstractTreeFeature<NoFeatureConfig> ACACIA_TREE1 = new AcaciaTree1(NoFeatureConfig::deserialize);

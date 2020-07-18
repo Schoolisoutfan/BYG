@@ -38,11 +38,9 @@ import voronoiaoc.byg.config.BYGWorldConfig;
 import voronoiaoc.byg.config.biomeweight.ConfigWeightManager;
 import voronoiaoc.byg.core.byglists.BYGEntityList;
 import voronoiaoc.byg.core.byglists.BYGFeatureList;
-import voronoiaoc.byg.core.registries.BYGBiomeRegistry;
 import voronoiaoc.byg.server.command.BYGCommand;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Mod("byg")
@@ -63,8 +61,6 @@ public class BYG {
         MinecraftForge.EVENT_BUS.register(new SubscribeEvents());
     }
 
-
-
     private void bygCommonSetup(FMLCommonSetupEvent event) {
         ConfigWeightManager.buildConfig();
         ConfigWeightManager.loadConfig(ConfigWeightManager.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(BYG.MOD_ID + "-weights-common.toml"));
@@ -77,7 +73,7 @@ public class BYG {
         List<Structure<?>> tempList = new ArrayList<>(Feature.ILLAGER_STRUCTURES);
         tempList.add(BYGFeatureList.BYGVILLAGE);
         Feature.ILLAGER_STRUCTURES = ImmutableList.copyOf(tempList);
-        Collections.sort(BYGBiomeRegistry.biomeList);
+//        Collections.sort(BYGBiomeRegistry.biomeList);
 
 //        BYGBiomeRegistry.biomeList.forEach(e -> {
 //            idx++;
