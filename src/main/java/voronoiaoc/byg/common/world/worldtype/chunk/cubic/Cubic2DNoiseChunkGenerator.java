@@ -382,7 +382,7 @@ public abstract class Cubic2DNoiseChunkGenerator<T extends GenerationSettings> e
      * Generate surface block patterns (including new non-circular surface deposits)
      */
 
-    public int func_222529_a(int worldX, int worldZ, Heightmap.Type p_222529_3_) {
+    public int getHeight(int worldX, int worldZ, Heightmap.Type p_222529_3_) {
 
         int sealevel = this.getSeaLevel();
         int chunkBlockX = worldX & 15;

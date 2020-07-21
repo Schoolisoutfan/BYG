@@ -350,7 +350,7 @@ public abstract class Worley2DNoiseChunkGenerator<T extends GenerationSettings> 
      * Seems to be for updating a heightmap based on a single column
      */
 
-    public int func_222529_a(int worldX, int worldZ, Heightmap.Type heightMapType) {
+    public int getHeight(int worldX, int worldZ, Heightmap.Type heightMapType) {
 
         int sealevel = this.getSeaLevel();
         int chunkBlockX = worldX & 15;

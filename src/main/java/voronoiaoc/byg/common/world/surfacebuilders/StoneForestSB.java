@@ -26,7 +26,7 @@ public class StoneForestSB extends SurfaceBuilder<SurfaceBuilderConfig> {
     public static FastNoise noiseGen = null;
 
     public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {
-        setSeed(seed);
+        setSeed(random.nextLong());
         BlockPos.Mutable block = new BlockPos.Mutable();
         int xPos = x & 15;
         int zPos = z & 15;
@@ -59,12 +59,11 @@ public class StoneForestSB extends SurfaceBuilder<SurfaceBuilderConfig> {
     public void setSeed(long seed) {
         if (noiseGen == null) {
             noiseGen = new FastNoise((int) seed);
-            noiseGen.SetFractalType(FastNoise.FractalType.RigidMulti);
-            noiseGen.SetNoiseType(FastNoise.NoiseType.SimplexFractal);
+            noiseGen.SetNoiseType(FastNoise.NoiseType.Simplex);
             noiseGen.SetGradientPerturbAmp(1);
             noiseGen.SetFractalOctaves(1);
-            noiseGen.SetFractalGain(0.3f);
-            noiseGen.SetFrequency(0.02f);
+            noiseGen.SetFractalGain(0.03f);
+            noiseGen.SetFrequency(0.2f);
         }
     }
 }
