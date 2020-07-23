@@ -59,11 +59,12 @@ public class StoneForestSB extends SurfaceBuilder<SurfaceBuilderConfig> {
     public void setSeed(long seed) {
         if (noiseGen == null) {
             noiseGen = new FastNoise((int) seed);
-            noiseGen.SetNoiseType(FastNoise.NoiseType.Simplex);
+            noiseGen.SetFractalType(FastNoise.FractalType.RigidMulti);
+            noiseGen.SetNoiseType(FastNoise.NoiseType.SimplexFractal);
             noiseGen.SetGradientPerturbAmp(1);
             noiseGen.SetFractalOctaves(1);
-            noiseGen.SetFractalGain(0.03f);
-            noiseGen.SetFrequency(0.2f);
+            noiseGen.SetFractalGain(0.3f);
+            noiseGen.SetFrequency(0.02f);
         }
     }
 }

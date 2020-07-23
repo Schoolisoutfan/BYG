@@ -107,9 +107,9 @@ public class BYG {
     public static class SubscribeEvents {
         @SubscribeEvent
         public void commandRegisterEvent(FMLServerStartingEvent event) {
-            BYG.LOGGER.debug("BYG: \"Server Starting\" Event Starting...");
+            LOGGER.debug("BYG: \"Server Starting\" Event Starting...");
             BYGCommand.register(event.getCommandDispatcher());
-            BYG.LOGGER.info("BYG: \"Server Starting\" Event Complete!");
+            LOGGER.info("BYG: \"Server Starting\" Event Complete!");
         }
     }
 }

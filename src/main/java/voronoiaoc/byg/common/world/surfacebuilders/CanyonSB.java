@@ -3,14 +3,13 @@ package voronoiaoc.byg.common.world.surfacebuilders;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
-import voronoiaoc.byg.common.world.worldtype.noise.simplex.chunkgen.ChunkFastSimplexStyleNoise;
-import voronoiaoc.byg.core.byglists.BYGBlockList;
+import net.minecraftforge.common.Tags;
+import voronoiaoc.byg.common.world.worldtype.noise.fastnoise.FastNoise;
 import voronoiaoc.byg.core.byglists.BYGSBList;
 
 import java.util.Random;
@@ -20,115 +19,154 @@ public class CanyonSB extends SurfaceBuilder<SurfaceBuilderConfig> {
     public CanyonSB(Function<Dynamic<?>, ? extends SurfaceBuilderConfig> config) {
         super(config);
     }
-
     protected long seed;
-    protected ChunkFastSimplexStyleNoise simplex;
+    protected FastNoise noiseGen = null;
+    protected FastNoise noiseGen2 = null;
+    protected FastNoise noiseGen3 = null;
 
-    public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {
+    public BlockState layerBlock = Blocks.TERRACOTTA.getDefaultState();
+
+    public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int groundHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {
+        setSeed(seed);
         BlockPos.Mutable block = new BlockPos.Mutable();
         int xPos = x & 15;
         int zPos = z & 15;
-        double rawSimplexNoiseSample = this.octavedSimplex(x, z, 1, 0.001F, 2, 0.5f);
-        double simplexNoiseSample = rawSimplexNoiseSample * 65;
-        double ridgedNoiseSample = 1 - (2 * Math.abs(simplexNoiseSample));
 
-        if (ridgedNoiseSample > -24) {
-            if (ridgedNoiseSample > -10) {
-                for (int yPos = startHeight; yPos >= startHeight - 80; --yPos) {
-                    block.setPos(xPos, yPos, zPos);
-                    if (yPos > seaLevel) {
-                        chunkIn.setBlockState(block, Blocks.AIR.getDefaultState(), false);
-                    }
-                }
-                if (noise < 1)
-                    SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG);
-                else
-                    SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, BYGSBList.BYGSBConfigList.COARSE);
-            }
-            //Edge 1(Outwardest Edge)
-            int noiseAdded = 135;
+        double noiseSample = noiseGen.GetNoise(x, z) * 10;
+        double noiseSample2 = (noiseGen2.GetNoise(x, z) * 15) + (noiseGen3.GetNoise(x,z) * 9) * noiseGen3.GetNoise(x, z);
 
-            if (ridgedNoiseSample > -24 && ridgedNoiseSample < -20) {
-                for (int yPos = startHeight; yPos >= noiseAdded; --yPos) {
-                    block.setPos(xPos, yPos, zPos);
+        //0.03 is effectively one block w/ the ridged noise sample.
+        if (noiseSample > 9.0) {
+            for (int yPos = groundHeight; yPos >= seaLevel - noiseSample2; --yPos) {
+                block.setPos(xPos, yPos, zPos);
+                if (noiseSample < 9.06) {
+                    if (yPos < groundHeight - 10)
+                        chunkIn.setBlockState(block, Blocks.STONE.getDefaultState(), false);
+                    else
+                        chunkIn.setBlockState(block, Blocks.AIR.getDefaultState(), false);
+                }
+                else if (noiseSample < 9.12) {
+                    if (yPos < groundHeight - 13)
+                        chunkIn.setBlockState(block, Blocks.STONE.getDefaultState(), false);
+                    else
+                        chunkIn.setBlockState(block, Blocks.AIR.getDefaultState(), false);
+                }
+                else if (noiseSample < 9.18) {
+                    if (yPos < groundHeight - 16)
+                        chunkIn.setBlockState(block, Blocks.STONE.getDefaultState(), false);
+                    else
+                        chunkIn.setBlockState(block, Blocks.AIR.getDefaultState(), false);
+                }
+                else if (noiseSample < 9.24) {
+                    if (yPos < groundHeight - 19)
+                        chunkIn.setBlockState(block, Blocks.STONE.getDefaultState(), false);
+                    else
+                        chunkIn.setBlockState(block, Blocks.AIR.getDefaultState(), false);
+                }
+                else if (noiseSample < 9.45) {
+                    if (yPos < groundHeight - 22)
+                        chunkIn.setBlockState(block, Blocks.STONE.getDefaultState(), false);
+                    else
+                        chunkIn.setBlockState(block, Blocks.AIR.getDefaultState(), false);
+                }
+                else if (noiseSample < 9.51) {
+                    if (yPos < groundHeight - 32)
+                        chunkIn.setBlockState(block, Blocks.STONE.getDefaultState(), false);
+                    else
+                        chunkIn.setBlockState(block, Blocks.AIR.getDefaultState(), false);
+                }
+                else if (noiseSample < 9.57) {
+                    if (yPos < groundHeight - 35)
+                        chunkIn.setBlockState(block, Blocks.STONE.getDefaultState(), false);
+                    else
+                        chunkIn.setBlockState(block, Blocks.AIR.getDefaultState(), false);
+                }
+                else if (noiseSample < 9.63) {
+                    if (yPos < groundHeight - 38)
+                        chunkIn.setBlockState(block, Blocks.STONE.getDefaultState(), false);
+                    else
+                        chunkIn.setBlockState(block, Blocks.AIR.getDefaultState(), false);
+                }
+                else if (noiseSample < 9.69) {
+                    if (yPos < groundHeight - 41)
+                        chunkIn.setBlockState(block, Blocks.STONE.getDefaultState(), false);
+                    else
+                        chunkIn.setBlockState(block, Blocks.AIR.getDefaultState(), false);
+                }
+                else {
                     if (yPos > seaLevel) {
                         chunkIn.setBlockState(block, Blocks.AIR.getDefaultState(), false);
                     }
+                    else
+                        chunkIn.setBlockState(block, Blocks.WATER.getDefaultState(), false);
                 }
-                if (noise < 1)
-                    SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, BYGSBList.BYGSBConfigList.REDSAND_CF);
-                else
-                    SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, randomSurfaceConfig(random));
-            }
-            //Edge 2(Middle Edge)
-            if (ridgedNoiseSample > -20 && ridgedNoiseSample < -16) {
-                for (int yPos = startHeight; yPos >= noiseAdded - 9; --yPos) {
-                    block.setPos(xPos, yPos, zPos);
-                    if (yPos > seaLevel) {
-                        chunkIn.setBlockState(block, Blocks.AIR.getDefaultState(), false);
-                    }
-                }
-                if (noise < 1)
-                    SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, BYGSBList.BYGSBConfigList.REDSAND_CF);
-                else
-                    SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, randomSurfaceConfig(random));
-            }
-            //Edge 3(Inner Edge)
-            if (ridgedNoiseSample > -16 && ridgedNoiseSample < -10) {
-                for (int yPos = startHeight; yPos >= noiseAdded - 18; --yPos) {
-                    block.setPos(xPos, yPos, zPos);
-                    if (yPos > seaLevel) {
-                        chunkIn.setBlockState(block, Blocks.AIR.getDefaultState(), false);
-                    }
-                }
-                if (noise < 1)
-                    SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, BYGSBList.BYGSBConfigList.REDSAND_CF);
-                else
-                    SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, randomSurfaceConfig(random));
             }
         }
+        if (noiseSample > 8.8F && noiseSample <= 9.0F)
+            SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, groundHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, BYGSBList.BYGSBConfigList.RED_ROCK_CF);
 
-        for (int yPos = startHeight - 3; yPos >= seaLevel; --yPos) {
-            block.setPos(xPos, yPos, zPos);
-            BlockState currentBlockToReplace = chunkIn.getBlockState(block);
-            if (currentBlockToReplace == STONE) {
-                chunkIn.setBlockState(block, BYGBlockList.RED_ROCK.getDefaultState(), false);
-
-            }
+        if (noiseSample < 8.8F) {
+            if (noise < 1)
+                SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, groundHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, BYGSBList.BYGSBConfigList.REDSAND_CF);
+            else
+                SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, groundHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, randomSurfaceConfig(random));
         }
 
-        if (noise < 1)
-            SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, BYGSBList.BYGSBConfigList.REDSAND_CF);
-        else
-            SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, randomSurfaceConfig(random));
+        BlockPos.Mutable mutable = new BlockPos.Mutable();
+        for (int yPos = groundHeight - 3; yPos >= seaLevel - 15; yPos--) {
+            setStrataLayerBlock(yPos);
+            mutable.setPos(xPos, yPos, zPos);
+
+            if (chunkIn.getBlockState(mutable).isIn(Tags.Blocks.STONE))
+                chunkIn.setBlockState(mutable, layerBlock, false);
+        }
     }
 
 
     public void setSeed(long seed) {
-        if (this.seed != seed || this.simplex == null) {
-            SharedSeedRandom sharedseedrandom = new SharedSeedRandom(seed);
-            this.simplex = new ChunkFastSimplexStyleNoise(sharedseedrandom);
+        if (noiseGen == null) {
+            noiseGen = new FastNoise((int) seed);
+            noiseGen.SetFractalType(FastNoise.FractalType.RigidMulti);
+            noiseGen.SetNoiseType(FastNoise.NoiseType.SimplexFractal);
+            noiseGen.SetGradientPerturbAmp(1);
+            noiseGen.SetFractalOctaves(1);
+            noiseGen.SetFractalGain(0.3f);
+            noiseGen.SetFrequency(0.0009F);
         }
-        this.seed = seed;
-    }
-
-    public double octavedSimplex(int x, int y, float amp, float scale, int octaves, float change) {
-        double height = 0;
-        for (int i = 0; i < octaves; i++) {
-            height += amp * simplex.sample2D(x * scale, y * scale);
-            scale /= change;
-            amp *= change;
+        if (noiseGen2 == null) {
+            noiseGen2 = new FastNoise((int) seed + 20);
+            noiseGen2.SetNoiseType(FastNoise.NoiseType.Simplex);
+            noiseGen2.SetFractalOctaves(2);
+            noiseGen2.SetFractalGain(0.3f);
+            noiseGen2.SetFrequency(0.008F);
         }
-        return height;
+        if (noiseGen3 == null) {
+            noiseGen3 = new FastNoise((int) seed + 277);
+            noiseGen3.SetNoiseType(FastNoise.NoiseType.Simplex);
+            noiseGen3.SetFractalOctaves(2);
+            noiseGen3.SetFractalGain(0.3f);
+            noiseGen3.SetFrequency(0.004F);
+        }
     }
 
     public static SurfaceBuilderConfig randomSurfaceConfig(Random random) {
         int randomizer = random.nextInt(3);
-
         if (randomizer == 1) {
             return SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG;
         } else
             return BYGSBList.BYGSBConfigList.COARSE;
+    }
 
+    public void setStrataLayerBlock(int yPos) {
+        if (yPos % 12 == 0)
+            layerBlock = Blocks.BROWN_TERRACOTTA.getDefaultState();
+        else if (yPos % 13 == 0)
+            layerBlock = Blocks.ORANGE_TERRACOTTA.getDefaultState();
+        else if (yPos % 14 == 0)
+            layerBlock = Blocks.YELLOW_TERRACOTTA.getDefaultState();
+        else if (yPos % 15 == 0)
+            layerBlock = Blocks.TERRACOTTA.getDefaultState();
+        else if (yPos % 16 == 0)
+            layerBlock = Blocks.TERRACOTTA.getDefaultState();
     }
 }

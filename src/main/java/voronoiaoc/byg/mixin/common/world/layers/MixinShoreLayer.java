@@ -26,6 +26,10 @@ public abstract class MixinShoreLayer {
                 if (idx != Registry.BIOME.getId(BYGBiomeList.ALPS))
                     cir.setReturnValue(Registry.BIOME.getId(BYGBiomeList.ALPINEFOOTHILLS));
 
+        if (biome == BYGBiomeList.REDROCKCANYON)
+            if (idx != Registry.BIOME.getId(BYGBiomeList.REDROCKCANYON))
+                cir.setReturnValue(Registry.BIOME.getId(BYGBiomeList.CANYON_EDGE));
+
             if (biome == BYGBiomeList.ALPS)
                 if (ClimateBooleans.isOcean(idx))
                     cir.setReturnValue(BYGBiomeGetter.SNOWYROCKYBLACKBEACH);

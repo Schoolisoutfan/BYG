@@ -1,68 +1,68 @@
-package voronoiaoc.byg.common.biomes.biomes;
+package voronoiaoc.byg.common.biomes.subbiomes;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
-import net.minecraft.world.gen.INoiseRandom;
+import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.structure.MineshaftConfig;
 import net.minecraft.world.gen.feature.structure.MineshaftStructure;
+import net.minecraft.world.gen.feature.structure.VillageConfig;
+import net.minecraft.world.gen.placement.IPlacementConfig;
+import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
+import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import voronoiaoc.byg.common.biomes.BiomeFog;
 import voronoiaoc.byg.common.world.feature.biomefeatures.BYGFeatures;
 import voronoiaoc.byg.common.world.feature.biomefeatures.BYGTreeFeatures;
-import voronoiaoc.byg.core.byglists.BYGBiomeList;
-import voronoiaoc.byg.core.byglists.BYGSBList;
+import voronoiaoc.byg.common.world.surfacebuilders.CanyonEdgeSB;
+import voronoiaoc.byg.core.byglists.BYGFeatureList;
 
-import javax.annotation.Nullable;
-
-public class WeepingWitchForest extends Biome implements BiomeFog {
-    static final ConfiguredSurfaceBuilder SURFACE_BUILDER = new ConfiguredSurfaceBuilder<>(BYGSBList.EBONY_SB, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG);
+public class CanyonEdge extends Biome {
+    static final ConfiguredSurfaceBuilder SURFACE_BUILDER = new ConfiguredSurfaceBuilder<>(new CanyonEdgeSB(SurfaceBuilderConfig::deserialize), SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG);
     static final RainType PRECIPATATION = RainType.RAIN;
-    static final Category CATEGORY = Category.FOREST;
-    static final double DEPTH = 0.2F;
-    static final double SCALE = 0.1F;
-    static final float TEMPERATURE = 0.25F;
-    static final float DOWNFALL = 0.8F;
+    static final Category CATEGORY = Category.PLAINS;
+    static final double DEPTH = -1.3F;
+    static final double SCALE = 0.5F;
+    static final float TEMPERATURE = 1.2F;
+    static final float DOWNFALL = 0.1F;
     static final int WATER_COLOR = 4159204;
     static final int WATER_FOG_COLOR = 329011;
     static final String PARENT = null;
 
-    public WeepingWitchForest() {
+    public CanyonEdge() {
         super(new Builder().surfaceBuilder(SURFACE_BUILDER).precipitation(PRECIPATATION).category(CATEGORY).depth((float) DEPTH).waterColor(WATER_COLOR).scale((float) SCALE).temperature(TEMPERATURE).downfall(DOWNFALL).waterFogColor(WATER_FOG_COLOR).parent(PARENT));
+        this.addStructure(BYGFeatureList.BYGVILLAGE.withConfiguration(new VillageConfig("byg:village/adobe/town_centers", 6)));
+        this.addStructure(Feature.PILLAGER_OUTPOST.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
         this.addStructure(Feature.MINESHAFT.withConfiguration(new MineshaftConfig(0.004D, MineshaftStructure.Type.NORMAL)));
         this.addStructure(Feature.STRONGHOLD.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
-        BYGTreeFeatures.addDeadHazelTrees(this);
-        BYGTreeFeatures.addHugeMushrooms(this);
-        BYGTreeFeatures.addSmallSpruceTrees(this);
         DefaultBiomeFeatures.addCarvers(this);
         DefaultBiomeFeatures.addStructures(this);
         DefaultBiomeFeatures.addMonsterRooms(this);
         DefaultBiomeFeatures.addStoneVariants(this);
         DefaultBiomeFeatures.addOres(this);
+        DefaultBiomeFeatures.addExtraGoldOre(this);
+        DefaultBiomeFeatures.addExtraEmeraldOre(this);
         DefaultBiomeFeatures.addSedimentDisks(this);
         DefaultBiomeFeatures.addMushrooms(this);
         DefaultBiomeFeatures.addReedsAndPumpkins(this);
         DefaultBiomeFeatures.addFreezeTopLayer(this);
-        BYGFeatures.addGrass(this);
+        BYGFeatures.addTerracottaBoulder(this);
+        DefaultBiomeFeatures.addGrassAndDeadBushes(this);
+        BYGTreeFeatures.addPaloVerdeTrees(this);
         BYGFeatures.addBYGMushrooms(this);
-        BYGFeatures.addAnemones(this);
-        BYGFeatures.addAzalea(this);
+        BYGFeatures.addGrass(this);
+        BYGFeatures.addFirecracker(this);
+        this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, BYGFeatureList.BYGVILLAGE.withConfiguration(new VillageConfig("byg:village/adobe/town_centers", 6)).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 
-        this.addSpawn(EntityClassification.CREATURE, new SpawnListEntry(EntityType.SHEEP, 12, 4, 4));
-        this.addSpawn(EntityClassification.CREATURE, new SpawnListEntry(EntityType.PIG, 10, 4, 4));
-        this.addSpawn(EntityClassification.CREATURE, new SpawnListEntry(EntityType.CHICKEN, 10, 4, 4));
-        this.addSpawn(EntityClassification.CREATURE, new SpawnListEntry(EntityType.COW, 8, 4, 4));
+        this.addSpawn(EntityClassification.CREATURE, new SpawnListEntry(EntityType.RABBIT, 4, 2, 3));
         this.addSpawn(EntityClassification.AMBIENT, new SpawnListEntry(EntityType.BAT, 10, 8, 8));
         this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.SPIDER, 100, 4, 4));
-        this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.ZOMBIE, 95, 4, 4));
+        this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.HUSK, 95, 4, 4));
         this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.ZOMBIE_VILLAGER, 5, 1, 1));
         this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.SKELETON, 100, 4, 4));
         this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.CREEPER, 100, 4, 4));
@@ -71,49 +71,22 @@ public class WeepingWitchForest extends Biome implements BiomeFog {
         this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.WITCH, 5, 1, 1));
     }
 
-    @Nullable
-    @Override
-    public Biome getHill(INoiseRandom rand) {
-        return (rand.random(5) == 0) ? BYGBiomeList.PUMPKIN_FOREST : BYGBiomeList.WEEPING_WITCH_CLEARING;
-    }
-
     @Override
     @OnlyIn(Dist.CLIENT)
     public int getGrassColor(double posX, double posZ) {
-        return 5406551;
+        return 10855786;
+
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public int getFoliageColor() {
-        return 6589494;
+        return 10855786;
     }
 
     @Override
     public Biome getRiver() {
-        return Biomes.RIVER;
-    }
-
-    @Override
-    public Vec3d getBiomeFogColor(int x, int z, Vec3d originalValue) {
-        return color;
-    }
-
-    Vec3d color = new Vec3d(192, 192, 192);
-
-    @Override
-    public Boolean doesBiomeXZShowFog(int x, int z) {
-        return false;
-    }
-
-    @Override
-    public double getBiomeVoidFogYFactor(int x, int y, double originalValue) {
-        return 0.6;
-    }
-
-    @Override
-    public float fogDistance(int x, int z, float originalDistanceChunks) {
-        return 10;
+        return this;
     }
 
 }

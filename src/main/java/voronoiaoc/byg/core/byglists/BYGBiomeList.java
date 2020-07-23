@@ -132,7 +132,9 @@ public class BYGBiomeList {
     public static final Biome CORAL_MANGROVES = new CoralMangroves();
     public static final Biome CIKA_MOUNTAINS = new CikaMountains();
 
-    public static final Biome WEEPING_WTICH_CLEARING = new WeepingWitchClearing();
+    public static final Biome CANYON_EDGE = new CanyonEdge();
+
+    public static final Biome WEEPING_WITCH_CLEARING = new WeepingWitchClearing();
     public static final Biome CHERRY_BLOSSOM_CLEARING = new CherryBlossomClearing();
     public static final Biome BLACK_FOREST_CLEARING = new BlackForestClearing();
     public static final Biome CONIFEROUS_CLEARING = new ConiferousClearing();

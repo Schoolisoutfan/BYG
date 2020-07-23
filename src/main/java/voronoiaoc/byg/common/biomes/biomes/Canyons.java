@@ -15,8 +15,8 @@ public class Canyons extends Biome {
     static final ConfiguredSurfaceBuilder<?> SURFACE_BUILDER = new ConfiguredSurfaceBuilder<>(BYGSBList.CANYONS, SurfaceBuilder.RED_SAND_WHITE_TERRACOTTA_GRAVEL_CONFIG);
     static final RainType PRECIPATATION = RainType.NONE;
     static final Biome.Category CATEGORY = Category.DESERT;
-    static final double DEPTH = 5.0F;
-    static final double SCALE = 0.05F;
+    static final double DEPTH = 3.5F;
+    static final double SCALE = 0.02F;
     static final float TEMPERATURE = 1.5F;
     static final float DOWNFALL = 0.9F;
     static final int WATER_COLOR = 4159204;
