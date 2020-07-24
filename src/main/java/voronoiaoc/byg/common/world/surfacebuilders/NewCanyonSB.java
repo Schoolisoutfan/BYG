@@ -54,7 +54,7 @@ public class NewCanyonSB extends SurfaceBuilder<SurfaceBuilderConfig> {
             noiseGen.SetGradientPerturbAmp(1);
             noiseGen.SetFractalOctaves(1);
             noiseGen.SetFractalGain(0.3f);
-            noiseGen.SetFrequency(0.0035F);
+            noiseGen.SetFrequency(0.00375F);
         }
     }
 
