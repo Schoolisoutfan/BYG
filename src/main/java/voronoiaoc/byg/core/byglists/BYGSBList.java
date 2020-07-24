@@ -23,7 +23,7 @@ public class BYGSBList {
     public static final SurfaceBuilder<SurfaceBuilderConfig> DUNES_SB = new DunesSB(SurfaceBuilderConfig::deserialize);
     public static final SurfaceBuilder<SurfaceBuilderConfig> DOVER_SB = new DoverMountainSB(SurfaceBuilderConfig::deserialize);
     public static final SurfaceBuilder<SurfaceBuilderConfig> QUAGMIRE_SB = new QuagmireSB(SurfaceBuilderConfig::deserialize);
-    public static final SurfaceBuilder<SurfaceBuilderConfig> CANYONS = new CanyonSB(SurfaceBuilderConfig::deserialize);
+    public static final SurfaceBuilder<SurfaceBuilderConfig> CANYONS = new NewCanyonSB(SurfaceBuilderConfig::deserialize);
     public static final SurfaceBuilder<SurfaceBuilderConfig> MOJAVE = new MojaveSB(SurfaceBuilderConfig::deserialize);
     public static final SurfaceBuilder<SurfaceBuilderConfig> SUB = new SubterraneanCave(SurfaceBuilderConfig::deserialize);
     public static final SurfaceBuilder<SurfaceBuilderConfig> EBONY_SB = new EbonyWoodsSB(SurfaceBuilderConfig::deserialize);
