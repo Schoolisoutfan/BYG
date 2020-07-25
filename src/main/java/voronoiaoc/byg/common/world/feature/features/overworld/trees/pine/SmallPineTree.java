@@ -2,6 +2,7 @@ package voronoiaoc.byg.common.world.feature.features.overworld.trees.pine;
 
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.Direction;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;

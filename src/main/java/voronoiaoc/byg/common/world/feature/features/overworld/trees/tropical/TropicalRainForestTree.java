@@ -3,6 +3,7 @@ package voronoiaoc.byg.common.world.feature.features.overworld.trees.tropical;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.Direction;
 import net.minecraft.block.VineBlock;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.util.Direction;
