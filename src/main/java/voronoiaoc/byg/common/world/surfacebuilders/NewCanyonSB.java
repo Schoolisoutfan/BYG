@@ -7,8 +7,10 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
+import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
+import voronoiaoc.byg.BYG;
 import voronoiaoc.byg.common.world.worldtype.noise.fastnoise.FastNoise;
 import voronoiaoc.byg.core.byglists.BYGSBList;
 
@@ -30,21 +32,34 @@ public class NewCanyonSB extends SurfaceBuilder<SurfaceBuilderConfig> {
         int zPos = z & 15;
         BlockPos.Mutable mutable = new BlockPos.Mutable(xPos, 0, z);
 
-
-
         double noiseSample = noiseGen.GetNoise(x, z) * 10;
-
         mutable.move(Direction.UP, groundHeight);
 
-        if (noiseSample > 8.5) {
-            for (int yPos = groundHeight; yPos >= seaLevel; --yPos) {
-                chunkIn.setBlockState(mutable, Blocks.AIR.getDefaultState(), false);
+        int centerY = chunkIn.getTopBlockY(Heightmap.Type.OCEAN_FLOOR_WG, x, z);
+        int someNumber = 0;
+        int startHeight = groundHeight;
 
-                mutable.move(Direction.DOWN);
+        for (int xCoord = -1; xCoord <= 1; xCoord++) {
+            for (int zCoord = -1; zCoord <= 1; zCoord++) {
+                int offSetY = chunkIn.getTopBlockY(Heightmap.Type.OCEAN_FLOOR_WG, x + xCoord, z + zCoord);
+                if (centerY < offSetY)
+                    someNumber+= offSetY - centerY;
+
             }
         }
-    }
+        BYG.LOGGER.info(someNumber);
+        if (someNumber > 12)
+            startHeight = 5;
 
+        for (int yPos = groundHeight; yPos >= startHeight; --yPos) {
+            chunkIn.setBlockState(mutable, Blocks.AIR.getDefaultState(), false);
+
+            mutable.move(Direction.DOWN);
+        }
+
+        SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, groundHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, BYGSBList.BYGSBConfigList.GRASSDOVERMOUNTAIN_CF);
+
+    }
 
     public void setSeed(long seed) {
         if (noiseGen == null) {
