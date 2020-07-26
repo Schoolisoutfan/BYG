@@ -2,6 +2,7 @@ package voronoiaoc.byg.common.world.feature.features.overworld.trees.util;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -21,7 +22,7 @@ public abstract class BYGTree {
             return false;
         } else {
             worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
-            if (abstracttreefeature.place(worldIn, chunkGenerator, random, pos, IFeatureConfig.NO_FEATURE_CONFIG)) {
+            if (abstracttreefeature.placeTree(worldIn, chunkGenerator, random, pos, IFeatureConfig.NO_FEATURE_CONFIG, true)) {
                 return true;
             } else {
                 worldIn.setBlockState(pos, blockUnder, 4);

@@ -3,6 +3,7 @@ package voronoiaoc.byg.common.world.feature.features.overworld.trees.willow;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
@@ -25,7 +26,7 @@ public class WillowTree1 extends BYGAbstractTreeFeature<NoFeatureConfig> {
         //setSapling((net.minecraftforge.common.IPlantable) BYGBlockList.BLUE_SPRUCE_SAPLING);
     }
 
-    protected boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos pos, MutableBoundingBox boundsIn) {
+    public boolean place(Set<BlockPos> treeBlockSet, IWorldGenerationReader worldIn, Random rand, BlockPos pos, MutableBoundingBox boundsIn, boolean isSapling) {
         int randChance = rand.nextInt(2);
         int randTreeHeight = rand.nextInt(6) + 8;
         BlockPos blockPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ());
@@ -33,16 +34,17 @@ public class WillowTree1 extends BYGAbstractTreeFeature<NoFeatureConfig> {
         BlockPos.Mutable mainMutable = new BlockPos.Mutable(block);
 
         if (pos.getY() + randTreeHeight + 1 < worldIn.getMaxHeight()) {
-            BlockPos blockpos = pos.down();
-            if (!isDesiredGroundwDirtTag(worldIn, blockpos, Blocks.GRASS_BLOCK)) {
+            if (!isDesiredGroundwDirtTag(worldIn, pos.offset(Direction.DOWN), Blocks.GRASS_BLOCK)) {
                 return false;
-            } else if (!this.doesTreeFit(worldIn, pos, randTreeHeight)) {
+            } else if (!this.isAnotherTreeNearby(worldIn, pos, randTreeHeight, 0, isSapling)) {
+                return false;
+            } else if (!this.doesSaplingHaveSpaceToGrow(worldIn, pos, randTreeHeight, 5, 5, isSapling)) {
                 return false;
             } else {
                 //Trunk
                 for (int i = 3; i <= randTreeHeight; i++) {
                     BlockPos.Mutable mutable = new BlockPos.Mutable(block);
-                    this.setWillowLog(changedBlocks, worldIn, mutable.move(UP, i), boundsIn);
+                    this.setWillowLog(treeBlockSet, worldIn, mutable.move(UP, i), boundsIn);
                 }
 
                 for (int baseSize = 0; baseSize < 4; baseSize++) {
@@ -50,76 +52,76 @@ public class WillowTree1 extends BYGAbstractTreeFeature<NoFeatureConfig> {
                     for (Direction direction : Direction.Plane.HORIZONTAL) {
                         mutable.setPos(block.up(3).offset(direction, baseSize));
                         if (((IWorld) worldIn).getBlockState(mutable).getBlock() != Blocks.DIRT)
-                            this.setWillowLog(changedBlocks, worldIn, mutable.move(DOWN, baseSize), boundsIn);
+                            this.setWillowLog(treeBlockSet, worldIn, mutable.move(DOWN, baseSize), boundsIn);
                     }
                 }
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(UP, randTreeHeight - 1).move(SOUTH).move(EAST), boundsIn);
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(DOWN), boundsIn);
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(UP, 2).move(EAST), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(UP, randTreeHeight - 1).move(SOUTH).move(EAST), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(DOWN), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(UP, 2).move(EAST), boundsIn);
                 mainMutable.setPos(block);
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(UP, randTreeHeight - 1).move(WEST), boundsIn);
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(WEST).move(UP).move(NORTH), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(UP, randTreeHeight - 1).move(WEST), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(WEST).move(UP).move(NORTH), boundsIn);
                 mainMutable.setPos(block);
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(UP, randTreeHeight - 2).move(NORTH), boundsIn);
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(UP).move(NORTH), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(UP, randTreeHeight - 2).move(NORTH), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(UP).move(NORTH), boundsIn);
                 mainMutable.setPos(block);
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(UP, randTreeHeight - 2).move(NORTH, 2).move(WEST), boundsIn);
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(WEST).move(NORTH), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(UP, randTreeHeight - 2).move(NORTH, 2).move(WEST), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(WEST).move(NORTH), boundsIn);
                 mainMutable.setPos(block);
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(UP, randTreeHeight - 2).move(NORTH, 2).move(EAST), boundsIn);
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(NORTH), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(UP, randTreeHeight - 2).move(NORTH, 2).move(EAST), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(NORTH), boundsIn);
                 mainMutable.setPos(block);
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(UP, randTreeHeight - 2).move(NORTH).move(EAST, 2), boundsIn);
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(EAST), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(UP, randTreeHeight - 2).move(NORTH).move(EAST, 2), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(EAST), boundsIn);
                 mainMutable.setPos(block);
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(UP, randTreeHeight - 2).move(EAST), boundsIn);
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(SOUTH), boundsIn);
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(SOUTH), boundsIn);
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(EAST).move(SOUTH), boundsIn);
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(WEST, 2), boundsIn);
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(UP).move(EAST), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(UP, randTreeHeight - 2).move(EAST), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(SOUTH), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(SOUTH), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(EAST).move(SOUTH), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(WEST, 2), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(UP).move(EAST), boundsIn);
                 mainMutable.setPos(block);
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(UP, randTreeHeight - 2).move(WEST), boundsIn);
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(WEST), boundsIn);
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(WEST).move(UP), boundsIn);
-                this.setWillowLog(changedBlocks, worldIn, mainMutable.move(EAST, 2).move(NORTH).move(DOWN), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(UP, randTreeHeight - 2).move(WEST), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(WEST), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(WEST).move(UP), boundsIn);
+                this.setWillowLog(treeBlockSet, worldIn, mainMutable.move(EAST, 2).move(NORTH).move(DOWN), boundsIn);
 
                 mainMutable.setPos(block);
 
 
-                this.setWillowLeaves(changedBlocks, worldIn, mainMutable.move(UP, randTreeHeight), boundsIn);
+                this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.move(UP, randTreeHeight), boundsIn);
                 for (int placeX = -3; placeX <= 3; placeX++) {
                     for (int placeZ = -3; placeZ <= 3; placeZ++) {
                         if (placeX <= 2 && placeX >= -2 && placeZ <= 2 && placeZ >= -2) {
-                            this.setWillowLeaves(changedBlocks, worldIn, mainMutable.add(placeX, 0, placeZ), boundsIn);
-                            this.setWillowLeaves(changedBlocks, worldIn, mainMutable.add(3, 0, placeZ), boundsIn);
-                            this.setWillowLeaves(changedBlocks, worldIn, mainMutable.add(-3, 0, placeZ), boundsIn);
-                            this.setWillowLeaves(changedBlocks, worldIn, mainMutable.add(placeX, 0, 3), boundsIn);
-                            this.setWillowLeaves(changedBlocks, worldIn, mainMutable.add(placeX, 0, -3), boundsIn);
+                            this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.add(placeX, 0, placeZ), boundsIn);
+                            this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.add(3, 0, placeZ), boundsIn);
+                            this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.add(-3, 0, placeZ), boundsIn);
+                            this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.add(placeX, 0, 3), boundsIn);
+                            this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.add(placeX, 0, -3), boundsIn);
 
                             for (int placeY = -1; placeY >= -(rand.nextInt(4) + 2); placeY--) {
-                                this.setWillowLeaves(changedBlocks, worldIn, mainMutable.add(4, placeY, placeZ), boundsIn);
-                                this.setWillowLeaves(changedBlocks, worldIn, mainMutable.add(-4, placeY, placeZ), boundsIn);
-                                this.setWillowLeaves(changedBlocks, worldIn, mainMutable.add(placeX, placeY, 4), boundsIn);
-                                this.setWillowLeaves(changedBlocks, worldIn, mainMutable.add(placeX, placeY, -4), boundsIn);
-                                this.setWillowLeaves(changedBlocks, worldIn, mainMutable.add(3, placeY, 3), boundsIn);
-                                this.setWillowLeaves(changedBlocks, worldIn, mainMutable.add(-3, placeY, 3), boundsIn);
-                                this.setWillowLeaves(changedBlocks, worldIn, mainMutable.add(3, placeY, -3), boundsIn);
-                                this.setWillowLeaves(changedBlocks, worldIn, mainMutable.add(-3, placeY, -3), boundsIn);
+                                this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.add(4, placeY, placeZ), boundsIn);
+                                this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.add(-4, placeY, placeZ), boundsIn);
+                                this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.add(placeX, placeY, 4), boundsIn);
+                                this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.add(placeX, placeY, -4), boundsIn);
+                                this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.add(3, placeY, 3), boundsIn);
+                                this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.add(-3, placeY, 3), boundsIn);
+                                this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.add(3, placeY, -3), boundsIn);
+                                this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.add(-3, placeY, -3), boundsIn);
                             }
                         }
 
                         if (placeX <= 1 && placeX >= -1 && placeZ <= 1 && placeZ >= -1) {
-                            this.setWillowLeaves(changedBlocks, worldIn, mainMutable.add(placeX, 1, placeZ), boundsIn);
-                            this.setWillowLeaves(changedBlocks, worldIn, mainMutable.add(placeX, 1, 2), boundsIn);
-                            this.setWillowLeaves(changedBlocks, worldIn, mainMutable.add(placeX, 1, -2), boundsIn);
-                            this.setWillowLeaves(changedBlocks, worldIn, mainMutable.add(2, 1, placeZ), boundsIn);
-                            this.setWillowLeaves(changedBlocks, worldIn, mainMutable.add(-2, 1, placeZ), boundsIn);
+                            this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.add(placeX, 1, placeZ), boundsIn);
+                            this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.add(placeX, 1, 2), boundsIn);
+                            this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.add(placeX, 1, -2), boundsIn);
+                            this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.add(2, 1, placeZ), boundsIn);
+                            this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.add(-2, 1, placeZ), boundsIn);
 //                        if (randChance == 0) {
-//                            this.setWillowLeaves(changedBlocks, worldIn, mainMutable.add(placeX, 0, 4));
-//                            this.setWillowLeaves(changedBlocks, worldIn, mainMutable.add(placeX, 0, -4));
-//                            this.setWillowLeaves(changedBlocks, worldIn, mainMutable.add(4, 0, placeZ));
-//                            this.setWillowLeaves(changedBlocks, worldIn, mainMutable.add(-4, 0, placeZ));
+//                            this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.add(placeX, 0, 4));
+//                            this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.add(placeX, 0, -4));
+//                            this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.add(4, 0, placeZ));
+//                            this.setWillowLeaves(treeBlockSet, worldIn, mainMutable.add(-4, 0, placeZ));
 //                        }
                         }
                     }

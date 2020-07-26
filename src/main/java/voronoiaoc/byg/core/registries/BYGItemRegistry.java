@@ -53,7 +53,7 @@ public class BYGItemRegistry {
                 BYGItemList.PENDORITE_SWORD = new SwordItem(BYGItemTiers.PENDORITE, 4, -2.4F, (new Item.Properties()).group(BYGCreativeTab.creativeTab)).setRegistryName("pendorite_sword"),
                 BYGItemList.PENDORITE_BATTLEAXE = new AxeItem(BYGItemTiers.PENDORITE, 7.0F, -3.3F, (new Item.Properties()).group(BYGCreativeTab.creativeTab)).setRegistryName("pendorite_battleaxe"),
                 BYGItemList.PENDORITE_SHOVEL = new ShovelItem(BYGItemTiers.PENDORITE, 2.0F, -3.0F, (new Item.Properties()).group(BYGCreativeTab.creativeTab)).setRegistryName("pendorite_shovel"),
-                BYGItemList.PENDORITE_HOE = new HoeItem(BYGItemTiers.PENDORITE,0.0F, (new Item.Properties()).group(BYGCreativeTab.creativeTab)).setRegistryName("pendorite_hoe"),
+                BYGItemList.PENDORITE_HOE = new HoeItem(BYGItemTiers.PENDORITE, 0.0F, (new Item.Properties()).group(BYGCreativeTab.creativeTab)).setRegistryName("pendorite_hoe"),
 
                 //BYGItemList.PENDORITE_SHIELD = new ShieldItem(new Item.Properties().maxDamage(1000).group(BYGItemGroup.COMBAT)).setRegistryName("pendorite_shield"),
                 BYGItemList.PENDORITE_HORSE_ARMOR = new BYGHorseArmor(11, "pendorite", (new Item.Properties()).maxStackSize(1).group(BYGCreativeTab.creativeTab)).setRegistryName("pendorite_horse_armor"),
@@ -649,7 +649,7 @@ public class BYGItemRegistry {
                 BYGItemList.COOKED_JOSHUA_FRUIT = new Item(new Item.Properties().group(BYGCreativeTab.creativeTab).food(new Food.Builder().hunger(5).saturation(0.4f).build())).setRegistryName("cooked_joshua_fruit"),
                 BYGItemList.JOSHUA_FRUIT = new Item(new Item.Properties().group(BYGCreativeTab.creativeTab).food(new Food.Builder().hunger(2).saturation(0.35f).build())).setRegistryName("joshua_fruit"),
 
-                
+
                 BYGItemList.ORANGE_BIRCH_SAPLING = new BlockItem(BYGBlockList.ORANGE_BIRCH_SAPLING, new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName(BYGBlockList.ORANGE_BIRCH_SAPLING.getRegistryName()),
                 BYGItemList.ORANGE_BIRCH_LEAVES = new BlockItem(BYGBlockList.ORANGE_BIRCH_LEAVES, new Item.Properties().group(BYGCreativeTab.creativeTab)).setRegistryName(BYGBlockList.ORANGE_BIRCH_LEAVES.getRegistryName()),
 

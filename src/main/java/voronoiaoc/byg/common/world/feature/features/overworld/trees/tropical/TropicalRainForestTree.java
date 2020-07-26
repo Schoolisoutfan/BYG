@@ -3,9 +3,9 @@ package voronoiaoc.byg.common.world.feature.features.overworld.trees.tropical;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.Direction;
 import net.minecraft.block.VineBlock;
 import net.minecraft.state.BooleanProperty;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.gen.IWorldGenerationBaseReader;
@@ -31,23 +31,23 @@ public class TropicalRainForestTree extends BYGAbstractTreeFeature<NoFeatureConf
     }
 
     protected static boolean canTreePlace(IWorldGenerationBaseReader genBaseReader, BlockPos blockPos) {
-        return canTreePlaceHere(
+        return isQualifiedForLog(
                 genBaseReader, blockPos
         );
     }
 
-    public boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos position, MutableBoundingBox boundsIn) {
-        //This sets heights for trees. Rand.nextint allows for tree height randomization. The final int value sets the minimum for tree Height.
+    public boolean place(Set<BlockPos> treeBlockSet, IWorldGenerationReader worldIn, Random rand, BlockPos pos, MutableBoundingBox boundsIn, boolean isSapling) {
+//This sets heights for trees. Rand.nextint allows for tree height randomization. The final int value sets the minimum for tree Height.
         int randTreeHeight = rand.nextInt(3) + rand.nextInt(3) + 8;
         //Positions
-        int posX = position.getX();
-        int posY = position.getY();
-        int posZ = position.getZ();
+        int posX = pos.getX();
+        int posY = pos.getY();
+        int posZ = pos.getZ();
         if (posY >= 1 && posY + randTreeHeight + 1 < worldIn.getMaxHeight()) {
-            BlockPos checkGround = position.down();
+            BlockPos checkGround = pos.down();
             if (!isDesiredGroundwDirtTag(worldIn, checkGround, Blocks.GRASS_BLOCK)) {
                 return false;
-            } else if (!this.doesTreeFit(worldIn, position, randTreeHeight)) {
+            } else if (!this.doesTreeFit(worldIn, pos, randTreeHeight)) {
                 return false;
             } else {
                 Direction direction = Direction.Plane.HORIZONTAL.random(rand);
@@ -72,35 +72,35 @@ public class TropicalRainForestTree extends BYGAbstractTreeFeature<NoFeatureConf
                     BlockPos blockpos2 = new BlockPos(posX1, logplacer1, posZ1);
                     BlockPos blockpos3 = new BlockPos(posX1, logplacer2, posZ1);
 
-                    this.treelog(changedBlocks, worldIn, blockpos1, boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.west(), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.east(), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.north(), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.south(), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.west().up(), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.east().up(), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.north().up(), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.south().up(), boundsIn);
-//                    this.treelog(changedBlocks, worldIn, blockpos2.west(2).up(1), boundsIn);
-//                    this.treelog(changedBlocks, worldIn, blockpos2.east(2).up(1), boundsIn);
-//                    this.treelog(changedBlocks, worldIn, blockpos2.north(2).up(1), boundsIn);
-//                    this.treelog(changedBlocks, worldIn, blockpos2.south(2).up(1), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.west(2).up(2), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.east(2).up(2), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.north(2).up(2), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.south(2).up(2), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.west(2).up(3), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.east(2).up(3), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.north(2).up(3), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.south(2).up(3), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.west(2).up(4), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.east(2).up(4), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.north(2).up(4), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.south(2).up(4), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.west(2).up(5), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.east(2).up(5), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.north(2).up(5), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.south(2).up(5), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos1, boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.west(), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.east(), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.north(), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.south(), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.west().up(), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.east().up(), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.north().up(), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.south().up(), boundsIn);
+//                    this.treelog(treeBlockSet, worldIn, blockpos2.west(2).up(1), boundsIn);
+//                    this.treelog(treeBlockSet, worldIn, blockpos2.east(2).up(1), boundsIn);
+//                    this.treelog(treeBlockSet, worldIn, blockpos2.north(2).up(1), boundsIn);
+//                    this.treelog(treeBlockSet, worldIn, blockpos2.south(2).up(1), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.west(2).up(2), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.east(2).up(2), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.north(2).up(2), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.south(2).up(2), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.west(2).up(3), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.east(2).up(3), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.north(2).up(3), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.south(2).up(3), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.west(2).up(4), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.east(2).up(4), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.north(2).up(4), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.south(2).up(4), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.west(2).up(5), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.east(2).up(5), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.north(2).up(5), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.south(2).up(5), boundsIn);
                     if (rand.nextInt(4) == 2) {
                         this.tryPlaceVines(worldIn, rand, blockpos3.west(), VineBlock.EAST);
                     } else if (rand.nextInt(2) == 1) {
@@ -114,59 +114,59 @@ public class TropicalRainForestTree extends BYGAbstractTreeFeature<NoFeatureConf
                         int leavessquarespos = 1;
                         for (int posXLeafWidth = -leavessquarespos; posXLeafWidth <= leavessquarespos; ++posXLeafWidth) {//has to do with leaves
                             for (int posZLeafWidthL0 = -leavessquarespos; posZLeafWidthL0 <= leavessquarespos; ++posZLeafWidthL0) {
-                                this.leafs(worldIn, posX1 + posXLeafWidth, topTrunkHeight + 5, posZ1 + posZLeafWidthL0, boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth) - 3, topTrunkHeight + 5, (posZ1 + posZLeafWidthL0), boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth) + 3, topTrunkHeight + 5, (posZ1 + posZLeafWidthL0), boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth), topTrunkHeight + 5, (posZ1 + posZLeafWidthL0) + 3, boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth), topTrunkHeight + 5, (posZ1 + posZLeafWidthL0) - 3, boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth) - 3, topTrunkHeight + 5, (posZ1 + posZLeafWidthL0) - 2, boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth) + 3, topTrunkHeight + 5, (posZ1 + posZLeafWidthL0) + 2, boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth) - 2, topTrunkHeight + 5, (posZ1 + posZLeafWidthL0) + 3, boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth) + 2, topTrunkHeight + 5, (posZ1 + posZLeafWidthL0) - 3, boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth) - 3, topTrunkHeight + 5, (posZ1 + posZLeafWidthL0) + 2, boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth) + 3, topTrunkHeight + 5, (posZ1 + posZLeafWidthL0) - 2, boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth) + 2, topTrunkHeight + 5, (posZ1 + posZLeafWidthL0) + 3, boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth) - 2, topTrunkHeight + 5, (posZ1 + posZLeafWidthL0) - 3, boundsIn, changedBlocks);
+                                this.leafs(worldIn, posX1 + posXLeafWidth, topTrunkHeight + 5, posZ1 + posZLeafWidthL0, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth) - 3, topTrunkHeight + 5, (posZ1 + posZLeafWidthL0), boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth) + 3, topTrunkHeight + 5, (posZ1 + posZLeafWidthL0), boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth), topTrunkHeight + 5, (posZ1 + posZLeafWidthL0) + 3, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth), topTrunkHeight + 5, (posZ1 + posZLeafWidthL0) - 3, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth) - 3, topTrunkHeight + 5, (posZ1 + posZLeafWidthL0) - 2, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth) + 3, topTrunkHeight + 5, (posZ1 + posZLeafWidthL0) + 2, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth) - 2, topTrunkHeight + 5, (posZ1 + posZLeafWidthL0) + 3, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth) + 2, topTrunkHeight + 5, (posZ1 + posZLeafWidthL0) - 3, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth) - 3, topTrunkHeight + 5, (posZ1 + posZLeafWidthL0) + 2, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth) + 3, topTrunkHeight + 5, (posZ1 + posZLeafWidthL0) - 2, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth) + 2, topTrunkHeight + 5, (posZ1 + posZLeafWidthL0) + 3, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth) - 2, topTrunkHeight + 5, (posZ1 + posZLeafWidthL0) - 3, boundsIn, treeBlockSet);
 
 
-                                this.leafs(worldIn, posX1 + posXLeafWidth, topTrunkHeight + 6, posZ1 + posZLeafWidthL0, boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth) - 2, topTrunkHeight + 6, (posZ1 + posZLeafWidthL0), boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth) + 2, topTrunkHeight + 6, (posZ1 + posZLeafWidthL0), boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth), topTrunkHeight + 6, (posZ1 + posZLeafWidthL0) + 2, boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth), topTrunkHeight + 6, (posZ1 + posZLeafWidthL0) - 2, boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth) - 1, topTrunkHeight + 6, (posZ1 + posZLeafWidthL0) - 1, boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth) + 1, topTrunkHeight + 6, (posZ1 + posZLeafWidthL0) + 1, boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth) - 1, topTrunkHeight + 6, (posZ1 + posZLeafWidthL0) + 1, boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth) + 1, topTrunkHeight + 6, (posZ1 + posZLeafWidthL0) - 1, boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth) - 1, topTrunkHeight + 6, (posZ1 + posZLeafWidthL0) + 1, boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth) + 1, topTrunkHeight + 6, (posZ1 + posZLeafWidthL0) - 1, boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth) + 1, topTrunkHeight + 6, (posZ1 + posZLeafWidthL0) + 1, boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth) - 1, topTrunkHeight + 6, (posZ1 + posZLeafWidthL0) - 1, boundsIn, changedBlocks);
+                                this.leafs(worldIn, posX1 + posXLeafWidth, topTrunkHeight + 6, posZ1 + posZLeafWidthL0, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth) - 2, topTrunkHeight + 6, (posZ1 + posZLeafWidthL0), boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth) + 2, topTrunkHeight + 6, (posZ1 + posZLeafWidthL0), boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth), topTrunkHeight + 6, (posZ1 + posZLeafWidthL0) + 2, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth), topTrunkHeight + 6, (posZ1 + posZLeafWidthL0) - 2, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth) - 1, topTrunkHeight + 6, (posZ1 + posZLeafWidthL0) - 1, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth) + 1, topTrunkHeight + 6, (posZ1 + posZLeafWidthL0) + 1, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth) - 1, topTrunkHeight + 6, (posZ1 + posZLeafWidthL0) + 1, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth) + 1, topTrunkHeight + 6, (posZ1 + posZLeafWidthL0) - 1, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth) - 1, topTrunkHeight + 6, (posZ1 + posZLeafWidthL0) + 1, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth) + 1, topTrunkHeight + 6, (posZ1 + posZLeafWidthL0) - 1, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth) + 1, topTrunkHeight + 6, (posZ1 + posZLeafWidthL0) + 1, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth) - 1, topTrunkHeight + 6, (posZ1 + posZLeafWidthL0) - 1, boundsIn, treeBlockSet);
 
 
-                                this.leafs(worldIn, posX1 + posXLeafWidth, topTrunkHeight + 7, posZ1 + posZLeafWidthL0, boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth) - 1, topTrunkHeight + 7, (posZ1 + posZLeafWidthL0), boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth) + 1, topTrunkHeight + 7, (posZ1 + posZLeafWidthL0), boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth), topTrunkHeight + 7, (posZ1 + posZLeafWidthL0) + 1, boundsIn, changedBlocks);
-                                this.leafs(worldIn, (posX1 + posXLeafWidth), topTrunkHeight + 7, (posZ1 + posZLeafWidthL0) - 1, boundsIn, changedBlocks);
+                                this.leafs(worldIn, posX1 + posXLeafWidth, topTrunkHeight + 7, posZ1 + posZLeafWidthL0, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth) - 1, topTrunkHeight + 7, (posZ1 + posZLeafWidthL0), boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth) + 1, topTrunkHeight + 7, (posZ1 + posZLeafWidthL0), boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth), topTrunkHeight + 7, (posZ1 + posZLeafWidthL0) + 1, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, (posX1 + posXLeafWidth), topTrunkHeight + 7, (posZ1 + posZLeafWidthL0) - 1, boundsIn, treeBlockSet);
 
 
-                                this.leafs(worldIn, posX1 + posXLeafWidth, topTrunkHeight + 8, posZ1 + posZLeafWidthL0, boundsIn, changedBlocks);
+                                this.leafs(worldIn, posX1 + posXLeafWidth, topTrunkHeight + 8, posZ1 + posZLeafWidthL0, boundsIn, treeBlockSet);
 
 
-//                                this.leafs(worldIn, posX1, topTrunkHeight + 9, posZ1, boundsIn, changedBlocks);
-//                                this.leafs(worldIn, posX1 - 1, topTrunkHeight + 9, posZ1, boundsIn, changedBlocks);
-//                                this.leafs(worldIn, posX1 + 1, topTrunkHeight + 9, posZ1, boundsIn, changedBlocks);
-//                                this.leafs(worldIn, posX1, topTrunkHeight + 9, posZ1 - 1, boundsIn, changedBlocks);
-//                                this.leafs(worldIn, posX1, topTrunkHeight + 9, posZ1 + 1, boundsIn, changedBlocks);
+//                                this.leafs(worldIn, posX1, topTrunkHeight + 9, posZ1, boundsIn, treeBlockSet);
+//                                this.leafs(worldIn, posX1 - 1, topTrunkHeight + 9, posZ1, boundsIn, treeBlockSet);
+//                                this.leafs(worldIn, posX1 + 1, topTrunkHeight + 9, posZ1, boundsIn, treeBlockSet);
+//                                this.leafs(worldIn, posX1, topTrunkHeight + 9, posZ1 - 1, boundsIn, treeBlockSet);
+//                                this.leafs(worldIn, posX1, topTrunkHeight + 9, posZ1 + 1, boundsIn, treeBlockSet);
                             }
                         }
                     } else if (leavePreset == 2) {
                         int leavessquarespos = rand.nextInt(1) + 1;
                         for (int posXLeafWidth = (leavessquarespos * -1); posXLeafWidth <= leavessquarespos; ++posXLeafWidth) {//has to do with leaves
                             for (int posZLeafWidthL0 = (leavessquarespos * -1); posZLeafWidthL0 <= leavessquarespos; ++posZLeafWidthL0) {
-                                this.leafs(worldIn, posX1 + posXLeafWidth, topTrunkHeight + 6, posZ1 + posZLeafWidthL0, boundsIn, changedBlocks);
-                                this.leafs(worldIn, posX1 + 2, topTrunkHeight - 1, posZ1, boundsIn, changedBlocks);
+                                this.leafs(worldIn, posX1 + posXLeafWidth, topTrunkHeight + 6, posZ1 + posZLeafWidthL0, boundsIn, treeBlockSet);
+                                this.leafs(worldIn, posX1 + 2, topTrunkHeight - 1, posZ1, boundsIn, treeBlockSet);
                             }
                         }
                     } else if (leavePreset == 3) {
@@ -191,7 +191,7 @@ public class TropicalRainForestTree extends BYGAbstractTreeFeature<NoFeatureConf
         int x = blockPos.getX();
         int y = blockPos.getY();
         int z = blockPos.getZ();
-        BlockPos.Mutable position = new BlockPos.Mutable();
+        BlockPos.Mutable pos = new BlockPos.Mutable();
 
         for (int yOffset = 0; yOffset <= height + 1; ++yOffset) {
             //Distance/Density of trees. Positive Values ONLY
@@ -199,7 +199,7 @@ public class TropicalRainForestTree extends BYGAbstractTreeFeature<NoFeatureConf
 
             for (int xOffset = -distance; xOffset <= distance; ++xOffset) {
                 for (int zOffset = -distance; zOffset <= distance; ++zOffset) {
-                    if (!canTreePlace(reader, position.setPos(x + xOffset, y + yOffset, z + zOffset))) {
+                    if (!canTreePlace(reader, pos.setPos(x + xOffset, y + yOffset, z + zOffset))) {
                         return false;
                     }
                 }

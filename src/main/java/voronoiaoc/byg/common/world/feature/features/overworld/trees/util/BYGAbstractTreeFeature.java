@@ -23,6 +23,7 @@ import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.template.Template;
+import net.minecraftforge.common.Tags;
 import voronoiaoc.byg.core.byglists.BYGBlockList;
 
 import java.util.List;
@@ -37,10 +38,29 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
         super(function);
     }
 
-    public static boolean canTreePlaceHere(IWorldGenerationBaseReader worldReader, BlockPos blockPos) {
+    public static boolean isQualifiedForLog(IWorldGenerationBaseReader worldReader, BlockPos blockPos) {
+        return worldReader.hasBlockState(blockPos, (state) -> state.isAir() || state.isIn(BlockTags.LEAVES) || state.getMaterial() == Material.PLANTS || state.getMaterial() == Material.TALL_PLANTS || state.getMaterial() == Material.OCEAN_PLANT);
+    }
+
+
+    public static boolean isAnotherTreeHere(IWorldGenerationBaseReader worldReader, BlockPos blockPos) {
         return worldReader.hasBlockState(blockPos, (state) -> {
             Block block = state.getBlock();
-            return state.isAir() || state.isIn(BlockTags.LEAVES) || block == Blocks.GRASS_BLOCK || Feature.isDirt(block) || block.isIn(BlockTags.LOGS) || block.isIn(BlockTags.SAPLINGS) || block == Blocks.VINE || block == BYGBlockList.OVERGROWN_STONE || block == BYGBlockList.GLOWCELIUM || state.getMaterial() == Material.PLANTS || state.getMaterial() == Material.TALL_PLANTS;
+            return block.isIn(BlockTags.LOGS) || block.isIn(BlockTags.LEAVES);
+        });
+    }
+
+    public static boolean isAnotherTreeLikeThisHere(IWorldGenerationBaseReader worldReader, BlockPos blockPos, Block logBlock, Block leafBlock) {
+        return worldReader.hasBlockState(blockPos, (state) -> {
+            Block block = state.getBlock();
+            return block == logBlock || block == leafBlock;
+        });
+    }
+
+    public static boolean canSaplingGrowHere(IWorldGenerationBaseReader worldReader, BlockPos blockPos) {
+        return worldReader.hasBlockState(blockPos, (state) -> {
+            Block block = state.getBlock();
+            return block.isIn(BlockTags.LOGS) || block.isIn(BlockTags.LEAVES) || state.isAir() || state.getMaterial() == Material.PLANTS || state.getMaterial() == Material.TALL_PLANTS || state.getMaterial() == Material.OCEAN_PLANT || state.getMaterial() == Material.LEAVES || state.isIn(Tags.Blocks.DIRT);
         });
     }
 
@@ -52,14 +72,10 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
         });
     }
 
-    public static void setGroundBlock(IWorldGenerationReader reader, Block block, BlockPos... positions) {
-        for (BlockPos pos : positions) {
+    public static void setGroundBlock(IWorldGenerationReader reader, Block block, BlockPos... poss) {
+        for (BlockPos pos : poss) {
             reader.setBlockState(pos.offset(Direction.DOWN), block.getDefaultState(), 2);
         }
-    }
-
-    public static boolean isQualifiedForLog(IWorldGenerationBaseReader worldReader, BlockPos blockPos) {
-        return worldReader.hasBlockState(blockPos, (state) -> state.isAir() || state.isIn(BlockTags.LEAVES) || state.getMaterial() == Material.PLANTS || state.getMaterial() == Material.TALL_PLANTS);
     }
 
     public static boolean isQualifiedForLogWater(IWorldGenerationBaseReader worldReader, BlockPos blockPos) {
@@ -103,12 +119,69 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
         int x = blockPos.getX();
         int y = blockPos.getY();
         int z = blockPos.getZ();
-        BlockPos.Mutable position = new BlockPos.Mutable();
+        BlockPos.Mutable pos = new BlockPos.Mutable();
 
         for (int yOffset = 0; yOffset <= height + 1; ++yOffset) {
             for (int xOffset = -distance; xOffset <= distance; ++xOffset) {
                 for (int zOffset = -distance; zOffset <= distance; ++zOffset) {
-                    if (!canTreePlaceHere(reader, position.setPos(x + xOffset, y + yOffset, z + zOffset))) {
+                    if (!isQualifiedForLog(reader, pos.setPos(x + xOffset, y + yOffset, z + zOffset))) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean doesSaplingHaveSpaceToGrow(IWorldGenerationBaseReader reader, BlockPos blockPos, int height, int xdistance, int zDistance, boolean isSapling) {
+        int x = blockPos.getX();
+        int y = blockPos.getY();
+        int z = blockPos.getZ();
+        BlockPos.Mutable pos = new BlockPos.Mutable();
+        if (isSapling) {
+            for (int yOffset = 0; yOffset <= height + 1; ++yOffset) {
+                for (int xOffset = -xdistance; xOffset <= xdistance; ++xOffset) {
+                    for (int zOffset = -zDistance; zOffset <= zDistance; ++zOffset) {
+                        if (!canSaplingGrowHere(reader, pos.setPos(x + xOffset, y + yOffset, z + zOffset))) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean isAnotherTreeNearby(IWorldGenerationBaseReader reader, BlockPos blockPos, int height, int distance, boolean isSapling) {
+        int x = blockPos.getX();
+        int y = blockPos.getY();
+        int z = blockPos.getZ();
+        BlockPos.Mutable pos = new BlockPos.Mutable();
+
+        if (!isSapling) {
+            for (int yOffset = 0; yOffset <= height + 1; ++yOffset) {
+                for (int xOffset = -distance; xOffset <= distance; ++xOffset) {
+                    for (int zOffset = -distance; zOffset <= distance; ++zOffset) {
+                        if (isAnotherTreeHere(reader, pos.setPos(x + xOffset, y + yOffset, z + zOffset))) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean isAnotherTreeLikeThisNearby(IWorldGenerationBaseReader reader, BlockPos blockPos, int height, int distance, Block logBlock, Block leafBlock) {
+        int x = blockPos.getX();
+        int y = blockPos.getY();
+        int z = blockPos.getZ();
+        BlockPos.Mutable pos = new BlockPos.Mutable();
+
+        for (int yOffset = 0; yOffset <= height + 1; ++yOffset) {
+            for (int xOffset = -distance; xOffset <= distance; ++xOffset) {
+                for (int zOffset = -distance; zOffset <= distance; ++zOffset) {
+                    if (!isAnotherTreeLikeThisHere(reader, pos.setPos(x + xOffset, y + yOffset, z + zOffset), logBlock, leafBlock)) {
                         return false;
                     }
                 }
@@ -118,11 +191,11 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
     }
 
 
-    public final void setFinalBlockState(Set<BlockPos> changedBlocks, IWorldWriter worldIn, BlockPos pos, BlockState blockState, MutableBoundingBox boundingBox) {
+    public final void setFinalBlockState(Set<BlockPos> treeBlockSet, IWorldWriter worldIn, BlockPos pos, BlockState blockState, MutableBoundingBox boundingBox) {
         this.setBlockStateWithoutUpdates(worldIn, pos, blockState);
         boundingBox.expandTo(new MutableBoundingBox(pos, pos));
         if (BlockTags.LOGS.contains(blockState.getBlock())) {
-            changedBlocks.add(pos.toImmutable());
+            treeBlockSet.add(pos.toImmutable());
         }
     }
 
@@ -132,14 +205,18 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
         } else {
             worldWriter.setBlockState(blockPos, blockState, 18);
         }
-
     }
 
-    @Override
     public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, T config) {
+        return this.placeTree(worldIn, generator, rand, pos, config, false);
+    }
+
+
+    //Does all the dirty work calculating the leave distance.
+    public boolean placeTree(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, T config, boolean isSapling) {
         Set<BlockPos> set = Sets.newHashSet();
         MutableBoundingBox mutableboundingbox = MutableBoundingBox.getNewBoundingBox();
-        boolean flag = this.place(set, worldIn, rand, pos, mutableboundingbox);
+        boolean flag = this.place(set, worldIn, rand, pos, mutableboundingbox, isSapling);
         if (mutableboundingbox.minX > mutableboundingbox.maxX) {
             return false;
         } else {
@@ -211,5 +288,5 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
         }
     }
 
-    protected abstract boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos position, MutableBoundingBox boundsIn);
+    protected abstract boolean place(Set<BlockPos> treeBlockSet, IWorldGenerationReader worldIn, Random rand, BlockPos pos, MutableBoundingBox boundsIn, boolean isSapling);
 }

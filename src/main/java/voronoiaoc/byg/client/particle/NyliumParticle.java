@@ -51,12 +51,12 @@ public class NyliumParticle extends SpriteTexturedParticle {
 
     public int getBrightnessForRender(float partialTick) {
         int i = super.getBrightnessForRender(partialTick);
-        float age = (float)this.age / (float)this.maxAge;
+        float age = (float) this.age / (float) this.maxAge;
         age = age * age;
         age = age * age;
         int j = i & 255;
         int k = i >> 16 & 255;
-        k = k + (int)(age * 15.0F * 16.0F);
+        k = k + (int) (age * 15.0F * 16.0F);
         if (k > 240) {
             k = 240;
         }

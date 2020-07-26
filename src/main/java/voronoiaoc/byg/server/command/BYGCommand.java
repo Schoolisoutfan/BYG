@@ -11,7 +11,7 @@ public class BYGCommand {
         BYG.LOGGER.debug("Registering BYG commands...");
         LiteralCommandNode<CommandSource> source = dispatcher.register(
                 Commands.literal(BYG.MOD_ID)
-                .then(LocateBiome.register(dispatcher))
+                        .then(LocateBiome.register(dispatcher))
 
         );
         dispatcher.register(Commands.literal("byg").redirect(source));

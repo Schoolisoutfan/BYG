@@ -63,7 +63,6 @@ public class EmburBog extends Biome implements BiomeFog {
     private static final Vec3d WARPEDDESERTVEC3D = new Vec3d(0.552F, 0.324F, 0.130F);
 
 
-
     @Override
     @OnlyIn(Dist.CLIENT)
     public int getGrassColor(double posX, double posZ) {

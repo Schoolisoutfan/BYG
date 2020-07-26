@@ -28,7 +28,7 @@ public class DeadTree extends BYGAbstractTreeFeature<NoFeatureConfig> {
     }
 
     protected static boolean canTreeReplace(IWorldGenerationBaseReader genBaseReader, BlockPos blockPos) {
-        return canTreePlaceHere(
+        return isQualifiedForLog(
                 genBaseReader, blockPos
         );
     }
@@ -40,16 +40,16 @@ public class DeadTree extends BYGAbstractTreeFeature<NoFeatureConfig> {
         });
     }
 
-    public boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos position, MutableBoundingBox boundsIn) {
+    public boolean place(Set<BlockPos> treeBlockSet, IWorldGenerationReader worldIn, Random rand, BlockPos pos, MutableBoundingBox boundsIn, boolean isSapling) {
         int randTreeHeight = rand.nextInt(4) + 4;
-        int posX = position.getX();
-        int posY = position.getY();
-        int posZ = position.getZ();
+        int posX = pos.getX();
+        int posY = pos.getY();
+        int posZ = pos.getZ();
         if (posY >= 1 && posY + randTreeHeight + 1 < worldIn.getMaxHeight()) {
-            BlockPos blockpos = position.down();
+            BlockPos blockpos = pos.down();
             if (!isQuagmireSB(worldIn, blockpos)) {
                 return false;
-            } else if (!this.doesTreeFit(worldIn, position, randTreeHeight)) {
+            } else if (!this.doesTreeFit(worldIn, pos, randTreeHeight)) {
                 return false;
             } else {
 
@@ -77,9 +77,9 @@ public class DeadTree extends BYGAbstractTreeFeature<NoFeatureConfig> {
 
                     //Sets Logs
                     if (isAir(worldIn, blockpos1)) {
-                        this.treelog(changedBlocks, worldIn, blockpos1, boundsIn);
-                        this.treelog(changedBlocks, worldIn, blockpos2.west(), boundsIn);
-                        this.treelog(changedBlocks, worldIn, blockpos2.west().up(), boundsIn);
+                        this.treelog(treeBlockSet, worldIn, blockpos1, boundsIn);
+                        this.treelog(treeBlockSet, worldIn, blockpos2.west(), boundsIn);
+                        this.treelog(treeBlockSet, worldIn, blockpos2.west().up(), boundsIn);
 
 
                     }
@@ -105,14 +105,14 @@ public class DeadTree extends BYGAbstractTreeFeature<NoFeatureConfig> {
         int x = blockPos.getX();
         int y = blockPos.getY();
         int z = blockPos.getZ();
-        BlockPos.Mutable position = new BlockPos.Mutable();
+        BlockPos.Mutable pos = new BlockPos.Mutable();
 
         for (int yOffset = 0; yOffset <= height + 1; ++yOffset) {
             int distance = 5;
 
             for (int xOffset = -distance; xOffset <= distance; ++xOffset) {
                 for (int zOffset = -distance; zOffset <= distance; ++zOffset) {
-                    if (!canTreeReplace(reader, position.setPos(x + xOffset, y + yOffset, z + zOffset))) {
+                    if (!canTreeReplace(reader, pos.setPos(x + xOffset, y + yOffset, z + zOffset))) {
                         return false;
                     }
                 }

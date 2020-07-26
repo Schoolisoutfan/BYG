@@ -30,11 +30,12 @@ import java.util.stream.Stream;
 
 public class LocateBiome {
     public static ForgeRegistry<Biome> biomeRegistry = ((ForgeRegistry<Biome>) ForgeRegistries.BIOMES);
+
     public static ArgumentBuilder<CommandSource, ?> register(CommandDispatcher<CommandSource> dispatcher) {
         return Commands.literal("locatebiome")
                 .then(Commands.argument("biome", ResourceLocationArgument.resourceLocation()).suggests((ctx, sb) -> ISuggestionProvider.suggest(biomeRegistry.getKeys().stream().map(ResourceLocation::toString), sb))
-                .then(Commands.argument("radius", IntegerArgumentType.integer(1000, 25000))
-                .executes((cs) -> getBiomePos(cs.getSource().getWorld(), cs.getSource(), cs.getArgument("radius", Integer.class), cs.getArgument("biome", ResourceLocation.class).toString()))));
+                        .then(Commands.argument("radius", IntegerArgumentType.integer(1000, 25000))
+                                .executes((cs) -> getBiomePos(cs.getSource().getWorld(), cs.getSource(), cs.getArgument("radius", Integer.class), cs.getArgument("biome", ResourceLocation.class).toString()))));
     }
 
     public static BlockPos biomePos(World world, CommandSource src, int radius, String biomeName) {
@@ -46,16 +47,16 @@ public class LocateBiome {
         final int z = biomePos.getZ() & 15;
         int step = 50;
 
-        while(checkPos <= radius){
-            for(int curX = -checkPos; curX <= checkPos; curX += step){
-                for(int curZ = -checkPos; curZ <= checkPos; curZ += step){
-                    if(Math.abs(curX) == checkPos || Math.abs(curZ) == checkPos){
-                        biomePos.setX(x+curX);
-                        biomePos.setZ(z+curZ);
+        while (checkPos <= radius) {
+            for (int curX = -checkPos; curX <= checkPos; curX += step) {
+                for (int curZ = -checkPos; curZ <= checkPos; curZ += step) {
+                    if (Math.abs(curX) == checkPos || Math.abs(curZ) == checkPos) {
+                        biomePos.setX(x + curX);
+                        biomePos.setZ(z + curZ);
                         biome = world.getBiome(biomePos);
-                        if (Objects.requireNonNull(biome.getRegistryName()).toString().equals(biomeName)) return biomePos;
-                    }
-                    else{
+                        if (Objects.requireNonNull(biome.getRegistryName()).toString().equals(biomeName))
+                            return biomePos;
+                    } else {
                         curZ = checkPos - step;
                     }
                 }
@@ -68,7 +69,7 @@ public class LocateBiome {
     public static int getBiomePos(World world, CommandSource source, int radius, String biomeName) {
         Random rand = new Random();
         BlockPos blockPos = new BlockPos(source.getPos());
-        BlockPos biomePos = new BlockPos(biomePos(world, source, radius,  biomeName));
+        BlockPos biomePos = new BlockPos(biomePos(world, source, radius, biomeName));
         Biome biome = biomeRegistry.getRaw(new ResourceLocation(biomeName));
 
         int distance = MathHelper.floor(getBiomeDistanceFromPlayer(blockPos.getX(), blockPos.getZ(), biomePos.getX(), biomePos.getZ()));
@@ -87,10 +88,10 @@ public class LocateBiome {
     private static float getBiomeDistanceFromPlayer(int x1, int z1, int x2, int z2) {
         int i = x2 - x1;
         int j = z2 - z1;
-        return MathHelper.sqrt((float)(i * i + j * j));
+        return MathHelper.sqrt((float) (i * i + j * j));
     }
 
-   static TextFormatting[] textFormattingArray = {
+    static TextFormatting[] textFormattingArray = {
             TextFormatting.LIGHT_PURPLE,
             TextFormatting.YELLOW,
             TextFormatting.GOLD,

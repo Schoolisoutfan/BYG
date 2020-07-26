@@ -17,7 +17,7 @@ public class BYGNetherBiomeProvider extends BiomeProvider {
      * @param genX (x >> 2)
      * @param genY (y >> 3)
      * @param genZ (z >> 2)
-     * @return the biome for the specified position
+     * @return the biome for the specified pos
      */
 
     @Override

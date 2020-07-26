@@ -3,6 +3,7 @@ package voronoiaoc.byg.common.world.feature.features.overworld.trees.mangrove;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.gen.IWorldGenerationBaseReader;
@@ -21,21 +22,22 @@ public class MangroveTree2 extends BYGAbstractTreeFeature<NoFeatureConfig> {
         super(configIn);
     }
 
-    protected boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos pos, MutableBoundingBox boundsIn) {
+    public boolean place(Set<BlockPos> treeBlockSet, IWorldGenerationReader worldIn, Random rand, BlockPos pos, MutableBoundingBox boundsIn, boolean isSapling) {
         int randTreeHeight = 11 + rand.nextInt(5);
         BlockPos.Mutable mainmutable = new BlockPos.Mutable(pos);
 
         if (pos.getY() + randTreeHeight + 1 < worldIn.getMaxHeight()) {
-            BlockPos blockpos = pos.down();
-            if (!isDesiredGroundwDirtTag(worldIn, blockpos, Blocks.GRASS_BLOCK)) {
+            if (!isDesiredGroundwDirtTag(worldIn, pos.offset(Direction.DOWN), Blocks.GRASS_BLOCK)) {
                 return false;
-            } else if (!this.doesTreeFit(worldIn, pos, randTreeHeight)) {
+            } else if (!this.isAnotherTreeNearby(worldIn, pos, randTreeHeight, 0, isSapling)) {
+                return false;
+            } else if (!this.doesSaplingHaveSpaceToGrow(worldIn, pos, randTreeHeight, 5, 5, isSapling)) {
                 return false;
             } else {
                 for (int buildTrunk = 3; buildTrunk <= randTreeHeight; buildTrunk++) {
                     if (buildTrunk == 3)
                         mainmutable.move(Direction.UP, 3);
-                    this.treeLog(changedBlocks, worldIn, mainmutable, boundsIn);
+                    this.treeLog(treeBlockSet, worldIn, mainmutable, boundsIn);
 
                     mainmutable.move(Direction.UP);
                 }
@@ -53,15 +55,15 @@ public class MangroveTree2 extends BYGAbstractTreeFeature<NoFeatureConfig> {
                 BlockPos.Mutable rootMutable9 = new BlockPos.Mutable(mainmutable.add(0, 0, 2));
 
                 for (int buildRoot = 0; buildRoot <= 5; buildRoot++) {
-                    this.treeBranch(changedBlocks, worldIn, rootMutable, boundsIn);
-                    this.treeBranch(changedBlocks, worldIn, rootMutable2, boundsIn);
-                    this.treeBranch(changedBlocks, worldIn, rootMutable3, boundsIn);
-                    this.treeBranch(changedBlocks, worldIn, rootMutable4, boundsIn);
-                    this.treeBranch(changedBlocks, worldIn, rootMutable5, boundsIn);
-                    this.treeBranch(changedBlocks, worldIn, rootMutable6, boundsIn);
-                    this.treeBranch(changedBlocks, worldIn, rootMutable7, boundsIn);
-                    this.treeBranch(changedBlocks, worldIn, rootMutable8, boundsIn);
-                    this.treeBranch(changedBlocks, worldIn, rootMutable9, boundsIn);
+                    this.treeBranch(treeBlockSet, worldIn, rootMutable, boundsIn);
+                    this.treeBranch(treeBlockSet, worldIn, rootMutable2, boundsIn);
+                    this.treeBranch(treeBlockSet, worldIn, rootMutable3, boundsIn);
+                    this.treeBranch(treeBlockSet, worldIn, rootMutable4, boundsIn);
+                    this.treeBranch(treeBlockSet, worldIn, rootMutable5, boundsIn);
+                    this.treeBranch(treeBlockSet, worldIn, rootMutable6, boundsIn);
+                    this.treeBranch(treeBlockSet, worldIn, rootMutable7, boundsIn);
+                    this.treeBranch(treeBlockSet, worldIn, rootMutable8, boundsIn);
+                    this.treeBranch(treeBlockSet, worldIn, rootMutable9, boundsIn);
 
                     rootMutable.move(Direction.DOWN);
                     rootMutable2.move(Direction.DOWN);
@@ -74,112 +76,112 @@ public class MangroveTree2 extends BYGAbstractTreeFeature<NoFeatureConfig> {
                     rootMutable9.move(Direction.DOWN);
                 }
 
-                this.treeBranch(changedBlocks, worldIn, mainmutable.add(1, 1, -2), boundsIn);
-                this.treeBranch(changedBlocks, worldIn, mainmutable.add(1, 1, -1), boundsIn);
-                this.treeBranch(changedBlocks, worldIn, mainmutable.add(-1, 1, 0), boundsIn);
-                this.treeBranch(changedBlocks, worldIn, mainmutable.add(0, 1, 1), boundsIn);
-                this.treeBranch(changedBlocks, worldIn, mainmutable.add(0, 1, 2), boundsIn);
-                this.treeBranch(changedBlocks, worldIn, mainmutable.add(1, 2, -1), boundsIn);
-                this.treeBranch(changedBlocks, worldIn, mainmutable.add(0, 2, 1), boundsIn);
-                this.treeBranch(changedBlocks, worldIn, mainmutable.add(1, 3, -1), boundsIn);
-                this.treeBranch(changedBlocks, worldIn, mainmutable.add(1, 3, 0), boundsIn);
-                this.treeBranch(changedBlocks, worldIn, mainmutable.add(1, 4, 0), boundsIn);
+                this.treeBranch(treeBlockSet, worldIn, mainmutable.add(1, 1, -2), boundsIn);
+                this.treeBranch(treeBlockSet, worldIn, mainmutable.add(1, 1, -1), boundsIn);
+                this.treeBranch(treeBlockSet, worldIn, mainmutable.add(-1, 1, 0), boundsIn);
+                this.treeBranch(treeBlockSet, worldIn, mainmutable.add(0, 1, 1), boundsIn);
+                this.treeBranch(treeBlockSet, worldIn, mainmutable.add(0, 1, 2), boundsIn);
+                this.treeBranch(treeBlockSet, worldIn, mainmutable.add(1, 2, -1), boundsIn);
+                this.treeBranch(treeBlockSet, worldIn, mainmutable.add(0, 2, 1), boundsIn);
+                this.treeBranch(treeBlockSet, worldIn, mainmutable.add(1, 3, -1), boundsIn);
+                this.treeBranch(treeBlockSet, worldIn, mainmutable.add(1, 3, 0), boundsIn);
+                this.treeBranch(treeBlockSet, worldIn, mainmutable.add(1, 4, 0), boundsIn);
 
-                this.treeBranch(changedBlocks, worldIn, mainmutable.add(0, randTreeHeight, -2), boundsIn);
-                this.treeBranch(changedBlocks, worldIn, mainmutable.add(1, randTreeHeight, -2), boundsIn);
-                this.treeBranch(changedBlocks, worldIn, mainmutable.add(0, randTreeHeight, -1), boundsIn);
-                this.treeBranch(changedBlocks, worldIn, mainmutable.add(-2, randTreeHeight, 1), boundsIn);
-                this.treeBranch(changedBlocks, worldIn, mainmutable.add(-1, randTreeHeight, 1), boundsIn);
-                this.treeBranch(changedBlocks, worldIn, mainmutable.add(0, randTreeHeight, 1), boundsIn);
-                this.treeBranch(changedBlocks, worldIn, mainmutable.add(-2, randTreeHeight, 2), boundsIn);
-                this.treeBranch(changedBlocks, worldIn, mainmutable.add(0, randTreeHeight, 2), boundsIn);
-                this.treeBranch(changedBlocks, worldIn, mainmutable.add(0, randTreeHeight, 3), boundsIn);
-                this.treeBranch(changedBlocks, worldIn, mainmutable.add(1, randTreeHeight, 3), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(1, randTreeHeight - 1, -3), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(0, randTreeHeight - 1, -2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(1, randTreeHeight - 1, -2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(2, randTreeHeight - 1, -2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(0, randTreeHeight - 1, -1), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(1, randTreeHeight - 1, -1), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-1, randTreeHeight - 1, 0), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-3, randTreeHeight - 1, 1), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-2, randTreeHeight - 1, 1), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-1, randTreeHeight - 1, 1), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(0, randTreeHeight - 1, 1), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-2, randTreeHeight - 1, 2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-1, randTreeHeight - 1, 2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(0, randTreeHeight - 1, 2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(1, randTreeHeight - 1, 2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-2, randTreeHeight - 1, 3), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-1, randTreeHeight - 1, 3), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(0, randTreeHeight - 1, 3), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(1, randTreeHeight - 1, 3), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(0, randTreeHeight - 1, 4), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(1, randTreeHeight - 1, 4), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(0, randTreeHeight, -5), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(0, randTreeHeight, -4), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(1, randTreeHeight, -4), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-1, randTreeHeight, -3), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(0, randTreeHeight, -3), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(1, randTreeHeight, -3), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(2, randTreeHeight, -3), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(3, randTreeHeight, -3), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-2, randTreeHeight, -2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-1, randTreeHeight, -2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(2, randTreeHeight, -2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(3, randTreeHeight, -2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(4, randTreeHeight, -2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-2, randTreeHeight, -1), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-1, randTreeHeight, -1), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(1, randTreeHeight, -1), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(2, randTreeHeight, -1), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(3, randTreeHeight, -1), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-3, randTreeHeight, 0), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-2, randTreeHeight, 0), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-1, randTreeHeight, 0), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(1, randTreeHeight, 0), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(2, randTreeHeight, 0), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(3, randTreeHeight, 0), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-4, randTreeHeight, 1), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-3, randTreeHeight, 1), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(1, randTreeHeight, 1), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(2, randTreeHeight, 1), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-4, randTreeHeight, 2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-3, randTreeHeight, 2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-1, randTreeHeight, 2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(1, randTreeHeight, 2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(2, randTreeHeight, 2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-3, randTreeHeight, 3), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-2, randTreeHeight, 3), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-1, randTreeHeight, 3), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(2, randTreeHeight, 3), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-2, randTreeHeight, 4), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-1, randTreeHeight, 4), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(0, randTreeHeight, 4), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(1, randTreeHeight, 4), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(2, randTreeHeight, 4), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(0, randTreeHeight, 5), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(1, randTreeHeight, 5), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(2, randTreeHeight, 5), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(1, randTreeHeight, 6), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(0, randTreeHeight + 1, -2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(1, randTreeHeight + 1, -2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(2, randTreeHeight + 1, -2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-1, randTreeHeight + 1, -1), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(0, randTreeHeight + 1, -1), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(1, randTreeHeight + 1, -1), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-1, randTreeHeight + 1, 0), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(0, randTreeHeight + 1, 0), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-2, randTreeHeight + 1, 1), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-1, randTreeHeight + 1, 1), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(0, randTreeHeight + 1, 1), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-2, randTreeHeight + 1, 2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-1, randTreeHeight + 1, 2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(0, randTreeHeight + 1, 2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(1, randTreeHeight + 1, 2), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(-2, randTreeHeight + 1, 3), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(0, randTreeHeight + 1, 3), boundsIn);
-                this.leafs(changedBlocks, worldIn, mainmutable.add(1, randTreeHeight + 1, 3), boundsIn);
+                this.treeBranch(treeBlockSet, worldIn, mainmutable.add(0, randTreeHeight, -2), boundsIn);
+                this.treeBranch(treeBlockSet, worldIn, mainmutable.add(1, randTreeHeight, -2), boundsIn);
+                this.treeBranch(treeBlockSet, worldIn, mainmutable.add(0, randTreeHeight, -1), boundsIn);
+                this.treeBranch(treeBlockSet, worldIn, mainmutable.add(-2, randTreeHeight, 1), boundsIn);
+                this.treeBranch(treeBlockSet, worldIn, mainmutable.add(-1, randTreeHeight, 1), boundsIn);
+                this.treeBranch(treeBlockSet, worldIn, mainmutable.add(0, randTreeHeight, 1), boundsIn);
+                this.treeBranch(treeBlockSet, worldIn, mainmutable.add(-2, randTreeHeight, 2), boundsIn);
+                this.treeBranch(treeBlockSet, worldIn, mainmutable.add(0, randTreeHeight, 2), boundsIn);
+                this.treeBranch(treeBlockSet, worldIn, mainmutable.add(0, randTreeHeight, 3), boundsIn);
+                this.treeBranch(treeBlockSet, worldIn, mainmutable.add(1, randTreeHeight, 3), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(1, randTreeHeight - 1, -3), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(0, randTreeHeight - 1, -2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(1, randTreeHeight - 1, -2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(2, randTreeHeight - 1, -2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(0, randTreeHeight - 1, -1), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(1, randTreeHeight - 1, -1), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-1, randTreeHeight - 1, 0), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-3, randTreeHeight - 1, 1), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-2, randTreeHeight - 1, 1), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-1, randTreeHeight - 1, 1), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(0, randTreeHeight - 1, 1), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-2, randTreeHeight - 1, 2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-1, randTreeHeight - 1, 2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(0, randTreeHeight - 1, 2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(1, randTreeHeight - 1, 2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-2, randTreeHeight - 1, 3), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-1, randTreeHeight - 1, 3), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(0, randTreeHeight - 1, 3), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(1, randTreeHeight - 1, 3), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(0, randTreeHeight - 1, 4), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(1, randTreeHeight - 1, 4), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(0, randTreeHeight, -5), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(0, randTreeHeight, -4), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(1, randTreeHeight, -4), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-1, randTreeHeight, -3), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(0, randTreeHeight, -3), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(1, randTreeHeight, -3), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(2, randTreeHeight, -3), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(3, randTreeHeight, -3), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-2, randTreeHeight, -2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-1, randTreeHeight, -2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(2, randTreeHeight, -2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(3, randTreeHeight, -2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(4, randTreeHeight, -2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-2, randTreeHeight, -1), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-1, randTreeHeight, -1), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(1, randTreeHeight, -1), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(2, randTreeHeight, -1), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(3, randTreeHeight, -1), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-3, randTreeHeight, 0), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-2, randTreeHeight, 0), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-1, randTreeHeight, 0), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(1, randTreeHeight, 0), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(2, randTreeHeight, 0), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(3, randTreeHeight, 0), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-4, randTreeHeight, 1), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-3, randTreeHeight, 1), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(1, randTreeHeight, 1), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(2, randTreeHeight, 1), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-4, randTreeHeight, 2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-3, randTreeHeight, 2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-1, randTreeHeight, 2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(1, randTreeHeight, 2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(2, randTreeHeight, 2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-3, randTreeHeight, 3), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-2, randTreeHeight, 3), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-1, randTreeHeight, 3), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(2, randTreeHeight, 3), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-2, randTreeHeight, 4), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-1, randTreeHeight, 4), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(0, randTreeHeight, 4), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(1, randTreeHeight, 4), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(2, randTreeHeight, 4), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(0, randTreeHeight, 5), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(1, randTreeHeight, 5), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(2, randTreeHeight, 5), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(1, randTreeHeight, 6), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(0, randTreeHeight + 1, -2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(1, randTreeHeight + 1, -2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(2, randTreeHeight + 1, -2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-1, randTreeHeight + 1, -1), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(0, randTreeHeight + 1, -1), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(1, randTreeHeight + 1, -1), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-1, randTreeHeight + 1, 0), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(0, randTreeHeight + 1, 0), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-2, randTreeHeight + 1, 1), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-1, randTreeHeight + 1, 1), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(0, randTreeHeight + 1, 1), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-2, randTreeHeight + 1, 2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-1, randTreeHeight + 1, 2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(0, randTreeHeight + 1, 2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(1, randTreeHeight + 1, 2), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(-2, randTreeHeight + 1, 3), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(0, randTreeHeight + 1, 3), boundsIn);
+                this.leafs(treeBlockSet, worldIn, mainmutable.add(1, randTreeHeight + 1, 3), boundsIn);
             }
         }
         return true;

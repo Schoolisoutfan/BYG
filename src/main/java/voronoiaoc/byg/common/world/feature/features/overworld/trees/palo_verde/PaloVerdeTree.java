@@ -31,23 +31,23 @@ public class PaloVerdeTree extends BYGAbstractTreeFeature<NoFeatureConfig> {
     }
 
     protected static boolean canTreeReplace(IWorldGenerationBaseReader genBaseReader, BlockPos blockPos) {
-        return canTreePlaceHere(
+        return isQualifiedForLog(
                 genBaseReader, blockPos
         );
     }
 
-    public boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos position, MutableBoundingBox boundsIn) {
-        //This sets heights for trees. Rand.nextint allows for tree height randomization. The final int value sets the minimum for tree Height.
+    public boolean place(Set<BlockPos> treeBlockSet, IWorldGenerationReader worldIn, Random rand, BlockPos pos, MutableBoundingBox boundsIn, boolean isSapling) {
+//This sets heights for trees. Rand.nextint allows for tree height randomization. The final int value sets the minimum for tree Height.
         int randTreeHeight = rand.nextInt(1) + 1;
         //Positions
-        int posX = position.getX();
-        int posY = position.getY();
-        int posZ = position.getZ();
+        int posX = pos.getX();
+        int posY = pos.getY();
+        int posZ = pos.getZ();
         if (posY >= 1 && posY + randTreeHeight + 1 < worldIn.getMaxHeight()) {
-            BlockPos blockpos = position.down();
-            if (((IWorld) worldIn).getBlockState(position.down()).getBlock() != Blocks.GRASS_BLOCK && ((IWorld) worldIn).getBlockState(position.down()).getBlock() != Blocks.RED_SAND && ((IWorld) worldIn).getBlockState(position.down()).getBlock() != Blocks.COARSE_DIRT) {
+            BlockPos blockpos = pos.down();
+            if (((IWorld) worldIn).getBlockState(pos.down()).getBlock() != Blocks.GRASS_BLOCK && ((IWorld) worldIn).getBlockState(pos.down()).getBlock() != Blocks.RED_SAND && ((IWorld) worldIn).getBlockState(pos.down()).getBlock() != Blocks.COARSE_DIRT) {
                 return false;
-            } else if (!this.doesTreeFit(worldIn, position, randTreeHeight)) {
+            } else if (!this.doesTreeFit(worldIn, pos, randTreeHeight)) {
                 return false;
             } else {
                 //Places dirt under logs where/when necessary.
@@ -74,15 +74,15 @@ public class PaloVerdeTree extends BYGAbstractTreeFeature<NoFeatureConfig> {
                     BlockPos blockpos2 = new BlockPos(posX1, logplacer2, posZ1);
 
                     //Sets Logs
-                    this.treelog(changedBlocks, worldIn, blockpos1, boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.east().north(), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.east().north(2), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.east(2).north(3).up(), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.east(2).north(3).up(2), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.east(3).north().up(3), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.east(4).north(2).up(3), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.east(3).north(2).up(3), boundsIn);
-                    this.treelog(changedBlocks, worldIn, blockpos2.east(2).north(4).up(3), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos1, boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.east().north(), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.east().north(2), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.east(2).north(3).up(), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.east(2).north(3).up(2), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.east(3).north().up(3), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.east(4).north(2).up(3), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.east(3).north(2).up(3), boundsIn);
+                    this.treelog(treeBlockSet, worldIn, blockpos2.east(2).north(4).up(3), boundsIn);
 
 
                 }
@@ -99,22 +99,22 @@ public class PaloVerdeTree extends BYGAbstractTreeFeature<NoFeatureConfig> {
                         int posZ3 = posZ1 - 2;
 
                         //Bottom Leaves
-                        this.leafs(worldIn, posX2 + posXLeafWidth, topTrunkHeight + 5, posZ2 + posZLeafWidthL0, boundsIn, changedBlocks);
-                        this.leafs(worldIn, posX2 + posXLeafWidth - 2, topTrunkHeight + 5, posZ2 + posZLeafWidthL0, boundsIn, changedBlocks);
-                        this.leafs(worldIn, posX2 + posXLeafWidth - 1, topTrunkHeight + 5, posZ2 + posZLeafWidthL0 + 1, boundsIn, changedBlocks);
-                        this.leafs(worldIn, posX2 + posXLeafWidth - 1, topTrunkHeight + 5, posZ2 + posZLeafWidthL0 - 1, boundsIn, changedBlocks);
+                        this.leafs(worldIn, posX2 + posXLeafWidth, topTrunkHeight + 5, posZ2 + posZLeafWidthL0, boundsIn, treeBlockSet);
+                        this.leafs(worldIn, posX2 + posXLeafWidth - 2, topTrunkHeight + 5, posZ2 + posZLeafWidthL0, boundsIn, treeBlockSet);
+                        this.leafs(worldIn, posX2 + posXLeafWidth - 1, topTrunkHeight + 5, posZ2 + posZLeafWidthL0 + 1, boundsIn, treeBlockSet);
+                        this.leafs(worldIn, posX2 + posXLeafWidth - 1, topTrunkHeight + 5, posZ2 + posZLeafWidthL0 - 1, boundsIn, treeBlockSet);
 
-                        this.leafs(worldIn, posX3 + posXLeafWidth, topTrunkHeight + 5, posZ3 + posZLeafWidthL0, boundsIn, changedBlocks);
-                        this.leafs(worldIn, posX3 + posXLeafWidth - 2, topTrunkHeight + 5, posZ3 + posZLeafWidthL0, boundsIn, changedBlocks);
-                        this.leafs(worldIn, posX3 + posXLeafWidth - 1, topTrunkHeight + 5, posZ3 + posZLeafWidthL0 + 1, boundsIn, changedBlocks);
-                        this.leafs(worldIn, posX3 + posXLeafWidth - 1, topTrunkHeight + 5, posZ3 + posZLeafWidthL0 - 1, boundsIn, changedBlocks);
+                        this.leafs(worldIn, posX3 + posXLeafWidth, topTrunkHeight + 5, posZ3 + posZLeafWidthL0, boundsIn, treeBlockSet);
+                        this.leafs(worldIn, posX3 + posXLeafWidth - 2, topTrunkHeight + 5, posZ3 + posZLeafWidthL0, boundsIn, treeBlockSet);
+                        this.leafs(worldIn, posX3 + posXLeafWidth - 1, topTrunkHeight + 5, posZ3 + posZLeafWidthL0 + 1, boundsIn, treeBlockSet);
+                        this.leafs(worldIn, posX3 + posXLeafWidth - 1, topTrunkHeight + 5, posZ3 + posZLeafWidthL0 - 1, boundsIn, treeBlockSet);
 
                         //3x3
                         if (posXLeafWidth <= 1 && posZLeafWidthL0 <= 1 && posZLeafWidthL0 >= -1 && posXLeafWidth >= -1) {
 
-                            this.leafs(worldIn, posX2 + posXLeafWidth - 1, topTrunkHeight + 6, posZ2 + posZLeafWidthL0, boundsIn, changedBlocks);
+                            this.leafs(worldIn, posX2 + posXLeafWidth - 1, topTrunkHeight + 6, posZ2 + posZLeafWidthL0, boundsIn, treeBlockSet);
 
-                            this.leafs(worldIn, posX3 + posXLeafWidth - 1, topTrunkHeight + 6, posZ3 + posZLeafWidthL0, boundsIn, changedBlocks);
+                            this.leafs(worldIn, posX3 + posXLeafWidth - 1, topTrunkHeight + 6, posZ3 + posZLeafWidthL0, boundsIn, treeBlockSet);
                         }
 
                         //2x3
@@ -124,15 +124,15 @@ public class PaloVerdeTree extends BYGAbstractTreeFeature<NoFeatureConfig> {
                         //Top Leaves
 
                         //Bottom Leaves
-                        this.leafs(worldIn, posX2 - 1, topTrunkHeight + 6, posZ2 + 2, boundsIn, changedBlocks);
-                        this.leafs(worldIn, posX2 - 3, topTrunkHeight + 6, posZ2, boundsIn, changedBlocks);
-                        this.leafs(worldIn, posX2 + 1, topTrunkHeight + 6, posZ2, boundsIn, changedBlocks);
-                        this.leafs(worldIn, posX2 - 1, topTrunkHeight + 6, posZ2 - 2, boundsIn, changedBlocks);
+                        this.leafs(worldIn, posX2 - 1, topTrunkHeight + 6, posZ2 + 2, boundsIn, treeBlockSet);
+                        this.leafs(worldIn, posX2 - 3, topTrunkHeight + 6, posZ2, boundsIn, treeBlockSet);
+                        this.leafs(worldIn, posX2 + 1, topTrunkHeight + 6, posZ2, boundsIn, treeBlockSet);
+                        this.leafs(worldIn, posX2 - 1, topTrunkHeight + 6, posZ2 - 2, boundsIn, treeBlockSet);
 
-                        this.leafs(worldIn, posX3 - 1, topTrunkHeight + 6, posZ3 + 2, boundsIn, changedBlocks);
-                        this.leafs(worldIn, posX3 - 3, topTrunkHeight + 6, posZ3, boundsIn, changedBlocks);
-                        this.leafs(worldIn, posX3 + 1, topTrunkHeight + 6, posZ3, boundsIn, changedBlocks);
-                        this.leafs(worldIn, posX3 - 1, topTrunkHeight + 6, posZ3 - 2, boundsIn, changedBlocks);
+                        this.leafs(worldIn, posX3 - 1, topTrunkHeight + 6, posZ3 + 2, boundsIn, treeBlockSet);
+                        this.leafs(worldIn, posX3 - 3, topTrunkHeight + 6, posZ3, boundsIn, treeBlockSet);
+                        this.leafs(worldIn, posX3 + 1, topTrunkHeight + 6, posZ3, boundsIn, treeBlockSet);
+                        this.leafs(worldIn, posX3 - 1, topTrunkHeight + 6, posZ3 - 2, boundsIn, treeBlockSet);
 
                     }
                 }
@@ -149,7 +149,7 @@ public class PaloVerdeTree extends BYGAbstractTreeFeature<NoFeatureConfig> {
         int x = blockPos.getX();
         int y = blockPos.getY();
         int z = blockPos.getZ();
-        BlockPos.Mutable position = new BlockPos.Mutable();
+        BlockPos.Mutable pos = new BlockPos.Mutable();
 
         for (int yOffset = 0; yOffset <= height + 1; ++yOffset) {
             //Distance/Density of trees. Positive Values ONLY
@@ -157,7 +157,7 @@ public class PaloVerdeTree extends BYGAbstractTreeFeature<NoFeatureConfig> {
 
             for (int xOffset = -distance; xOffset <= distance; ++xOffset) {
                 for (int zOffset = -distance; zOffset <= distance; ++zOffset) {
-                    if (!canTreeReplace(reader, position.setPos(x + xOffset, y + yOffset, z + zOffset))) {
+                    if (!canTreeReplace(reader, pos.setPos(x + xOffset, y + yOffset, z + zOffset))) {
                         return false;
                     }
                 }

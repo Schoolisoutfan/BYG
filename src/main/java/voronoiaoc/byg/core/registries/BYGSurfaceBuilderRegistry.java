@@ -38,13 +38,6 @@ public class BYGSurfaceBuilderRegistry {
                 BYGSBList.GLOWING_ANCIENT_FOREST_SB.setRegistryName("glowing_ancient_forest_sb")
 
 
-
-
-
-
-
-
-
         );
         BYG.LOGGER.info("BYG: Surface Builders Registered!");
     }

@@ -23,7 +23,7 @@ public class ConfigWeightManager {
     public static final ConfigWeight BLUFFSTEEPS = new ConfigWeight("Bluff_Steeps", 6);
     public static final ConfigWeight BOREALFOREST = new ConfigWeight("Boreal_Forest", 6);
     public static final ConfigWeight COLDSWAMPLANDS = new ConfigWeight("Cold_Swamplands", 6);
-//    public static final ConfigWeight CANYONS = new ConfigWeight("canyons", 10);
+    //    public static final ConfigWeight CANYONS = new ConfigWeight("canyons", 10);
     public static final ConfigWeight CIKA_WOODS = new ConfigWeight("Cika_Woods", 4);
     public static final ConfigWeight CHERRY_BLOSSOM_FOREST = new ConfigWeight("Cherry_Blossom_Forest", 6);
     public static final ConfigWeight REDWOOD_TROPICS = new ConfigWeight("Redwood_Tropics", 4);
@@ -68,7 +68,7 @@ public class ConfigWeightManager {
     public static final ConfigWeight SNOWY_EVERGREEN_TAIGA = new ConfigWeight("Snowy_Evergreen_Taiga", 6);
     public static final ConfigWeight SNOWYBLUETAIGA = new ConfigWeight("Snowy_Blue_Taiga", 6);
     public static final ConfigWeight SNOWYGIANTBLUETAIGA = new ConfigWeight("Snowy_Blue_Giant_Taiga", 6);
-//    public static final ConfigWeight sonorandesert = new ConfigWeight("sonorandesert", 10);
+    //    public static final ConfigWeight sonorandesert = new ConfigWeight("sonorandesert", 10);
 //    public static final ConfigWeight stonebrushlands = new ConfigWeight("stonebrushlands", 10);
 //    public static final ConfigWeight stoneforest = new ConfigWeight("stoneforest", 10);
     public static final ConfigWeight THE_BLACK_FOREST = new ConfigWeight("The_Black_Forest", 5);
@@ -76,7 +76,7 @@ public class ConfigWeightManager {
     public static final ConfigWeight TROPICALRAINFOREST = new ConfigWeight("Tropical_Rain_Forest", 6);
     public static final ConfigWeight CRAGGARDENS = new ConfigWeight("Crag_Gardens", 1);
     public static final ConfigWeight VIBRANTSWAMPLANDS = new ConfigWeight("Vibrant_Swamplands", 6);
-//    public static final ConfigWeight VOLCANO = new ConfigWeight("Volcano", 1);
+    //    public static final ConfigWeight VOLCANO = new ConfigWeight("Volcano", 1);
     public static final ConfigWeight WEEPING_WITCH_FOREST = new ConfigWeight("Weeping_Witch_Forest", 1);
     public static final ConfigWeight WOODLANDS = new ConfigWeight("Woodlands", 4);
     public static final ConfigWeight ZELKOVAFOREST = new ConfigWeight("Zelkova_Forest", 6);
@@ -86,7 +86,7 @@ public class ConfigWeightManager {
     private static final ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
 
     public static void buildConfig() {
-        biomeWeights.forEach(o ->{
+        biomeWeights.forEach(o -> {
             o.apply(COMMON_BUILDER);
             COMMON_CONFIG = COMMON_BUILDER.build();
         });

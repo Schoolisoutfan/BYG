@@ -3,6 +3,7 @@ package voronoiaoc.byg.common.world.feature.features.overworld.trees.util;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
@@ -44,7 +45,7 @@ public abstract class BYGHugeTree extends BYGTree {
             worldIn.setBlockState(pos.add(xOffset + 1, 0, zOffset), blockstate, 4);
             worldIn.setBlockState(pos.add(xOffset, 0, zOffset + 1), blockstate, 4);
             worldIn.setBlockState(pos.add(xOffset + 1, 0, zOffset + 1), blockstate, 4);
-            if (abstracttreefeature.place(worldIn, chunkGenerator, random, pos.add(xOffset, 0, zOffset), IFeatureConfig.NO_FEATURE_CONFIG)) {
+            if (abstracttreefeature.placeTree(worldIn, chunkGenerator, random, pos.add(xOffset, 0, zOffset), IFeatureConfig.NO_FEATURE_CONFIG, true)) {
                 return true;
             } else {
                 worldIn.setBlockState(pos.add(xOffset, 0, zOffset), blockUnder, 4);

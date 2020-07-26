@@ -45,9 +45,9 @@ public class LavaLakeWideShallow extends Feature<NoFeatureConfig> {
 
 
     @Override
-    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos position, NoFeatureConfig configBlock) {
+    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, NoFeatureConfig configBlock) {
         setSeed(world.getSeed());
-        BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position.down(2));
+        BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(pos.down(2));
 
         // creates the actual lakes
         boolean containedFlag;
@@ -62,13 +62,13 @@ public class LavaLakeWideShallow extends Feature<NoFeatureConfig> {
                 if (xTemp * xTemp + zTemp * zTemp < 64) {
 
                     double samplePerlin1 = (this.noiseGen.noiseAt(
-                            (double) position.getX() + x * 0.05D,
-                            (double) position.getZ() + z * 0.05D, true) + 1)
+                            (double) pos.getX() + x * 0.05D,
+                            (double) pos.getZ() + z * 0.05D, true) + 1)
                             * 3.0D;
 
                     for (int y = 0; y > -samplePerlin1; --y) {
 
-                        blockpos$Mutable.setPos(position).move(x, y, z);
+                        blockpos$Mutable.setPos(pos).move(x, y, z);
 
                         // checks if the spot is solid all around (diagonally too) and has nothing solid above it
                         containedFlag = checkIfValidSpot(world, blockpos$Mutable, samplePerlin1);

@@ -2,7 +2,6 @@ package voronoiaoc.byg;
 
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.entity.EntityType;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraftforge.common.MinecraftForge;
@@ -22,7 +21,6 @@ import org.apache.logging.log4j.Logger;
 import voronoiaoc.byg.client.gui.MainMenuBYG;
 import voronoiaoc.byg.client.textures.renders.BYGCutoutRenders;
 import voronoiaoc.byg.common.biomes.BYGBiomeWeightSystem;
-import voronoiaoc.byg.common.entity.boat.BYGBoatEntity;
 import voronoiaoc.byg.common.entity.boat.BYGBoatRenderer;
 import voronoiaoc.byg.common.properties.BYGCreativeTab;
 import voronoiaoc.byg.common.properties.vanilla.BYGCompostables;
@@ -48,7 +46,7 @@ import java.util.List;
 @Mod("byg")
 public class BYG {
     public static final String MOD_ID = "byg";
-//    public static final WorldType BYGWORLDTYPE = new BYGWorldType();
+    //    public static final WorldType BYGWORLDTYPE = new BYGWorldType();
     public static boolean isClient = false;
     public static Logger LOGGER = LogManager.getLogger();
     public static boolean isUsingMixin;
@@ -90,7 +88,7 @@ public class BYG {
         BYGCutoutRenders.renderCutOuts();
         MainMenuBYG.mainMenuPanorama();
         DimensionOverride.dimensionOverrideClient();
-        RenderingRegistry.registerEntityRenderingHandler((EntityType<? extends BYGBoatEntity>) BYGEntityList.BYGBOAT, BYGBoatRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(BYGEntityList.BYGBOAT, BYGBoatRenderer::new);
         LOGGER.info("BYG: \"Client Setup\" Event Complete!");
     }
 

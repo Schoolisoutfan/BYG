@@ -17,7 +17,9 @@ import voronoiaoc.byg.config.BYGConfig;
 @Mixin(GameRenderer.class)
 public abstract class MixinGameRenderer {
 
-    @Shadow @Final private Minecraft mc;
+    @Shadow
+    @Final
+    private Minecraft mc;
 
     @Inject(at = @At("RETURN"), method = "getFarPlaneDistance", cancellable = true)
     private void strengthenFog(CallbackInfoReturnable<Float> cir) {
@@ -51,16 +53,14 @@ public abstract class MixinGameRenderer {
                     float fogStrength = ((BiomeFog) biome).fogDistance(sampleX, sampleZ, originalFogStrength);
 
                     accumulatedFogStrength += fogStrength * fogStrength;
-                }
-                else
+                } else
                     accumulatedFogStrength += defaultFogStrength;
             }
 
             if (modified && BYGConfig.biomeFogEffects.get() == BYGConfig.BiomeFogSettings.DENSEFOG || BYGConfig.biomeFogEffects.get() == BYGConfig.BiomeFogSettings.DENSEFOGCOLOR) {
                 float transitionSmoothness = 33 * 33;
                 cir.setReturnValue((float) Math.sqrt(accumulatedFogStrength / transitionSmoothness));
-            }
-            else
+            } else
                 cir.setReturnValue(cir.getReturnValueF());
         }
     }

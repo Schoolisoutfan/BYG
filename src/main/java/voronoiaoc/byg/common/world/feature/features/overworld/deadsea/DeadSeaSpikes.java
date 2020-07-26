@@ -39,7 +39,7 @@ public class DeadSeaSpikes extends Feature<NoFeatureConfig> {
     }
 
     @Override
-    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig config) {
+    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos pos, NoFeatureConfig config) {
         long randomLong = rand.nextLong();
         setSeed(world.getSeed() + 215465128 + randomLong);
         double noise;
@@ -49,14 +49,14 @@ public class DeadSeaSpikes extends Feature<NoFeatureConfig> {
         int terrainHeight;
         BlockPos.Mutable mutable = new BlockPos.Mutable();
 
-//        if (world.getBlockState(position.down()).getBlock() != BYGBlockList.BLACK_SAND) {
+//        if (world.getBlockState(pos.down()).getBlock() != BYGBlockList.BLACK_SAND) {
 //            return false;
 //        }
 
-//        if (world.getBlockState(position.down()).getBlock() == BYGBlockList.BLACK_SAND) {
+//        if (world.getBlockState(pos.down()).getBlock() == BYGBlockList.BLACK_SAND) {
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                mutable.setPos(position.getX() + x, 0, position.getZ() + z);
+                mutable.setPos(pos.getX() + x, 0, pos.getZ() + z);
 
                 noise2 = (noiseGen.noise3_Classic(mutable.getX() * 0.04D, mutable.getY() * 0.04D, mutable.getZ() * 0.04D) + 1D) * 5D;
                 noise = Math.pow(Math.abs(noiseGen.sample2D(mutable.getX() * 0.013D, mutable.getZ() * 0.013D)) + noise2 * 0.005D, 7); //0.70990733195111407153665966708847
