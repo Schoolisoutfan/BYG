@@ -6,12 +6,14 @@ import net.minecraft.world.gen.layer.Layer;
 
 import java.util.Set;
 
+import static voronoiaoc.byg.common.world.worldtype.BYGBiomeLayers.stackLayers;
+
 public class BYGBiomeProvider extends BiomeProvider {
     private final Layer layer;
 
     public BYGBiomeProvider(Set<Biome> biomes, long seed) {
         super(biomes);
-        this.layer = BYGBiomeLayers.stackLayerTransformers(seed);
+        this.layer = stackLayers(seed);
     }
 
     @Override

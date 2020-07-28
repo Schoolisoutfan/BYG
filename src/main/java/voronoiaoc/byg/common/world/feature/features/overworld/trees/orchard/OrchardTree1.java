@@ -30,7 +30,7 @@ public class OrchardTree1 extends BYGAbstractTreeFeature<NoFeatureConfig> {
                 return false;
             } else if (!this.isAnotherTreeNearby(worldIn, pos, randTreeHeight, 0, isSapling)) {
                 return false;
-            } else if (!this.doesSaplingHaveSpaceToGrow(worldIn, pos, randTreeHeight, 5, 5, isSapling)) {
+            } else if (!this.doesSaplingHaveSpaceToGrow(worldIn, pos, randTreeHeight, 5, 5, 5, isSapling)) {
                 return false;
             } else {
                 for (int buildTrunk = 0; buildTrunk <= randTreeHeight; buildTrunk++) {
@@ -603,7 +603,6 @@ public class OrchardTree1 extends BYGAbstractTreeFeature<NoFeatureConfig> {
         else
             return BYGBlockList.ORCHARD_LEAVES.getDefaultState();
     }
-
 
 
 }

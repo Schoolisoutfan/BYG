@@ -115,17 +115,48 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
         this.setBlockStateWithoutUpdates(worldIn, pos, state);
     }
 
-    public boolean doesTreeFit(IWorldGenerationBaseReader reader, BlockPos blockPos, int height, int distance) {
-        int x = blockPos.getX();
-        int y = blockPos.getY();
-        int z = blockPos.getZ();
-        BlockPos.Mutable pos = new BlockPos.Mutable();
+    /**
+     * Use this method instead of the next if the canopy is square shaped.
+     *
+     * @param reader            Gives us access to world.
+     * @param pos               The start position of the feature from the decorator/position of the sapling.
+     * @param treeHeight        The height of the tree trunk determined within the feature. Typically a random number.
+     * @param canopyStartHeight The start height at which leaves begin to generate. I.E: "randTreeHeight - 15".
+     * @param xDistance         Used to calculate the canopy's X distance.
+     * @param zDistance         Used to calculate the canopy's Z distance.
+     * @param isSapling         Boolean Passed in to determine whether or not the tree is being generated during world gen or with a sapling.
+     * @param trunkPositions    Typically this is going to be the bottom most logs of the trunks for the tree.
+     * @return Determine Whether or not a sapling can grow at the given position by checking the surrounding area.
+     */
 
-        for (int yOffset = 0; yOffset <= height + 1; ++yOffset) {
-            for (int xOffset = -distance; xOffset <= distance; ++xOffset) {
-                for (int zOffset = -distance; zOffset <= distance; ++zOffset) {
-                    if (!isQualifiedForLog(reader, pos.setPos(x + xOffset, y + yOffset, z + zOffset))) {
-                        return false;
+    public boolean doesSaplingHaveSpaceToGrow(IWorldGenerationBaseReader reader, BlockPos pos, int treeHeight, int canopyStartHeight, int xDistance, int zDistance, boolean isSapling, BlockPos... trunkPositions) {
+        int x = pos.getX();
+        int y = pos.getY();
+        int z = pos.getZ();
+        BlockPos.Mutable mutable = new BlockPos.Mutable();
+        //Skip if this is not a sapling.
+        if (isSapling) {
+            //Check the tree trunk and determine whether or not there's a block in the way.
+            for (int yOffSet = 0; yOffSet <= treeHeight; yOffSet++) {
+                if (!canSaplingGrowHere(reader, mutable.setPos(x, y + yOffSet, z))) {
+                    return false;
+                }
+                //If the list of trunk positions(other than the center trunk) is greater than 0, we check each of these trunk positions from the bottom to the tree height.
+                if (trunkPositions.length > 0) {
+                    for (BlockPos trunkPos : trunkPositions) {
+                        if (!canSaplingGrowHere(reader, mutable.setPos(trunkPos.getX(), trunkPos.getY() + yOffSet, trunkPos.getZ()))) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            //We use canopyStartHeight instead of 0 because we want to check the area only in the canopy's area and not around the trunk. This makes our saplings much smarter and easier to grow.
+            for (int yOffset = canopyStartHeight; yOffset <= treeHeight + 1; ++yOffset) {
+                for (int xOffset = -xDistance; xOffset <= xDistance; ++xOffset) {
+                    for (int zOffset = -zDistance; zOffset <= zDistance; ++zOffset) {
+                        if (!canSaplingGrowHere(reader, mutable.setPos(x + xOffset, y + yOffset, z + zOffset))) {
+                            return false;
+                        }
                     }
                 }
             }
@@ -133,16 +164,48 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
         return true;
     }
 
-    public boolean doesSaplingHaveSpaceToGrow(IWorldGenerationBaseReader reader, BlockPos blockPos, int height, int xdistance, int zDistance, boolean isSapling) {
-        int x = blockPos.getX();
-        int y = blockPos.getY();
-        int z = blockPos.getZ();
-        BlockPos.Mutable pos = new BlockPos.Mutable();
+    /**
+     * Use this method instead of the previous if the canopy is not square shaped.
+     *
+     * @param reader            Gives us access to world.
+     * @param pos               The start position of the feature from the decorator/position of the sapling.
+     * @param treeHeight        The height of the tree trunk determined within the feature. Typically a random number.
+     * @param canopyStartHeight The start height at which leaves begin to generate. I.E: "randTreeHeight - 15".
+     * @param xNegativeDistance Used to calculate the canopy's negative X distance. Only ever used if the canopy has a unique shape.
+     * @param zNegativeDistance Used to calculate the canopy's negative Z distance. Only ever used if the canopy has a unique shape.
+     * @param xPositiveDistance Used to calculate the canopy's positive X distance. Only ever used if the canopy has a unique shape.
+     * @param zPositiveDistance Used to calculate the canopy's positive Z distance. Only ever used if the canopy has a unique shape.
+     * @param isSapling         Boolean Passed in to determine whether or not the tree is being generated during world gen or with a sapling.
+     * @param trunkPositions    Typically this is going to be the bottom most logs of the trunks for the tree.
+     * @return Determine Whether or not a sapling can grow at the given position by checking the surrounding area.
+     */
+
+    public boolean doesSaplingHaveSpaceToGrow(IWorldGenerationBaseReader reader, BlockPos pos, int treeHeight, int canopyStartHeight, int xNegativeDistance, int zNegativeDistance, int xPositiveDistance, int zPositiveDistance, boolean isSapling, BlockPos... trunkPositions) {
+        int x = pos.getX();
+        int y = pos.getY();
+        int z = pos.getZ();
+        BlockPos.Mutable mutable = new BlockPos.Mutable();
+
         if (isSapling) {
-            for (int yOffset = 0; yOffset <= height + 1; ++yOffset) {
-                for (int xOffset = -xdistance; xOffset <= xdistance; ++xOffset) {
-                    for (int zOffset = -zDistance; zOffset <= zDistance; ++zOffset) {
-                        if (!canSaplingGrowHere(reader, pos.setPos(x + xOffset, y + yOffset, z + zOffset))) {
+            //Check the tree trunk and determine whether or not there's a block in the way.
+            for (int yOffSet = 0; yOffSet <= treeHeight; yOffSet++) {
+                if (!canSaplingGrowHere(reader, mutable.setPos(x, y + yOffSet, z))) {
+                    return false;
+                }
+                //If the list of trunk positions(other than the center trunk) is greater than 0, we check each of these trunk positions from the bottom to the tree height.
+                if (trunkPositions.length > 0) {
+                    for (BlockPos trunkPos : trunkPositions) {
+                        if (!canSaplingGrowHere(reader, mutable.setPos(trunkPos.getX(), trunkPos.getY() + yOffSet, trunkPos.getZ()))) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            //We use canopyStartHeight instead of 0 because we want to check the area only in the canopy's area and not around the trunk. This makes our saplings much smarter and easier to grow.
+            for (int yOffset = canopyStartHeight; yOffset <= treeHeight + 1; ++yOffset) {
+                for (int xOffset = -xNegativeDistance; xOffset <= xPositiveDistance; ++xOffset) {
+                    for (int zOffset = -zNegativeDistance; zOffset <= zPositiveDistance; ++zOffset) {
+                        if (!canSaplingGrowHere(reader, mutable.setPos(x + xOffset, y + yOffset, z + zOffset))) {
                             return false;
                         }
                     }

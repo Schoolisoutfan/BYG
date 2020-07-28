@@ -44,7 +44,7 @@ public class BYGBiomeRegistry {
         registerBiome(registry, BYGBiomeList.CHERRYBLOSSOMFOREST, "cherry_blossom_forest", true, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.OVERWORLD);
         registerBiome(registry, BYGBiomeList.REDWOOD_TROPICS, "redwood_tropics", true, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.DENSE, BiomeDictionary.Type.OVERWORLD);
         registerBiome(registry, BYGBiomeList.CONIFEROUSFOREST, "coniferousforest", true, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.COLD, BiomeDictionary.Type.CONIFEROUS, BiomeDictionary.Type.OVERWORLD);
-        registerBiome(registry, BYGBiomeList.CYPRESSSWAMPLANDS, "cypress_swamplands", true, BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.OVERWORLD);
+        registerBiome(registry, BYGBiomeList.CYPRESSSWAMPLANDS, "cypress_swamplands", true, BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.WET, BiomeDictionary.Type.OVERWORLD);
         registerBiome(registry, BYGBiomeList.DOVERMOUNTAINS, "dovermountains", true, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.COLD, BiomeDictionary.Type.CONIFEROUS, BiomeDictionary.Type.OVERWORLD);
         registerBiome(registry, BYGBiomeList.DEADSEA, "deadsea", true, BiomeDictionary.Type.OCEAN, BiomeDictionary.Type.WASTELAND, BiomeDictionary.Type.SPOOKY, BiomeDictionary.Type.OVERWORLD);
         registerBiome(registry, BYGBiomeList.DECIDUOUSFOREST, "deciduousforest", true, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.OVERWORLD);

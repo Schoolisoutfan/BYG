@@ -1097,5 +1097,4 @@ public class LargeRainbowEucalyptus extends BYGAbstractTreeFeature<NoFeatureConf
     }
 
 
-
 }

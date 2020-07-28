@@ -45,7 +45,7 @@ public class RainbowEucalyptusTree extends BYGAbstractTreeFeature<NoFeatureConfi
                 return false;
             } else if (!this.isAnotherTreeNearby(worldIn, pos, randTreeHeight, 0, isSapling)) {
                 return false;
-            } else if (!this.doesSaplingHaveSpaceToGrow(worldIn, pos, randTreeHeight, 5, 5, isSapling)) {
+            } else if (!this.doesSaplingHaveSpaceToGrow(worldIn, pos, randTreeHeight, 5, 5, 5, isSapling)) {
                 return false;
             } else if (!this.doesTreeFit(worldIn, pos, randTreeHeight)) {
                 return false;

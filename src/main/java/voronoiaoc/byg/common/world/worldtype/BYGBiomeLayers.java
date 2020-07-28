@@ -29,7 +29,7 @@ public class BYGBiomeLayers {
 
     static int configBiomeSize = BYGWorldConfig.biomeSize.get();
 
-    public static Layer stackLayerTransformers(long seed) {
+    public static Layer stackLayers(long seed) {
         LongFunction<IExtendedNoiseRandom<LazyArea>> contextProvider = salt -> new LazyAreaLayerContext(1, seed, salt);
         BiomeGroupManager manager = new BiomeGroupManager(seed);
 

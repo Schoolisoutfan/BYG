@@ -16,7 +16,6 @@ public class LandDoubleLayerMergerBYG extends InitMerge2 implements IDimOffset1T
     public int apply(IExtendedNoiseRandom<?> rand, IArea masterInitLayer, IArea biomeMix, int x, int z) {
         int landCheck = masterInitLayer.getValue(x, z);
         int biomeMixValue = biomeMix.getValue(x, z);
-
         return (landCheck) == 1 ? biomeMixValue : landCheck;
     }
 }

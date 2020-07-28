@@ -3,7 +3,6 @@ package voronoiaoc.byg.common.world.feature.features.overworld.trees.willow;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Direction;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.gen.IWorldGenerationBaseReader;
@@ -31,7 +30,7 @@ public class WillowTree2 extends BYGAbstractTreeFeature<NoFeatureConfig> {
                 return false;
             } else if (!this.isAnotherTreeNearby(worldIn, pos, randTreeHeight, 0, isSapling)) {
                 return false;
-            } else if (!this.doesSaplingHaveSpaceToGrow(worldIn, pos, randTreeHeight, 5, 5, isSapling)) {
+            } else if (!this.doesSaplingHaveSpaceToGrow(worldIn, pos, randTreeHeight, 5, 5, 5, isSapling)) {
                 return false;
             } else {
                 for (int buildTrunk = 2; buildTrunk <= randTreeHeight; buildTrunk++) {
