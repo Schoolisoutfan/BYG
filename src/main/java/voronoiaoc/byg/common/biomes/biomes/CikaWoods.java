@@ -25,7 +25,7 @@ import javax.annotation.Nullable;
 public class CikaWoods extends Biome {
     static final ConfiguredSurfaceBuilder SURFACE_BUILDER = new ConfiguredSurfaceBuilder<>(SurfaceBuilder.GIANT_TREE_TAIGA, new SurfaceBuilderConfig(Blocks.GRASS_BLOCK.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.DIRT.getDefaultState()));
     static final RainType PRECIPATATION = RainType.RAIN;
-    static final Category CATEGORY = Category.PLAINS;
+    static final Category CATEGORY = Category.TAIGA;
     static final double DEPTH = 0.2F;
     static final double SCALE = 0.2F;
     static final float TEMPERATURE = 0.35F;

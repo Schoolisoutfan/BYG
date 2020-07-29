@@ -58,13 +58,13 @@ public class BYGBiomeRegistry {
         registerBiome(registry, BYGBiomeList.GROVE, "grove", true, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.LUSH, BiomeDictionary.Type.OVERWORLD);
         registerBiome(registry, BYGBiomeList.ENCHANTED_GROVE, "enchanted_grove", true, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.LUSH, BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.OVERWORLD);
         registerBiome(registry, BYGBiomeList.GUIANASHIELD, "guianashield", true, BiomeDictionary.Type.JUNGLE, BiomeDictionary.Type.HOT, BiomeDictionary.Type.DENSE, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.OVERWORLD);
-        registerBiome(registry, BYGBiomeList.JACARANDAFOREST, "jacarandaforest", true, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.OVERWORLD);
+        registerBiome(registry, BYGBiomeList.JACARANDAFOREST, "jacarandaforest", true, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.JUNGLE, BiomeDictionary.Type.DENSE, BiomeDictionary.Type.OVERWORLD);
         registerBiome(registry, BYGBiomeList.MANGROVEMARSHES, "mangrove_marshes", true, BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.WET, BiomeDictionary.Type.DENSE, BiomeDictionary.Type.OVERWORLD);
         registerBiome(registry, BYGBiomeList.MAPLETAIGA, "maple_taiga", true, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.COLD, BiomeDictionary.Type.OVERWORLD);
         registerBiome(registry, BYGBiomeList.MEADOW, "meadow", true, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.LUSH, BiomeDictionary.Type.OVERWORLD);
         registerBiome(registry, BYGBiomeList.MOJAVE_DESERT, "mojave_desert", true, BiomeDictionary.Type.DRY, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SANDY, BiomeDictionary.Type.OVERWORLD);
         registerBiome(registry, BYGBiomeList.LUSH_TUNDRA, "lush_tundra", true, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.COLD, BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.LUSH, BiomeDictionary.Type.OVERWORLD);
-        registerBiome(registry, BYGBiomeList.ORCHARD, "orchard", true, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.LUSH, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.OVERWORLD);
+        registerBiome(registry, BYGBiomeList.ORCHARD, "orchard", true, BiomeDictionary.Type.LUSH, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.OVERWORLD);
         registerBiome(registry, BYGBiomeList.PRAIRIE, "prairie", true, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.DRY, BiomeDictionary.Type.OVERWORLD);
         registerBiome(registry, BYGBiomeList.REDDESERT, "reddesert", true, BiomeDictionary.Type.DRY, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SANDY, BiomeDictionary.Type.OVERWORLD);
         registerBiome(registry, BYGBiomeList.REDDESERTDUNES, "reddesertdunes", true, BiomeDictionary.Type.DRY, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SANDY, BiomeDictionary.Type.OVERWORLD);

@@ -26,7 +26,7 @@ public class Prairie extends Biome {
     static final Category CATEGORY = Category.PLAINS;
     static final double DEPTH = 0.125F;
     static final double SCALE = 0.05F;
-    static final float TEMPERATURE = 0.8F;
+    static final float TEMPERATURE = 1.4F;
     static final float DOWNFALL = 0.2F;
     static final int WATER_COLOR = 4159204;
     static final int WATER_FOG_COLOR = 329011;

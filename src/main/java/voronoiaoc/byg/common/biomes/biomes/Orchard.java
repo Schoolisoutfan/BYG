@@ -26,7 +26,7 @@ import javax.annotation.Nullable;
 public class Orchard extends Biome {
     static final ConfiguredSurfaceBuilder SURFACE_BUILDER = new ConfiguredSurfaceBuilder<>(SurfaceBuilder.DEFAULT, new SurfaceBuilderConfig(Blocks.GRASS_BLOCK.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.DIRT.getDefaultState()));
     static final RainType PRECIPATATION = RainType.RAIN;
-    static final Category CATEGORY = Category.PLAINS;
+    static final Category CATEGORY = Category.FOREST;
     static final double DEPTH = 0.2F;
     static final double SCALE = 0.15F;
     static final float TEMPERATURE = 0.8F;

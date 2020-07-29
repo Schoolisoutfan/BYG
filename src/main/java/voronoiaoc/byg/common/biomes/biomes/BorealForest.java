@@ -26,7 +26,7 @@ import javax.annotation.Nullable;
 public class BorealForest extends Biome {
     static final ConfiguredSurfaceBuilder SURFACE_BUILDER = new ConfiguredSurfaceBuilder<>(BYGSBList.BOREAL_SB, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG);
     static final RainType PRECIPATATION = RainType.RAIN;
-    static final Category CATEGORY = Category.FOREST;
+    static final Category CATEGORY = Category.TAIGA;
     static final double DEPTH = 0.2F;
     static final double SCALE = 0.2F;
     static final float TEMPERATURE = 0.25F;
