@@ -38,7 +38,7 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
         super(function);
     }
 
-    public boolean isQualifiedForLog(IWorldGenerationBaseReader worldReader, BlockPos blockPos) {
+    public static boolean isQualifiedForLog(IWorldGenerationBaseReader worldReader, BlockPos blockPos) {
         return worldReader.hasBlockState(blockPos, (state) -> state.isAir() || state.isIn(BlockTags.LEAVES) || state.getMaterial() == Material.PLANTS || state.getMaterial() == Material.TALL_PLANTS || state.getMaterial() == Material.OCEAN_PLANT);
     }
 
@@ -278,7 +278,7 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
     public void buildBase(IWorldGenerationBaseReader reader, int earthBlockThreshold, Block earthBlock, Block fillerBlock, BlockPos.Mutable... trunkPositions) {
         for (BlockPos.Mutable trunkPos : trunkPositions) {
             for (int fill = 1; fill <= 10; fill++) {
-                if (fill < earthBlockThreshold) {
+                if (fill > earthBlockThreshold) {
                     if (isQualifiedForLog(reader, trunkPos)) {
                         ((IWorldWriter) reader).setBlockState(trunkPos, earthBlock.getDefaultState(), 2);
                         trunkPos.move(Direction.DOWN);
