@@ -246,12 +246,14 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
         return true;
     }
 
-    public void buildBase(IWorldGenerationBaseReader reader, Block fillerBlock, BlockPos.Mutable... trunkPositions) {
-        for (BlockPos.Mutable trunkPos : trunkPositions) {
+    public void buildBase(IWorldGenerationBaseReader reader, Block fillerBlock, BlockPos... trunkPositions) {
+        BlockPos.Mutable mutableTrunk = new BlockPos.Mutable();
+        for (BlockPos trunkPos : trunkPositions) {
+            mutableTrunk.setPos(trunkPos);
             for (int fill = 1; fill <= 10; fill++) {
                 if (isQualifiedForLog(reader, trunkPos)) {
-                    ((IWorldWriter) reader).setBlockState(trunkPos, fillerBlock.getDefaultState(), 2);
-                    trunkPos.move(Direction.DOWN);
+                    ((IWorldWriter) reader).setBlockState(mutableTrunk, fillerBlock.getDefaultState(), 2);
+                    mutableTrunk.move(Direction.DOWN);
                 }
                 else
                     break;
@@ -259,15 +261,17 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
         }
     }
 
-    public void buildBase(IWorldGenerationBaseReader reader, Block topBlock, Block fillerBlock, BlockPos.Mutable... trunkPositions) {
-        for (BlockPos.Mutable trunkPos : trunkPositions) {
+    public void buildBase(IWorldGenerationBaseReader reader, Block topBlock, Block fillerBlock, BlockPos... trunkPositions) {
+        BlockPos.Mutable mutableTrunk = new BlockPos.Mutable();
+        for (BlockPos trunkPos : trunkPositions) {
+            mutableTrunk.setPos(trunkPos);
             for (int fill = 1; fill <= 10; fill++) {
                 if (isQualifiedForLog(reader, trunkPos)) {
                     if (fill == 1)
-                        ((IWorldWriter) reader).setBlockState(trunkPos, topBlock.getDefaultState(), 2);
+                        ((IWorldWriter) reader).setBlockState(mutableTrunk, topBlock.getDefaultState(), 2);
                     else
-                        ((IWorldWriter) reader).setBlockState(trunkPos, fillerBlock.getDefaultState(), 2);
-                    trunkPos.move(Direction.DOWN);
+                        ((IWorldWriter) reader).setBlockState(mutableTrunk, fillerBlock.getDefaultState(), 2);
+                    mutableTrunk.move(Direction.DOWN);
                 }
                 else
                     break;
@@ -276,19 +280,21 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
     }
 
     public void buildBase(IWorldGenerationBaseReader reader, int earthBlockThreshold, Block earthBlock, Block fillerBlock, BlockPos.Mutable... trunkPositions) {
+        BlockPos.Mutable mutableTrunk = new BlockPos.Mutable();
         for (BlockPos.Mutable trunkPos : trunkPositions) {
+            mutableTrunk.setPos(trunkPos);
             for (int fill = 1; fill <= 10; fill++) {
                 if (fill > earthBlockThreshold) {
                     if (isQualifiedForLog(reader, trunkPos)) {
-                        ((IWorldWriter) reader).setBlockState(trunkPos, earthBlock.getDefaultState(), 2);
-                        trunkPos.move(Direction.DOWN);
+                        ((IWorldWriter) reader).setBlockState(mutableTrunk, earthBlock.getDefaultState(), 2);
+                        mutableTrunk.move(Direction.DOWN);
                     } else
                         break;
                 }
                 else {
                     if (isQualifiedForLog(reader, trunkPos)) {
-                        ((IWorldWriter) reader).setBlockState(trunkPos, fillerBlock.getDefaultState(), 2);
-                        trunkPos.move(Direction.DOWN);
+                        ((IWorldWriter) reader).setBlockState(mutableTrunk, fillerBlock.getDefaultState(), 2);
+                        mutableTrunk.move(Direction.DOWN);
                     } else
                         break;
                 }
