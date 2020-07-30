@@ -68,7 +68,10 @@ public class BaobabTree1 extends BYGAbstractTreeFeature<NoFeatureConfig> {
                 buildBase(treeBlockSet, worldIn, BYGBlockList.BAOBAB_LOG, boundsIn, mutable, mutable.offset(Direction.NORTH), mutable.offset(Direction.NORTH).offset(Direction.WEST), mutable.offset(Direction.WEST),
                         mutable.offset(Direction.NORTH, 2), mutable.offset(Direction.NORTH, 2).offset(Direction.WEST), mutable.offset(Direction.NORTH).offset(Direction.WEST, 2)
                         , mutable.offset(Direction.WEST, 2), mutable.offset(Direction.EAST), mutable.offset(Direction.NORTH).offset(Direction.EAST), mutable.offset(Direction.SOUTH).offset(Direction.WEST)
-                        , mutable.offset(Direction.SOUTH));
+                        , mutable.offset(Direction.SOUTH), mutable.offset(Direction.SOUTH).offset(Direction.EAST), mutable.offset(Direction.SOUTH).offset(Direction.WEST, 2)
+                        , mutable.offset(Direction.NORTH, 2).offset(Direction.EAST), mutable.offset(Direction.NORTH, 2).offset(Direction.WEST, 2), mutable.offset(Direction.NORTH, 3)
+                        , mutable.offset(Direction.NORTH, 3).offset(Direction.WEST), mutable.offset(Direction.EAST, 2), mutable.offset(Direction.EAST, 2).offset(Direction.NORTH)
+                        , mutable.offset(Direction.SOUTH, 2).offset(Direction.WEST), mutable.offset(Direction.SOUTH, 2), mutable.offset(Direction.WEST, 3), mutable.offset(Direction.WEST, 3).offset(Direction.NORTH));
 
                 Direction direction = Direction.Plane.HORIZONTAL.random(rand);
                 int randTreeHeight2 = randTreeHeight - rand.nextInt(1);//Crashes on 0.

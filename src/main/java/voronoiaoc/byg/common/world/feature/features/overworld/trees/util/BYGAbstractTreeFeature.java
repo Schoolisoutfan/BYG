@@ -251,11 +251,11 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
         for (BlockPos trunkPos : trunkPositions) {
             mutableTrunk.setPos(trunkPos);
             for (int fill = 1; fill <= 10; fill++) {
-                if (isQualifiedForLog(reader, trunkPos)) {
+                if (isQualifiedForLog(reader, mutableTrunk)) {
                     setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, fillerBlock.getDefaultState(), boundingBox);
                 }
                 else
-                    break;
+                    fill = 10;
                 mutableTrunk.move(Direction.DOWN);
             }
         }
@@ -266,14 +266,14 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
         for (BlockPos trunkPos : trunkPositions) {
             mutableTrunk.setPos(trunkPos);
             for (int fill = 1; fill <= 10; fill++) {
-                if (isQualifiedForLog(reader, trunkPos)) {
+                if (isQualifiedForLog(reader, mutableTrunk)) {
                     if (fill == 1)
                         setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, topBlock.getDefaultState(), boundingBox);
                     else
                         setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, fillerBlock.getDefaultState(), boundingBox);
                 }
                 else
-                    break;
+                    fill = 10;
                 mutableTrunk.move(Direction.DOWN);
 
             }
@@ -295,8 +295,8 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
                     if (isQualifiedForLog(reader, trunkPos)) {
                         setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, fillerBlock.getDefaultState(), boundingBox);
                     }
-                    else
-                        break;
+//                    else
+//                        break;
                 }
                 mutableTrunk.move(Direction.DOWN);
             }
