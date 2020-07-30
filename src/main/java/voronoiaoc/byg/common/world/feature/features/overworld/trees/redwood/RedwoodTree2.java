@@ -33,6 +33,13 @@ public class RedwoodTree2 extends BYGAbstractTreeFeature<NoFeatureConfig> {
             } else if (!this.doesSaplingHaveSpaceToGrow(worldIn, pos, randTreeHeight, 5, 5, 5, isSapling)) {
                 return false;
             } else {
+                buildBase(treeBlockSet, worldIn, BYGBlockList.REDWOOD_LOG, Blocks.DIRT, boundsIn, mainmutable.add(0, 0, -1),
+                        mainmutable.add(-1, 0, 0), mainmutable.add(0, 0, 0), mainmutable.add(1, 0, 0), mainmutable.add(0, 0, 1), mainmutable.add(0, 0, -3),
+                        mainmutable.add(-1, 0, -2), mainmutable.add(0, 0, -2), mainmutable.add(1, 0, -2), mainmutable.add(-2, 0, -1), mainmutable.add(-1, 0, -1),
+                        mainmutable.add(1, 0, -1), mainmutable.add(2, 0, -1), mainmutable.add(-3, 0, 0), mainmutable.add(-2, 0, 0), mainmutable.add(2, 0, 0),
+                        mainmutable.add(3, 0, 0), mainmutable.add(-2, 0, 1), mainmutable.add(-1, 0, 1), mainmutable.add(1, 0, 1), mainmutable.add(2, 0, 1),
+                        mainmutable.add(-1, 0, 2), mainmutable.add(0, 0, 2), mainmutable.add(1, 0, 2), mainmutable.add(0, 0, 3));
+
                 this.treeLog(treeBlockSet, worldIn, mainmutable.add(0, 0, -1), boundsIn);
                 this.treeLog(treeBlockSet, worldIn, mainmutable.add(-1, 0, 0), boundsIn);
                 this.treeLog(treeBlockSet, worldIn, mainmutable.add(0, 0, 0), boundsIn);

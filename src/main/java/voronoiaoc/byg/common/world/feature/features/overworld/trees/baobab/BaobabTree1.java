@@ -65,7 +65,7 @@ public class BaobabTree1 extends BYGAbstractTreeFeature<NoFeatureConfig> {
             } else {
                 BlockPos.Mutable mutable = new BlockPos.Mutable(pos);
 
-                buildBase(treeBlockSet, worldIn, BYGBlockList.BAOBAB_LOG, boundsIn, mutable, mutable.offset(Direction.NORTH), mutable.offset(Direction.NORTH).offset(Direction.WEST), mutable.offset(Direction.WEST),
+                buildBase(treeBlockSet, worldIn, BYGBlockList.BAOBAB_LOG, Blocks.DIRT, boundsIn, mutable, mutable.offset(Direction.NORTH), mutable.offset(Direction.NORTH).offset(Direction.WEST), mutable.offset(Direction.WEST),
                         mutable.offset(Direction.NORTH, 2), mutable.offset(Direction.NORTH, 2).offset(Direction.WEST), mutable.offset(Direction.NORTH).offset(Direction.WEST, 2)
                         , mutable.offset(Direction.WEST, 2), mutable.offset(Direction.EAST), mutable.offset(Direction.NORTH).offset(Direction.EAST), mutable.offset(Direction.SOUTH).offset(Direction.WEST)
                         , mutable.offset(Direction.SOUTH), mutable.offset(Direction.SOUTH).offset(Direction.EAST), mutable.offset(Direction.SOUTH).offset(Direction.WEST, 2)

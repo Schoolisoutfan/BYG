@@ -246,7 +246,7 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
         return true;
     }
 
-    public void buildBase(Set<BlockPos> setlogblock, IWorldGenerationBaseReader reader, Block fillerBlock, MutableBoundingBox boundingBox, BlockPos... trunkPositions) {
+    public void buildBase(Set<BlockPos> setlogblock, IWorldGenerationBaseReader reader, Block fillerBlock, Block earthBlock, MutableBoundingBox boundingBox, BlockPos... trunkPositions) {
         BlockPos.Mutable mutableTrunk = new BlockPos.Mutable();
         for (BlockPos trunkPos : trunkPositions) {
             mutableTrunk.setPos(trunkPos);
@@ -254,28 +254,12 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
                 if (isQualifiedForLog(reader, mutableTrunk)) {
                     setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, fillerBlock.getDefaultState(), boundingBox);
                 }
-                else
+                else {
+                    if (isDesiredGroundwDirtTag(reader, mutableTrunk, Blocks.PODZOL, Blocks.MYCELIUM))
+                        setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, earthBlock.getDefaultState(), boundingBox);
                     fill = 10;
-                mutableTrunk.move(Direction.DOWN);
-            }
-        }
-    }
-
-    public void buildBase(Set<BlockPos> setlogblock, IWorldGenerationBaseReader reader, Block topBlock, Block fillerBlock, MutableBoundingBox boundingBox, BlockPos... trunkPositions) {
-        BlockPos.Mutable mutableTrunk = new BlockPos.Mutable();
-        for (BlockPos trunkPos : trunkPositions) {
-            mutableTrunk.setPos(trunkPos);
-            for (int fill = 1; fill <= 10; fill++) {
-                if (isQualifiedForLog(reader, mutableTrunk)) {
-                    if (fill == 1)
-                        setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, topBlock.getDefaultState(), boundingBox);
-                    else
-                        setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, fillerBlock.getDefaultState(), boundingBox);
                 }
-                else
-                    fill = 10;
                 mutableTrunk.move(Direction.DOWN);
-
             }
         }
     }
@@ -292,11 +276,14 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
                         fill = 10;
                 }
                 else {
-                    if (isQualifiedForLog(reader, trunkPos)) {
+                    if (isQualifiedForLog(reader, mutableTrunk)) {
                         setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, fillerBlock.getDefaultState(), boundingBox);
                     }
-                    else
+                    else {
+                        if (isDesiredGroundwDirtTag(reader, mutableTrunk))
+                            setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, earthBlock.getDefaultState(), boundingBox);
                         fill = 10;
+                    }
                 }
                 mutableTrunk.move(Direction.DOWN);
             }
