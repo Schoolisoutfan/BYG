@@ -247,48 +247,49 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
     }
 
     public void buildBase(Set<BlockPos> setlogblock, IWorldGenerationBaseReader reader, Block fillerBlock, Block earthBlock, MutableBoundingBox boundingBox, BlockPos... trunkPositions) {
-        BlockPos.Mutable mutableTrunk = new BlockPos.Mutable();
-        for (BlockPos trunkPos : trunkPositions) {
-            mutableTrunk.setPos(trunkPos);
-            for (int fill = 1; fill <= 15; fill++) {
-                if (isQualifiedForLog(reader, mutableTrunk)) {
-                    if (fill <= 7)
-                        setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, fillerBlock.getDefaultState(), boundingBox);
-                    else
-                        setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, earthBlock.getDefaultState(), boundingBox);
+        if (trunkPositions.length > 0) {
+            BlockPos.Mutable mutableTrunk = new BlockPos.Mutable();
+            for (BlockPos trunkPos : trunkPositions) {
+                mutableTrunk.setPos(trunkPos);
+                for (int fill = 1; fill <= 15; fill++) {
+                    if (isQualifiedForLog(reader, mutableTrunk)) {
+                        if (fill <= 7)
+                            setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, fillerBlock.getDefaultState(), boundingBox);
+                        else
+                            setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, earthBlock.getDefaultState(), boundingBox);
+                    } else {
+                        if (isDesiredGroundwDirtTag(reader, mutableTrunk, Blocks.PODZOL, Blocks.MYCELIUM))
+                            setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, earthBlock.getDefaultState(), boundingBox);
+                        fill = 15;
+                    }
+                    mutableTrunk.move(Direction.DOWN);
                 }
-                else {
-                    if (isDesiredGroundwDirtTag(reader, mutableTrunk, Blocks.PODZOL, Blocks.MYCELIUM))
-                        setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, earthBlock.getDefaultState(), boundingBox);
-                    fill = 15;
-                }
-                mutableTrunk.move(Direction.DOWN);
             }
         }
     }
 
     public void buildBase(Set<BlockPos> setlogblock, IWorldGenerationBaseReader reader, int earthBlockThreshold, Block earthBlock, Block fillerBlock, MutableBoundingBox boundingBox, BlockPos.Mutable... trunkPositions) {
-        BlockPos.Mutable mutableTrunk = new BlockPos.Mutable();
-        for (BlockPos.Mutable trunkPos : trunkPositions) {
-            mutableTrunk.setPos(trunkPos);
-            for (int fill = 1; fill <= 15; fill++) {
-                if (isQualifiedForLog(reader, mutableTrunk)) {
-                    if (fill <= earthBlockThreshold)
-                        setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, fillerBlock.getDefaultState(), boundingBox);
-                    else
-                        setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, earthBlock.getDefaultState(), boundingBox);
-                }
-                else {
+        if (trunkPositions.length > 0) {
+            BlockPos.Mutable mutableTrunk = new BlockPos.Mutable();
+            for (BlockPos.Mutable trunkPos : trunkPositions) {
+                mutableTrunk.setPos(trunkPos);
+                for (int fill = 1; fill <= 15; fill++) {
                     if (isQualifiedForLog(reader, mutableTrunk)) {
-                        setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, fillerBlock.getDefaultState(), boundingBox);
-                    }
-                    else {
-                        if (isDesiredGroundwDirtTag(reader, mutableTrunk, Blocks.PODZOL, Blocks.MYCELIUM))
+                        if (fill <= earthBlockThreshold)
+                            setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, fillerBlock.getDefaultState(), boundingBox);
+                        else
                             setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, earthBlock.getDefaultState(), boundingBox);
-                        fill = 15;
+                    } else {
+                        if (isQualifiedForLog(reader, mutableTrunk)) {
+                            setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, fillerBlock.getDefaultState(), boundingBox);
+                        } else {
+                            if (isDesiredGroundwDirtTag(reader, mutableTrunk, Blocks.PODZOL, Blocks.MYCELIUM))
+                                setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, earthBlock.getDefaultState(), boundingBox);
+                            fill = 15;
+                        }
                     }
+                    mutableTrunk.move(Direction.DOWN);
                 }
-                mutableTrunk.move(Direction.DOWN);
             }
         }
     }
