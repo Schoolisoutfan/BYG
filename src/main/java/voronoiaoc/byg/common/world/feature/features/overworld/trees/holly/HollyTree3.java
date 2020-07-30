@@ -38,7 +38,7 @@ public class HollyTree3 extends BYGAbstractTreeFeature<NoFeatureConfig> {
                 return false;
             } else {
 
-                setGroundBlock(worldIn, Blocks.DIRT, mainmutable, mainmutable2, mainmutable3, mainmutable4);
+                buildBase(worldIn, Blocks.DIRT, mainmutable, mainmutable2, mainmutable3, mainmutable4);
                 for (int buildTrunk = 0; buildTrunk <= randTreeHeight; buildTrunk++) {
                     this.treeLog(treeBlockSet, worldIn, mainmutable, boundsIn);
                     this.treeLog(treeBlockSet, worldIn, mainmutable2, boundsIn);

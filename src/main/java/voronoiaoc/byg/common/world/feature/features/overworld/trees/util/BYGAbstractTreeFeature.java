@@ -38,26 +38,25 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
         super(function);
     }
 
-    public static boolean isQualifiedForLog(IWorldGenerationBaseReader worldReader, BlockPos blockPos) {
+    public boolean isQualifiedForLog(IWorldGenerationBaseReader worldReader, BlockPos blockPos) {
         return worldReader.hasBlockState(blockPos, (state) -> state.isAir() || state.isIn(BlockTags.LEAVES) || state.getMaterial() == Material.PLANTS || state.getMaterial() == Material.TALL_PLANTS || state.getMaterial() == Material.OCEAN_PLANT);
     }
 
-
-    public static boolean isAnotherTreeHere(IWorldGenerationBaseReader worldReader, BlockPos blockPos) {
+    public boolean isAnotherTreeHere(IWorldGenerationBaseReader worldReader, BlockPos blockPos) {
         return worldReader.hasBlockState(blockPos, (state) -> {
             Block block = state.getBlock();
             return block.isIn(BlockTags.LOGS) || block.isIn(BlockTags.LEAVES);
         });
     }
 
-    public static boolean isAnotherTreeLikeThisHere(IWorldGenerationBaseReader worldReader, BlockPos blockPos, Block logBlock, Block leafBlock) {
+    public boolean isAnotherTreeLikeThisHere(IWorldGenerationBaseReader worldReader, BlockPos blockPos, Block logBlock, Block leafBlock) {
         return worldReader.hasBlockState(blockPos, (state) -> {
             Block block = state.getBlock();
             return block == logBlock || block == leafBlock;
         });
     }
 
-    public static boolean canSaplingGrowHere(IWorldGenerationBaseReader worldReader, BlockPos blockPos) {
+    public boolean canSaplingGrowHere(IWorldGenerationBaseReader worldReader, BlockPos blockPos) {
         return worldReader.hasBlockState(blockPos, (state) -> {
             Block block = state.getBlock();
             return block.isIn(BlockTags.LOGS) || block.isIn(BlockTags.LEAVES) || state.isAir() || state.getMaterial() == Material.PLANTS || state.getMaterial() == Material.TALL_PLANTS || state.getMaterial() == Material.OCEAN_PLANT || state.getMaterial() == Material.LEAVES || state.isIn(Tags.Blocks.DIRT);
@@ -65,28 +64,22 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
     }
 
     //Qualifies Tree Placement in Water
-    public static boolean canTreePlaceHereWater(IWorldGenerationBaseReader worldReader, BlockPos blockPos) {
+    public boolean canTreePlaceHereWater(IWorldGenerationBaseReader worldReader, BlockPos blockPos) {
         return worldReader.hasBlockState(blockPos, (state) -> {
             Block block = state.getBlock();
             return state.isAir() || state.isIn(BlockTags.LEAVES) || block == Blocks.GRASS_BLOCK || Feature.isDirt(block) || block.isIn(BlockTags.LOGS) || block.isIn(BlockTags.SAPLINGS) || block == Blocks.VINE || block == BYGBlockList.OVERGROWN_STONE || block == BYGBlockList.GLOWCELIUM || block == Blocks.WATER;
         });
     }
 
-    public static void setGroundBlock(IWorldGenerationReader reader, Block block, BlockPos... poss) {
-        for (BlockPos pos : poss) {
-            reader.setBlockState(pos.offset(Direction.DOWN), block.getDefaultState(), 2);
-        }
-    }
-
-    public static boolean isQualifiedForLogWater(IWorldGenerationBaseReader worldReader, BlockPos blockPos) {
+    public boolean isQualifiedForLogWater(IWorldGenerationBaseReader worldReader, BlockPos blockPos) {
         return worldReader.hasBlockState(blockPos, (state) -> state.isAir() || state.isIn(BlockTags.LEAVES) || state.getBlock() == Blocks.WATER || state.getMaterial() == Material.PLANTS || state.getMaterial() == Material.TALL_PLANTS || state.getMaterial() == Material.OCEAN_PLANT);
     }
 
-    public static boolean isAir(IWorldGenerationBaseReader worldIn, BlockPos pos) {
+    public boolean isAir(IWorldGenerationBaseReader worldIn, BlockPos pos) {
         return worldIn.hasBlockState(pos, BlockState::isAir);
     }
 
-    public static boolean isAirOrWater(IWorldGenerationBaseReader worldIn, BlockPos pos) {
+    public boolean isAirOrWater(IWorldGenerationBaseReader worldIn, BlockPos pos) {
         return worldIn.hasBlockState(pos, (state) -> state.isAir() || state.getBlock() == Blocks.WATER);
     }
 
@@ -100,7 +93,7 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
         });
     }
 
-    public static boolean isDesiredGround(IWorldGenerationBaseReader worldIn, BlockPos pos, Block... desiredGroundBlock) {
+    public boolean isDesiredGround(IWorldGenerationBaseReader worldIn, BlockPos pos, Block... desiredGroundBlock) {
         return worldIn.hasBlockState(pos, (state) -> {
             Block block = state.getBlock();
             for (Block block1 : desiredGroundBlock) {
@@ -253,6 +246,55 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
         return true;
     }
 
+    public void buildBase(IWorldGenerationBaseReader reader, Block fillerBlock, BlockPos.Mutable... trunkPositions) {
+        for (BlockPos.Mutable trunkPos : trunkPositions) {
+            for (int fill = 1; fill <= 10; fill++) {
+                if (isQualifiedForLog(reader, trunkPos)) {
+                    ((IWorldWriter) reader).setBlockState(trunkPos, fillerBlock.getDefaultState(), 2);
+                    trunkPos.move(Direction.DOWN);
+                }
+                else
+                    break;
+            }
+        }
+    }
+
+    public void buildBase(IWorldGenerationBaseReader reader, Block topBlock, Block fillerBlock, BlockPos.Mutable... trunkPositions) {
+        for (BlockPos.Mutable trunkPos : trunkPositions) {
+            for (int fill = 1; fill <= 10; fill++) {
+                if (isQualifiedForLog(reader, trunkPos)) {
+                    if (fill == 1)
+                        ((IWorldWriter) reader).setBlockState(trunkPos, topBlock.getDefaultState(), 2);
+                    else
+                        ((IWorldWriter) reader).setBlockState(trunkPos, fillerBlock.getDefaultState(), 2);
+                    trunkPos.move(Direction.DOWN);
+                }
+                else
+                    break;
+            }
+        }
+    }
+
+    public void buildBase(IWorldGenerationBaseReader reader, int earthBlockThreshold, Block earthBlock, Block fillerBlock, BlockPos.Mutable... trunkPositions) {
+        for (BlockPos.Mutable trunkPos : trunkPositions) {
+            for (int fill = 1; fill <= 10; fill++) {
+                if (fill < earthBlockThreshold) {
+                    if (isQualifiedForLog(reader, trunkPos)) {
+                        ((IWorldWriter) reader).setBlockState(trunkPos, earthBlock.getDefaultState(), 2);
+                        trunkPos.move(Direction.DOWN);
+                    } else
+                        break;
+                }
+                else {
+                    if (isQualifiedForLog(reader, trunkPos)) {
+                        ((IWorldWriter) reader).setBlockState(trunkPos, fillerBlock.getDefaultState(), 2);
+                        trunkPos.move(Direction.DOWN);
+                    } else
+                        break;
+                }
+            }
+        }
+    }
 
     public final void setFinalBlockState(Set<BlockPos> treeBlockSet, IWorldWriter worldIn, BlockPos pos, BlockState blockState, MutableBoundingBox boundingBox) {
         this.setBlockStateWithoutUpdates(worldIn, pos, blockState);

@@ -35,7 +35,7 @@ public class WhiteCherry1 extends BYGAbstractTreeFeature<NoFeatureConfig> {
             } else if (!this.doesSaplingHaveSpaceToGrow(worldIn, pos, randTreeHeight, 5, 5, 5, isSapling)) {
                 return false;
             } else {
-                setGroundBlock(worldIn, Blocks.DIRT, mainmutable, mainmutable2, mainmutable3, mainmutable4);
+                buildBase(worldIn, Blocks.DIRT, mainmutable, mainmutable2, mainmutable3, mainmutable4);
                 this.treeLog(treeBlockSet, worldIn, mainmutable, boundsIn);
                 this.treeLog(treeBlockSet, worldIn, mainmutable2, boundsIn);
                 this.treeLog(treeBlockSet, worldIn, mainmutable3, boundsIn);
