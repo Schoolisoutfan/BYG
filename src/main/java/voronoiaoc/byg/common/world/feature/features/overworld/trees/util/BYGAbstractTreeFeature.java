@@ -283,7 +283,7 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
                         setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, fillerBlock.getDefaultState(), boundingBox);
                     }
                     else {
-                        if (isDesiredGroundwDirtTag(reader, mutableTrunk))
+                        if (isDesiredGroundwDirtTag(reader, mutableTrunk, Blocks.PODZOL, Blocks.MYCELIUM))
                             setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, earthBlock.getDefaultState(), boundingBox);
                         fill = 15;
                     }
