@@ -286,17 +286,17 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
             mutableTrunk.setPos(trunkPos);
             for (int fill = 1; fill <= 10; fill++) {
                 if (fill > earthBlockThreshold) {
-                    if (isQualifiedForLog(reader, trunkPos)) {
+                    if (isQualifiedForLog(reader, mutableTrunk)) {
                         setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, earthBlock.getDefaultState(), boundingBox);
                     } else
-                        break;
+                        fill = 10;
                 }
                 else {
                     if (isQualifiedForLog(reader, trunkPos)) {
                         setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, fillerBlock.getDefaultState(), boundingBox);
                     }
-//                    else
-//                        break;
+                    else
+                        fill = 10;
                 }
                 mutableTrunk.move(Direction.DOWN);
             }
