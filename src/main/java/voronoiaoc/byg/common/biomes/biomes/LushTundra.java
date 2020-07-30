@@ -27,7 +27,7 @@ public class LushTundra extends Biome {
     static final Category CATEGORY = Category.ICY;
     static final double DEPTH = 0.15F;
     static final double SCALE = 0.1F;
-    static final float TEMPERATURE = 0.35F;
+    static final float TEMPERATURE = -0.35F;
     static final float DOWNFALL = 0.4F;
     static final int WATER_COLOR = 4159204;
     static final int WATER_FOG_COLOR = 329011;
