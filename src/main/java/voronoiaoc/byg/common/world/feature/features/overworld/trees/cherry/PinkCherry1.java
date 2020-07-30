@@ -35,7 +35,7 @@ public class PinkCherry1 extends BYGAbstractTreeFeature<NoFeatureConfig> {
             } else if (!this.doesSaplingHaveSpaceToGrow(worldIn, pos, randTreeHeight, 5, 5, 5, isSapling)) {
                 return false;
             } else {
-                buildBase(worldIn, Blocks.DIRT, mainmutable, mainmutable2, mainmutable3, mainmutable4);
+                buildBase(treeBlockSet, worldIn, Blocks.DIRT, boundsIn, mainmutable, mainmutable2, mainmutable3, mainmutable4);
                 for (int buildTrunk = 0; buildTrunk <= randTreeHeight + 1; buildTrunk++) {
                     this.treeLog(treeBlockSet, worldIn, mainmutable, boundsIn);
                     this.treeLog(treeBlockSet, worldIn, mainmutable2, boundsIn);

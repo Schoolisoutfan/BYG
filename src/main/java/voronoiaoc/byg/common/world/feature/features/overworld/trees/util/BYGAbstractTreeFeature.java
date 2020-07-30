@@ -246,58 +246,59 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
         return true;
     }
 
-    public void buildBase(IWorldGenerationBaseReader reader, Block fillerBlock, BlockPos... trunkPositions) {
+    public void buildBase(Set<BlockPos> setlogblock, IWorldGenerationBaseReader reader, Block fillerBlock, MutableBoundingBox boundingBox, BlockPos... trunkPositions) {
         BlockPos.Mutable mutableTrunk = new BlockPos.Mutable();
         for (BlockPos trunkPos : trunkPositions) {
             mutableTrunk.setPos(trunkPos);
             for (int fill = 1; fill <= 10; fill++) {
                 if (isQualifiedForLog(reader, trunkPos)) {
-                    ((IWorldWriter) reader).setBlockState(mutableTrunk, fillerBlock.getDefaultState(), 2);
-                    mutableTrunk.move(Direction.DOWN);
+                    setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, fillerBlock.getDefaultState(), boundingBox);
                 }
                 else
                     break;
+                mutableTrunk.move(Direction.DOWN);
             }
         }
     }
 
-    public void buildBase(IWorldGenerationBaseReader reader, Block topBlock, Block fillerBlock, BlockPos... trunkPositions) {
+    public void buildBase(Set<BlockPos> setlogblock, IWorldGenerationBaseReader reader, Block topBlock, Block fillerBlock, MutableBoundingBox boundingBox, BlockPos... trunkPositions) {
         BlockPos.Mutable mutableTrunk = new BlockPos.Mutable();
         for (BlockPos trunkPos : trunkPositions) {
             mutableTrunk.setPos(trunkPos);
             for (int fill = 1; fill <= 10; fill++) {
                 if (isQualifiedForLog(reader, trunkPos)) {
                     if (fill == 1)
-                        ((IWorldWriter) reader).setBlockState(mutableTrunk, topBlock.getDefaultState(), 2);
+                        setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, topBlock.getDefaultState(), boundingBox);
                     else
-                        ((IWorldWriter) reader).setBlockState(mutableTrunk, fillerBlock.getDefaultState(), 2);
-                    mutableTrunk.move(Direction.DOWN);
+                        setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, fillerBlock.getDefaultState(), boundingBox);
                 }
                 else
                     break;
+                mutableTrunk.move(Direction.DOWN);
+
             }
         }
     }
 
-    public void buildBase(IWorldGenerationBaseReader reader, int earthBlockThreshold, Block earthBlock, Block fillerBlock, BlockPos.Mutable... trunkPositions) {
+    public void buildBase(Set<BlockPos> setlogblock, IWorldGenerationBaseReader reader, int earthBlockThreshold, Block earthBlock, Block fillerBlock, MutableBoundingBox boundingBox, BlockPos.Mutable... trunkPositions) {
         BlockPos.Mutable mutableTrunk = new BlockPos.Mutable();
         for (BlockPos.Mutable trunkPos : trunkPositions) {
             mutableTrunk.setPos(trunkPos);
             for (int fill = 1; fill <= 10; fill++) {
                 if (fill > earthBlockThreshold) {
                     if (isQualifiedForLog(reader, trunkPos)) {
-                        ((IWorldWriter) reader).setBlockState(mutableTrunk, earthBlock.getDefaultState(), 2);
-                        mutableTrunk.move(Direction.DOWN);
+                        setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, earthBlock.getDefaultState(), boundingBox);
                     } else
                         break;
                 }
                 else {
                     if (isQualifiedForLog(reader, trunkPos)) {
-                        ((IWorldWriter) reader).setBlockState(mutableTrunk, fillerBlock.getDefaultState(), 2);
-                        mutableTrunk.move(Direction.DOWN);
-                    } else
+                        setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, fillerBlock.getDefaultState(), boundingBox);
+                    }
+                    else
                         break;
                 }
+                mutableTrunk.move(Direction.DOWN);
             }
         }
     }

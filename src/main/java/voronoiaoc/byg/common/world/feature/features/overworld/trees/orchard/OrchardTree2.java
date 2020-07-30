@@ -37,7 +37,7 @@ public class OrchardTree2 extends BYGAbstractTreeFeature<NoFeatureConfig> {
             } else if (!this.doesSaplingHaveSpaceToGrow(worldIn, pos, randTreeHeight, 5, 5, 5, isSapling)) {
                 return false;
             } else {
-                buildBase(worldIn, Blocks.DIRT, mainmutable, mainmutable2, mainmutable3, mainmutable4, mainmutable5);
+                buildBase(treeBlockSet, worldIn, Blocks.DIRT, boundsIn, mainmutable, mainmutable2, mainmutable3, mainmutable4, mainmutable5);
                 for (int buildTrunk = 0; buildTrunk <= randTreeHeight; buildTrunk++) {
                     if (buildTrunk >= randTreeHeight - 3) {
                         this.leafs(treeBlockSet, worldIn, mainmutable, boundsIn);

@@ -63,8 +63,13 @@ public class BaobabTree1 extends BYGAbstractTreeFeature<NoFeatureConfig> {
             } else if (!this.doesTreeFit(worldIn, pos, randTreeHeight)) {
                 return false;
             } else {
-                BlockPos.Mutable mutable = new BlockPos.Mutable();
-                buildBase(worldIn, BYGBlockList.BAOBAB_LOG, mutable, mutable.offset(Direction.NORTH));
+                BlockPos.Mutable mutable = new BlockPos.Mutable(pos);
+
+                buildBase(treeBlockSet, worldIn, BYGBlockList.BAOBAB_LOG, boundsIn, mutable, mutable.offset(Direction.NORTH), mutable.offset(Direction.NORTH).offset(Direction.WEST), mutable.offset(Direction.WEST),
+                        mutable.offset(Direction.NORTH, 2), mutable.offset(Direction.NORTH, 2).offset(Direction.WEST), mutable.offset(Direction.NORTH).offset(Direction.WEST, 2)
+                        , mutable.offset(Direction.WEST, 2), mutable.offset(Direction.EAST), mutable.offset(Direction.NORTH).offset(Direction.EAST), mutable.offset(Direction.SOUTH).offset(Direction.WEST)
+                        , mutable.offset(Direction.SOUTH));
+
                 Direction direction = Direction.Plane.HORIZONTAL.random(rand);
                 int randTreeHeight2 = randTreeHeight - rand.nextInt(1);//Crashes on 0.
                 int posY1 = 2 - rand.nextInt(1);//Crashes on 0.

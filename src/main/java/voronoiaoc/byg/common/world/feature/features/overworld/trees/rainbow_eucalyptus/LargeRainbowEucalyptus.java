@@ -33,7 +33,7 @@ public class LargeRainbowEucalyptus extends BYGAbstractTreeFeature<NoFeatureConf
             if (!isDesiredGroundwDirtTag(worldIn, blockpos, BYGBlockList.MOSSY_STONE)) {
                 return false;
             } else {
-                buildBase(worldIn, Blocks.DIRT, mainmutable, mainmutable2, mainmutable3, mainmutable4, mainmutable5);
+                buildBase(treeBlockSet, worldIn, Blocks.DIRT, boundsIn, mainmutable, mainmutable2, mainmutable3, mainmutable4, mainmutable5);
                 for (int buildTrunk = 0; buildTrunk <= randTreeHeight; buildTrunk++) {
                     if (buildTrunk < randTreeHeight - 2) {
                         this.treeLog(treeBlockSet, worldIn, mainmutable, boundsIn);
