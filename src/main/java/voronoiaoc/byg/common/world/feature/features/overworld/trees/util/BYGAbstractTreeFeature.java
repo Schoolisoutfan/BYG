@@ -258,7 +258,7 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
                         else
                             setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, earthBlock.getDefaultState(), boundingBox);
                     } else {
-                        if (isDesiredGroundwDirtTag(reader, mutableTrunk, Blocks.PODZOL, Blocks.MYCELIUM))
+                        if (isDesiredGround(reader, mutableTrunk, Blocks.PODZOL, Blocks.MYCELIUM, BYGBlockList.PODZOL_DACITE, BYGBlockList.OVERGROWN_STONE, BYGBlockList.GLOWCELIUM))
                             setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, earthBlock.getDefaultState(), boundingBox);
                         fill = 15;
                     }
@@ -268,10 +268,10 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
         }
     }
 
-    public void buildBase(Set<BlockPos> setlogblock, IWorldGenerationBaseReader reader, int earthBlockThreshold, Block earthBlock, Block fillerBlock, MutableBoundingBox boundingBox, BlockPos.Mutable... trunkPositions) {
+    public void buildBase(Set<BlockPos> setlogblock, IWorldGenerationBaseReader reader, int earthBlockThreshold, Block earthBlock, Block fillerBlock, MutableBoundingBox boundingBox, BlockPos... trunkPositions) {
         if (trunkPositions.length > 0) {
             BlockPos.Mutable mutableTrunk = new BlockPos.Mutable();
-            for (BlockPos.Mutable trunkPos : trunkPositions) {
+            for (BlockPos trunkPos : trunkPositions) {
                 mutableTrunk.setPos(trunkPos);
                 for (int fill = 1; fill <= 15; fill++) {
                     if (isQualifiedForLog(reader, mutableTrunk)) {
@@ -283,13 +283,24 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
                         if (isQualifiedForLog(reader, mutableTrunk)) {
                             setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, fillerBlock.getDefaultState(), boundingBox);
                         } else {
-                            if (isDesiredGroundwDirtTag(reader, mutableTrunk, Blocks.PODZOL, Blocks.MYCELIUM))
+                            if (isDesiredGround(reader, mutableTrunk, Blocks.PODZOL, Blocks.MYCELIUM, BYGBlockList.PODZOL_DACITE, BYGBlockList.OVERGROWN_STONE, BYGBlockList.GLOWCELIUM))
                                 setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk, earthBlock.getDefaultState(), boundingBox);
                             fill = 15;
                         }
                     }
                     mutableTrunk.move(Direction.DOWN);
                 }
+            }
+        }
+    }
+
+    public void setSoil(Set<BlockPos> setlogblock, IWorldGenerationBaseReader reader, Block soil, MutableBoundingBox boundingBox, BlockPos.Mutable... trunkPositions) {
+        if (trunkPositions.length > 0) {
+            BlockPos.Mutable mutableTrunk = new BlockPos.Mutable();
+            for (BlockPos trunkPos : trunkPositions) {
+                mutableTrunk.setPos(trunkPos);
+                if (isDesiredGround(reader, mutableTrunk, Blocks.PODZOL, Blocks.MYCELIUM, BYGBlockList.PODZOL_DACITE, BYGBlockList.OVERGROWN_STONE, BYGBlockList.GLOWCELIUM))
+                    setFinalBlockState(setlogblock, (IWorldWriter) reader, mutableTrunk.move(Direction.DOWN), soil.getDefaultState(), boundingBox);
             }
         }
     }

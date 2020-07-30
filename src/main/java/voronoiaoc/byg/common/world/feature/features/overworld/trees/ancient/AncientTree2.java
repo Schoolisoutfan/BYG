@@ -32,6 +32,8 @@ public class AncientTree2 extends BYGAbstractTreeFeature<NoFeatureConfig> {
             } else if (!this.doesSaplingHaveSpaceToGrow(worldIn, pos, randTreeHeight, 5, 5, 5, isSapling)) {
                 return false;
             } else {
+
+
                 this.treeLog(treeBlockSet, worldIn, mainmutable.add(0, 0, 0), boundsIn);
                 this.treeLog(treeBlockSet, worldIn, mainmutable.add(0, 1, 0), boundsIn);
                 this.treeLog(treeBlockSet, worldIn, mainmutable.add(0, 2, 0), boundsIn);
