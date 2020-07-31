@@ -27,7 +27,7 @@ public class DeciduousBirch extends BYGAbstractTreeFeature<NoFeatureConfig> {
     }
 
     protected static boolean canTreeReplace(IWorldGenerationBaseReader p_214587_0_, BlockPos p_214587_1_) {
-        return isQualifiedForLog(
+        return canLogPlaceHere(
                 p_214587_0_, p_214587_1_
         );
     }

@@ -29,7 +29,7 @@ public class ConiferTree7 extends BYGAbstractTreeFeature<NoFeatureConfig> {
     }
 
     protected static boolean canTreePlace(IWorldGenerationBaseReader genBaseReader, BlockPos blockPos) {
-        return isQualifiedForLog(
+        return canLogPlaceHere(
                 genBaseReader, blockPos
         );
     }

@@ -248,7 +248,7 @@ public class BluffTree extends BYGAbstractTreeFeature<NoFeatureConfig> {
 
     //Log Placement
     private void treelog(Set<BlockPos> setlogblock, IWorldGenerationReader reader, BlockPos pos, MutableBoundingBox boundingBox) {
-        if (isQualifiedForLog(reader, pos)) {
+        if (canLogPlaceHere(reader, pos)) {
             this.setFinalBlockState(setlogblock, reader, pos, LOG, boundingBox);
         }
 

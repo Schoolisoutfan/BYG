@@ -32,7 +32,7 @@ public class SeasonalDeciduousShrubs extends BYGAbstractTreeFeature<NoFeatureCon
     }
 
     protected static boolean canTreeReplace(IWorldGenerationBaseReader genBaseReader, BlockPos blockPos) {
-        return isQualifiedForLog(
+        return canLogPlaceHere(
                 genBaseReader, blockPos
         );
     }

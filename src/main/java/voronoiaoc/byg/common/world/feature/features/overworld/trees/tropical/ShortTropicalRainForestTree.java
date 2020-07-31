@@ -29,7 +29,7 @@ public class ShortTropicalRainForestTree extends BYGAbstractTreeFeature<NoFeatur
     }
 
     protected static boolean canTreePlace(IWorldGenerationBaseReader genBaseReader, BlockPos blockPos) {
-        return isQualifiedForLog(
+        return canLogPlaceHere(
                 genBaseReader, blockPos
         );
     }

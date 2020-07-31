@@ -28,7 +28,7 @@ public class IndigoJacarandaTree2 extends BYGAbstractTreeFeature<NoFeatureConfig
     }
 
     protected static boolean canTreeReplace(IWorldGenerationBaseReader genBaseReader, BlockPos blockPos) {
-        return isQualifiedForLog(genBaseReader, blockPos
+        return canLogPlaceHere(genBaseReader, blockPos
         );
     }
 

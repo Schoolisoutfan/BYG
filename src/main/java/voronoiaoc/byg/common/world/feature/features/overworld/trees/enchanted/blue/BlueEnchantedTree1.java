@@ -330,14 +330,14 @@ public class BlueEnchantedTree1 extends BYGAbstractTreeFeature<NoFeatureConfig> 
 
     //Log Placement
     private void treeLog(Set<BlockPos> setlogblock, IWorldGenerationReader reader, BlockPos pos, MutableBoundingBox boundingBox) {
-        if (isQualifiedForLog(reader, pos)) {
+        if (canLogPlaceHere(reader, pos)) {
             this.setFinalBlockState(setlogblock, reader, pos, BYGBlockList.BLUE_ENCHANTED_LOG.getDefaultState(), boundingBox);
         }
     }
 
     //Log Placement
     private void treeBranch(Set<BlockPos> setlogblock, IWorldGenerationReader reader, BlockPos pos, MutableBoundingBox boundingBox) {
-        if (isQualifiedForLog(reader, pos)) {
+        if (canLogPlaceHere(reader, pos)) {
             this.setFinalBlockState(setlogblock, reader, pos, BYGBlockList.BLUE_ENCHANTED_LOG.getDefaultState(), boundingBox);
         }
     }

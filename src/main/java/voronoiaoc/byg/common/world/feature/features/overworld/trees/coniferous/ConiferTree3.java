@@ -504,7 +504,7 @@ public class ConiferTree3 extends BYGAbstractTreeFeature<NoFeatureConfig> {
 
     //Log Placement
     private void treeLog(Set<BlockPos> setlogblock, IWorldGenerationReader reader, BlockPos pos, MutableBoundingBox boundingBox) {
-        if (isQualifiedForLog(reader, pos)) {
+        if (canLogPlaceHere(reader, pos)) {
             this.setFinalBlockState(setlogblock, reader, pos, BYGBlockList.FIR_LOG.getDefaultState(), boundingBox);
         }
     }

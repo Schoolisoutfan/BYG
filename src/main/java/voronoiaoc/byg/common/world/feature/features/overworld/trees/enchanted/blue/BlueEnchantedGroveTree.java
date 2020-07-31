@@ -31,7 +31,7 @@ public class BlueEnchantedGroveTree extends BYGAbstractTreeFeature<NoFeatureConf
     }
 
     protected static boolean canTreeReplace(IWorldGenerationBaseReader genBaseReader, BlockPos blockPos) {
-        return isQualifiedForLog(
+        return canLogPlaceHere(
                 genBaseReader, blockPos
         );
     }

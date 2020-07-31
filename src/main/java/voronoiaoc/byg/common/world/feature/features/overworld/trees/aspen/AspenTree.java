@@ -32,7 +32,7 @@ public class AspenTree extends BYGAbstractTreeFeature<NoFeatureConfig> {
     }
 
     protected static boolean canTreeReplace(IWorldGenerationBaseReader genBaseReader, BlockPos blockPos) {
-        return isQualifiedForLog(
+        return canLogPlaceHere(
                 genBaseReader, blockPos
         );
     }

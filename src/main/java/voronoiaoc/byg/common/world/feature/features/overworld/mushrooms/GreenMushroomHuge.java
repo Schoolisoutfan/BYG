@@ -151,14 +151,14 @@ public class GreenMushroomHuge extends BYGAbstractTreeFeature<NoFeatureConfig> {
 
     //Log Placement
     private void treeLog(Set<BlockPos> setlogblock, IWorldGenerationReader reader, BlockPos pos, MutableBoundingBox boundingBox) {
-        if (isQualifiedForLog(reader, pos)) {
+        if (canLogPlaceHere(reader, pos)) {
             this.setFinalBlockState(setlogblock, reader, pos, BYGBlockList.WHITE_MUSHROOM_STEM.getDefaultState(), boundingBox);
         }
     }
 
     //Log Placement
     private void treeBranch(Set<BlockPos> setlogblock, IWorldGenerationReader reader, BlockPos pos, MutableBoundingBox boundingBox) {
-        if (isQualifiedForLog(reader, pos)) {
+        if (canLogPlaceHere(reader, pos)) {
             this.setFinalBlockState(setlogblock, reader, pos, BYGBlockList.WHITE_MUSHROOM_STEM.getDefaultState(), boundingBox);
         }
     }
@@ -183,7 +183,7 @@ public class GreenMushroomHuge extends BYGAbstractTreeFeature<NoFeatureConfig> {
 
             for (int xOffset = -distance; xOffset <= distance; ++xOffset) {
                 for (int zOffset = -distance; zOffset <= distance; ++zOffset) {
-                    if (!isQualifiedForLog(reader, pos.setPos(x + xOffset, y + yOffset, z + zOffset))) {
+                    if (!canLogPlaceHere(reader, pos.setPos(x + xOffset, y + yOffset, z + zOffset))) {
                         return false;
                     }
                 }

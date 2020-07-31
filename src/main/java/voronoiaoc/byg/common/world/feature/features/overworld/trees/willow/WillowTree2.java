@@ -526,14 +526,14 @@ public class WillowTree2 extends BYGAbstractTreeFeature<NoFeatureConfig> {
 
     //Log Placement
     private void treeLog(Set<BlockPos> setlogblock, IWorldGenerationReader reader, BlockPos pos, MutableBoundingBox boundingBox) {
-        if (canTreePlaceHereWater(reader, pos)) {
+        if (canLogPlaceHereWater(reader, pos)) {
             this.setFinalBlockState(setlogblock, reader, pos, BYGBlockList.WILLOW_LOG.getDefaultState(), boundingBox);
         }
     }
 
     //Log Placement
     private void treeBranch(Set<BlockPos> setlogblock, IWorldGenerationReader reader, BlockPos pos, MutableBoundingBox boundingBox) {
-        if (canTreePlaceHereWater(reader, pos)) {
+        if (canLogPlaceHereWater(reader, pos)) {
             this.setFinalBlockState(setlogblock, reader, pos, BYGBlockList.WILLOW_LOG.getDefaultState(), boundingBox);
         }
     }
@@ -558,7 +558,7 @@ public class WillowTree2 extends BYGAbstractTreeFeature<NoFeatureConfig> {
 
             for (int xOffset = -distance; xOffset <= distance; ++xOffset) {
                 for (int zOffset = -distance; zOffset <= distance; ++zOffset) {
-                    if (!canTreePlaceHereWater(reader, pos.setPos(x + xOffset, y + yOffset, z + zOffset))) {
+                    if (!canLogPlaceHereWater(reader, pos.setPos(x + xOffset, y + yOffset, z + zOffset))) {
                         return false;
                     }
                 }
