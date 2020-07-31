@@ -65,7 +65,7 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
      * This is likely if not guaranteed to be used in a for loop checking the surrounding in another method as it's useless like this.
      *
      * @param reader Gives us access to world.
-     * @param pos Position to check.
+     * @param pos    Position to check.
      * @return Determine whether or not the position can support a sapling's tree.
      */
     public boolean canSaplingGrowHere(IWorldGenerationBaseReader reader, BlockPos pos) {
@@ -76,20 +76,8 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
     }
 
     /**
-     * Typically only ever used on trees that need to place in water.
-     *
      * @param reader Gives us access to world.
-     * @param pos Position to check.
-     * @return Determines whether or not a log block can place here by checking several properties of the block on the given position.
-     */
-    public boolean canLogPlaceWater(IWorldGenerationBaseReader reader, BlockPos pos) {
-        return reader.hasBlockState(pos, (state) -> state.isAir() || state.isIn(BlockTags.LEAVES) || state.getBlock() == Blocks.WATER || state.getMaterial() == Material.PLANTS || state.getMaterial() == Material.TALL_PLANTS || state.getMaterial() == Material.OCEAN_PLANT);
-    }
-
-    /**
-     *
-     * @param reader Gives us access to world.
-     * @param pos Position to check.
+     * @param pos    Position to check.
      * @return Determines whether or not a position is air.
      */
 
@@ -102,9 +90,8 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
     }
 
     /**
-     *
-     * @param reader Gives us access to world.
-     * @param pos Position to check.
+     * @param reader             Gives us access to world.
+     * @param pos                Position to check.
      * @param desiredGroundBlock Allows to add other blocks that do not have the dirt tag.
      * @return Determines if the position is of the dirt tag or another block.
      */
@@ -119,9 +106,8 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
     }
 
     /**
-     *
-     * @param reader Gives us access to world.
-     * @param pos Position to check.
+     * @param reader             Gives us access to world.
+     * @param pos                Position to check.
      * @param desiredGroundBlock Add a blacklist of blocks that we want.
      * @return Determines if the position contains a block from our whitelist.
      */
@@ -133,11 +119,6 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
             }
             return false;
         });
-    }
-
-    @Override
-    public void setBlockState(IWorldWriter worldIn, BlockPos pos, BlockState state) {
-        this.setBlockStateWithoutUpdates(worldIn, pos, state);
     }
 
     /**
@@ -250,11 +231,11 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
      * Checks the area surrounding the pos for any blocks using either the log or leaves tag.
      * Called only during world gen.
      *
-     * @param reader Gives us access to world
-     * @param pos The given position of either the feature during world gen or the sapling.
+     * @param reader     Gives us access to world
+     * @param pos        The given position of either the feature during world gen or the sapling.
      * @param treeHeight The height of the given tree.
-     * @param distance Checks the surrounding position
-     * @param isSapling Boolean passed in to determine whether or not the tree is being generated during world gen or with a sapling.
+     * @param distance   Checks the surrounding position
+     * @param isSapling  Boolean passed in to determine whether or not the tree is being generated during world gen or with a sapling.
      * @return Determines whether or not any tree is within the givem distance
      */
     public boolean isAnotherTreeNearby(IWorldGenerationBaseReader reader, BlockPos pos, int treeHeight, int distance, boolean isSapling) {
@@ -282,13 +263,13 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
      * Checks the area surrounding the pos for a tree matching its wood/leaves block.
      * Called only during world gen
      *
-     * @param reader Gives us access to world
-     * @param pos The given position of either the feature during world gen or the sapling.
+     * @param reader     Gives us access to world
+     * @param pos        The given position of either the feature during world gen or the sapling.
      * @param treeHeight The height of the given tree.
-     * @param distance Checks the surrounding position
-     * @param logBlock The log block we're checking for.
-     * @param leafBlock The leaf block we're checking for.
-     * @param isSapling Boolean passed in to determine whether or not the tree is being generated during world gen or with a sapling.
+     * @param distance   Checks the surrounding position
+     * @param logBlock   The log block we're checking for.
+     * @param leafBlock  The leaf block we're checking for.
+     * @param isSapling  Boolean passed in to determine whether or not the tree is being generated during world gen or with a sapling.
      * @return Determines whether or not the tree we're searching for is within the given distance.
      */
 
@@ -316,11 +297,11 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
     /**
      * Use this to set the soil under large trunked trees. I.E: Baobab or Redwood.
      *
-     * @param treeBlocksSet Gives us access to the tree block set where we add our trees blocks.
-     * @param reader Gives us access to world
-     * @param fillerBlock Typically this is the log of the tree we're trying to fill the base of.
-     * @param earthBlock The block used under logs. Typically a block found in the dirt tag
-     * @param boundingBox Bounding Box of our tree.
+     * @param treeBlocksSet  Gives us access to the tree block set where we add our trees blocks.
+     * @param reader         Gives us access to world
+     * @param fillerBlock    Typically this is the log of the tree we're trying to fill the base of.
+     * @param earthBlock     The block used under logs. Typically a block found in the dirt tag
+     * @param boundingBox    Bounding Box of our tree.
      * @param trunkPositions List of trunk positions where the base is built under the given positions.
      */
 
@@ -349,13 +330,13 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
     /**
      * Use this to set the soil under large trunked trees. Has an extra parameter to specify when the earth block should start placing. I.E: Baobab or Redwood.
      *
-     * @param treeBlocksSet Gives us access to the tree block set where we add our trees blocks.
-     * @param reader Gives us access to world
+     * @param treeBlocksSet       Gives us access to the tree block set where we add our trees blocks.
+     * @param reader              Gives us access to world
      * @param earthBlockThreshold Used to specify when earthBlock starts placing.
-     * @param fillerBlock Typically this is the log of the tree we're trying to fill the base of.
-     * @param earthBlock The block used under logs. Typically a block found in the dirt tag
-     * @param boundingBox Bounding Box of our tree.
-     * @param trunkPositions List of trunk positions where the base is built under the given positions.
+     * @param fillerBlock         Typically this is the log of the tree we're trying to fill the base of.
+     * @param earthBlock          The block used under logs. Typically a block found in the dirt tag
+     * @param boundingBox         Bounding Box of our tree.
+     * @param trunkPositions      List of trunk positions where the base is built under the given positions.
      */
     public void buildBase(Set<BlockPos> treeBlocksSet, IWorldGenerationBaseReader reader, int earthBlockThreshold, Block fillerBlock, Block earthBlock, MutableBoundingBox boundingBox, BlockPos... trunkPositions) {
         if (trunkPositions.length > 0) {
@@ -411,12 +392,11 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
     }
 
     @Override
-    public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, T config) {
-        return this.placeTree(worldIn, generator, rand, pos, config, false);
+    public void setBlockState(IWorldWriter worldIn, BlockPos pos, BlockState state) {
+        this.setBlockStateWithoutUpdates(worldIn, pos, state);
     }
 
-
-    //Does all the dirty work calculating the leave distance.
+    //Does all the dirty work calculating the leave distance for us.
     public boolean placeTree(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, T config, boolean isSapling) {
         Set<BlockPos> set = Sets.newHashSet();
         MutableBoundingBox mutableboundingbox = MutableBoundingBox.getNewBoundingBox();
@@ -492,15 +472,19 @@ public abstract class BYGAbstractTreeFeature<T extends IFeatureConfig> extends F
         }
     }
 
+    //This passes in information lettings us know this is used during world gen.
+    @Override
+    public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, T config) {
+        return this.placeTree(worldIn, generator, rand, pos, config, false);
+    }
 
     /**
-     *
      * @param treeBlockSet A set to add our tree's blocks for use in the feature.
-     * @param worldIn Gives us access to world
-     * @param rand An instance of Random which is only called once per method call.
-     * @param pos The position of the feature or sapling
-     * @param boundsIn The bounding box around our tree.
-     * @param isSapling Boolean passed in to determine whether or not the tree is being generated during world gen or with a sapling.
+     * @param worldIn      Gives us access to world
+     * @param rand         An instance of Random which is only called once per method call.
+     * @param pos          The position of the feature or sapling
+     * @param boundsIn     The bounding box around our tree.
+     * @param isSapling    Boolean passed in to determine whether or not the tree is being generated during world gen or with a sapling.
      * @return Adds our blocks to the tree and determines whether or not a tree is allowed to generate/grow.
      */
     protected abstract boolean place(Set<BlockPos> treeBlockSet, IWorldGenerationReader worldIn, Random rand, BlockPos pos, MutableBoundingBox boundsIn, boolean isSapling);

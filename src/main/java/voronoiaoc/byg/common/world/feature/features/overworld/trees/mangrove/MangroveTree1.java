@@ -196,14 +196,14 @@ public class MangroveTree1 extends BYGAbstractTreeFeature<NoFeatureConfig> {
 
     //Log Placement
     private void treeLog(Set<BlockPos> setlogblock, IWorldGenerationReader reader, BlockPos pos, MutableBoundingBox boundingBox) {
-        if (canLogPlaceWater(reader, pos)) {
+        if (canLogPlaceHereWater(reader, pos)) {
             this.setFinalBlockState(setlogblock, reader, pos, BYGBlockList.MANGROVE_LOG.getDefaultState(), boundingBox);
         }
     }
 
     //Log Placement
     private void treeBranch(Set<BlockPos> setlogblock, IWorldGenerationReader reader, BlockPos pos, MutableBoundingBox boundingBox) {
-        if (canLogPlaceWater(reader, pos)) {
+        if (canLogPlaceHereWater(reader, pos)) {
             this.setFinalBlockState(setlogblock, reader, pos, BYGBlockList.MANGROVE_LOG.getDefaultState(), boundingBox);
         }
     }
