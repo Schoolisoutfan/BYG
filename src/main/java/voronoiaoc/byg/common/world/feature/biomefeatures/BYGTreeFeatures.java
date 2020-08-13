@@ -209,7 +209,7 @@ public class BYGTreeFeatures {
                 Feature.NORMAL_TREE.withConfiguration(OAK_TREE_WITH_MORE_BEEHIVES_CONFIG).withChance(0.06F),
                 Feature.FANCY_TREE.withConfiguration(BYGFeatureConfigs.FANCY_RED_OAK_WITH_MORE_BEEHIVES_CONFIG).withChance(0.1F)),
                 BYGFeatureList.OAK_RED_TREE1.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG))).withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(
-                new AtSurfaceWithExtraConfig(5, 0.5F, 3))));
+                new AtSurfaceWithExtraConfig(8, 0.5F, 3))));
     }
 
     public static void addSparseRedOakForestTrees(Biome biome) {
